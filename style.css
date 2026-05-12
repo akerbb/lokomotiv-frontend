@@ -6062,3 +6062,100 @@ html[data-theme="dark"] .bot-message p {
     border-color: var(--dark-border);
   }
 }
+
+/* Stoppa sidledsskroll och gör layouten stabil på mobil */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+section,
+header,
+footer,
+main,
+.contact-layout,
+.services-grid,
+.historia-grid,
+.social-grid,
+.stats,
+.hero {
+  max-width: 100%;
+}
+
+/* Långa ord/länkar/text ska radbrytas istället för att trycka ut sidan */
+p,
+h1,
+h2,
+h3,
+a,
+li,
+span,
+strong,
+textarea,
+input,
+button {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Formulär och iframe ska inte bli bredare än skärmen */
+input,
+textarea,
+select,
+button {
+  max-width: 100%;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+/* Extra säkerhet för små skärmar och roterade mobiler */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero,
+  .contact-layout,
+  .historia-grid,
+  .social-grid,
+  .services-grid,
+  .stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero,
+  .content-section,
+  .about,
+  footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-logo {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .btn,
+  .nav-button,
+  .select-button {
+    white-space: normal;
+  }
+}
