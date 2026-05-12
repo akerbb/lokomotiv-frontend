@@ -6063,99 +6063,43 @@ html[data-theme="dark"] .bot-message p {
   }
 }
 
-/* Stoppa sidledsskroll och gör layouten stabil på mobil */
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+/* Sticky header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-img,
-video,
-iframe,
-svg {
-  max-width: 100%;
-}
-
-section,
-header,
-footer,
-main,
-.contact-layout,
-.services-grid,
-.historia-grid,
-.social-grid,
-.stats,
-.hero {
-  max-width: 100%;
-}
-
-/* Långa ord/länkar/text ska radbrytas istället för att trycka ut sidan */
-p,
+/* Stoppa långa rubriker från att trycka ut sidan */
 h1,
 h2,
 h3,
-a,
-li,
-span,
-strong,
-textarea,
-input,
-button {
+.service-card h3,
+.section-title h2 {
+  max-width: 100%;
   overflow-wrap: anywhere;
-  word-break: normal;
+  word-break: break-word;
+  hyphens: auto;
 }
 
-/* Formulär och iframe ska inte bli bredare än skärmen */
-input,
-textarea,
-select,
-button {
-  max-width: 100%;
+/* Speciellt för långa tjänstenamn */
+.service-card h3 {
+  font-size: clamp(1.05rem, 4vw, 1.35rem);
+  line-height: 1.15;
 }
 
-iframe {
-  max-width: 100%;
-}
-
-/* Extra säkerhet för små skärmar och roterade mobiler */
+/* Mobiljustering */
 @media (max-width: 768px) {
-  body {
-    overflow-x: hidden;
+  header {
+    position: sticky;
+    top: 0;
   }
 
-  .hero,
-  .contact-layout,
-  .historia-grid,
-  .social-grid,
-  .services-grid,
-  .stats {
-    grid-template-columns: 1fr !important;
+  .service-card h3 {
+    font-size: clamp(1rem, 5vw, 1.25rem);
   }
 
-  .hero,
-  .content-section,
-  .about,
-  footer {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .hero-logo {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .btn,
-  .nav-button,
-  .select-button {
-    white-space: normal;
+  .service-text {
+    min-width: 0;
   }
 }
