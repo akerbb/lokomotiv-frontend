@@ -222,8 +222,7 @@ TJÄNSTEDETALJER
       .forEach(field => {
         if (field.type === "file") {
   if (field.files.length > 0) {
-    summary += `Bilder bifogade för ${serviceName}:\n`;
-summary += `[[BILDER_${field.name}]]\n`;
+    summary += `[[BILDER_${field.name}]]\n`;
   }
 } else if (field.value.trim() !== "") {
           const label = field.dataset.mailLabel || field.name || "Fält";
