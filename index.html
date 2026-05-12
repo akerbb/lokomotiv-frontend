@@ -74,7 +74,13 @@
       <a href="#sociala-medier">Sociala medier</a>
       <a href="#kontakt" class="nav-button">Kontakta oss</a>
     </nav>
-     <div class="social-icons">
+     <div class="header-actions">
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Byt till mörkt läge" aria-pressed="false">
+    <span class="theme-toggle-icon" aria-hidden="true"></span>
+    <span class="theme-toggle-text">Mörkt</span>
+  </button>
+
+  <div class="social-icons">
   <a href="https://www.instagram.com/lokomotivstad" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
     <svg viewBox="0 0 24 24" class="icon">
       <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 2A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5zm4.8-3.3a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1z"/>
@@ -87,10 +93,10 @@
   </svg>
 </a>
 </div>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Byt till mörkt läge" aria-pressed="false">
-      <span class="theme-toggle-icon" aria-hidden="true"></span>
-      <span class="theme-toggle-text">Mörkt</span>
-    </button>
+    
+
+
+    </div>
   </header>
 
   <main>
@@ -538,17 +544,32 @@
   </main>
 
   <footer>
-    <p>
-      © 2026 Lokomotiv Städ & Fönsterputs AB ·
-      <a href="mailto:eric@lokomotivstad.se">eric@lokomotivstad.se</a>
-    </p>
-<br>
-<a href="integritet.html">Integritetspolicy</a>
-  </footer>
+  <p>
+    © 2026 Lokomotiv Städ & Fönsterputs AB
+  </p>
+
+  <div class="footer-links">
+    <a href="mailto:eric@lokomotivstad.se">
+      eric@lokomotivstad.se
+    </a>
+
+    <span class="footer-divider"></span>
+
+    <a href="integritet.html">
+      Integritetspolicy
+    </a>
+
+    <span class="footer-divider"></span>
+
+    <a href="tel:+4656330990">
+      0563-309 90
+    </a>
+  </div>
+</footer>
   <div class="faq-bot" id="faqBot">
   <button class="faq-bot-toggle" id="faqBotToggle" aria-label="Öppna FAQ-hjälp" aria-expanded="false" aria-controls="faqBotWindow">
-    <span class="faq-toggle-icon" aria-hidden="true">💬</span>
-  </button>
+  <span class="faq-toggle-icon" aria-hidden="true">❯</span>
+</button>
 
   <div class="faq-bot-window" id="faqBotWindow" aria-live="polite">
     <div class="faq-bot-header">
@@ -557,7 +578,7 @@
   <img src="bilder/lok.png" alt="">
 </div>
         <div>
-          <strong>Vanliga frågor</strong>
+          <strong>Lokomotiv Hjälp</strong>
         </div>
       </div>
       <button id="faqBotClose" aria-label="Stäng FAQ">×</button>
@@ -572,7 +593,7 @@
       <div class="faq-question-list" aria-label="Vanliga frågor">
         <button 
   class="faq-question"
-  data-answer=' Hej! Vi erbjuder dessa:
+  data-answer='
   <div class="faq-service-links">
     <a href="fonsterputsning.html">Fönsterputsning</a>
     <a href="stadning.html">Städning</a>

@@ -1,3 +1,15 @@
+// Förhindra att webbläsaren återställer gammal scroll-position vid refresh/back-forward.
+// Sidan ska alltid börja högst upp om URL:en inte har en hash, t.ex. #kontakt.
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('pageshow', () => {
+  if (!window.location.hash) {
+    window.scrollTo(0, 0);
+  }
+});
+
 // =============================
 // Lokomotiv Städ - JavaScript
 // =============================
@@ -42,10 +54,14 @@ function applyTheme(theme) {
 applyTheme(getPreferredTheme());
 
 if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  themeToggle.addEventListener("click", event => {
+    event.stopPropagation();
 
-    // Stoppa färgsläp/lagg när användaren snabbt växlar mellan mörkt och ljust läge.
+    const faqWasOpen = faqBot?.classList.contains("open");
+
+    const nextTheme =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+
     document.documentElement.classList.add("theme-changing");
 
     themeToggle.classList.remove("is-switching");
@@ -55,9 +71,17 @@ if (themeToggle) {
     localStorage.setItem("theme", nextTheme);
     applyTheme(nextTheme);
 
+    if (faqWasOpen && faqBot) {
+      faqBot.classList.add("open");
+    }
+
     window.setTimeout(() => {
       themeToggle.classList.remove("is-switching");
       document.documentElement.classList.remove("theme-changing");
+
+      if (faqWasOpen && faqBot) {
+        faqBot.classList.add("open");
+      }
     }, 180);
   });
 }
@@ -297,7 +321,7 @@ clearTimeout(timeout);
     showFormMessage(
       messageBox,
       "success",
-      "✓ Tack! Din förfrågan har skickats."
+      "✓ Tack! Din förfrågan har skickats. Vi återkommer så fort vi kan med en offert! Ha en trevlig dag :)"
     );
 
     contactForm.reset();
@@ -315,9 +339,12 @@ clearTimeout(timeout);
       });
     });
 
-    setTimeout(() => {
-      window.location.href = "tack.html";
-    }, 1200);
+    contactForm.classList.add("submitted");
+
+contactForm.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 
   } else {
 
@@ -379,10 +406,6 @@ window.addEventListener("load", revealOnScroll);
 // Header active link
 const navLinks = document.querySelectorAll("nav > a, .nav-dropdown-toggle");
 
-let isHeaderScrolling = false;
-let headerScrollTarget = "";
-let headerScrollTimeout;
-
 function getSections() {
   return document.querySelectorAll("main section[id]");
 }
@@ -399,37 +422,26 @@ function setActiveMenuLink(sectionId) {
 }
 
 function updateActiveMenuLink() {
-  if (isHeaderScrolling) {
-    const targetSection = document.getElementById(headerScrollTarget);
+  const sections = Array.from(getSections());
 
-    if (!targetSection) return;
+  if (sections.length === 0) return;
 
-    const targetTop = targetSection.getBoundingClientRect().top;
-    const headerOffset = header ? header.offsetHeight + 20 : 100;
+  const headerHeight = header ? header.offsetHeight : 0;
 
-    if (Math.abs(targetTop - headerOffset) < 35) {
-      isHeaderScrolling = false;
-      headerScrollTarget = "";
-      clearTimeout(headerScrollTimeout);
-    } else {
-      return;
-    }
-  }
+  // Punkt i viewporten där vi avgör aktiv sektion
+  const checkpoint = headerHeight + window.innerHeight * 0.28;
 
-  let currentSection = "";
-  const sections = getSections();
+  let currentSection = sections[0].id;
 
   sections.forEach(section => {
-    const sectionTop = section.offsetTop - 140;
+    const rect = section.getBoundingClientRect();
 
-    if (window.scrollY >= sectionTop) {
-      currentSection = section.getAttribute("id") || "";
+    if (rect.top <= checkpoint) {
+      currentSection = section.id;
     }
   });
 
-  if (currentSection) {
-    setActiveMenuLink(currentSection);
-  }
+  setActiveMenuLink(currentSection);
 }
 
 navLinks.forEach(link => {
@@ -439,24 +451,16 @@ navLinks.forEach(link => {
     if (!href.startsWith("#")) return;
 
     const targetId = href.replace("#", "");
-    const targetSection = document.getElementById(targetId);
-
-    if (!targetSection) return;
-
-    isHeaderScrolling = true;
-    headerScrollTarget = targetId;
-
     setActiveMenuLink(targetId);
-
-    clearTimeout(headerScrollTimeout);
-
-    headerScrollTimeout = setTimeout(() => {
-      isHeaderScrolling = false;
-      headerScrollTarget = "";
-      updateActiveMenuLink();
-    }, 1200);
   });
 });
+
+window.addEventListener("scroll", updateActiveMenuLink, {
+  passive: true
+});
+
+window.addEventListener("load", updateActiveMenuLink);
+window.addEventListener("resize", updateActiveMenuLink);
 
 // Om användaren avbryter smooth-scroll manuellt
 ["wheel", "touchstart", "keydown"].forEach(eventName => {
@@ -525,6 +529,10 @@ window.addEventListener("load", toggleFloatingCall);
 const navDropdown = document.querySelector(".nav-dropdown");
 const navDropdownToggle = document.querySelector(".nav-dropdown-toggle");
 
+function isMobileHeader() {
+  return window.matchMedia("(max-width: 1200px)").matches;
+}
+
 if (menuBtn && navMenu) {
   menuBtn.addEventListener("click", event => {
     event.preventDefault();
@@ -541,22 +549,35 @@ if (menuBtn && navMenu) {
 
   navMenu.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", event => {
-      const isMobile = window.matchMedia("(max-width: 1100px)").matches;
       const isDropdownToggle = link.classList.contains("nav-dropdown-toggle");
       const isDropdownItem = link.closest(".nav-dropdown-menu");
 
-      if (isMobile && isDropdownToggle) {
-        event.preventDefault();
-        event.stopPropagation();
+      if (!isMobileHeader()) return;
 
+      if (isDropdownToggle) {
         if (!navDropdown || !navDropdownToggle) return;
 
-        const isOpen = navDropdown.classList.toggle("open");
-        navDropdownToggle.setAttribute("aria-expanded", String(isOpen));
+        const dropdownIsOpen = navDropdown.classList.contains("open");
+
+        if (!dropdownIsOpen) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          navDropdown.classList.add("open");
+          navDropdownToggle.setAttribute("aria-expanded", "true");
+          return;
+        }
+
+        // Andra klicket på Tjänster:
+        // låt href="#tjanster" fungera, men stäng mobilmenyn efter klicket
+        navMenu.classList.remove("active");
+        menuBtn.setAttribute("aria-expanded", "false");
+        navDropdown.classList.remove("open");
+        navDropdownToggle.setAttribute("aria-expanded", "false");
         return;
       }
 
-      if (isMobile && isDropdownItem) {
+      if (isDropdownItem) {
         navMenu.classList.remove("active");
         menuBtn.setAttribute("aria-expanded", "false");
 
@@ -568,14 +589,12 @@ if (menuBtn && navMenu) {
         return;
       }
 
-      if (isMobile) {
-        navMenu.classList.remove("active");
-        menuBtn.setAttribute("aria-expanded", "false");
+      navMenu.classList.remove("active");
+      menuBtn.setAttribute("aria-expanded", "false");
 
-        if (navDropdown && navDropdownToggle) {
-          navDropdown.classList.remove("open");
-          navDropdownToggle.setAttribute("aria-expanded", "false");
-        }
+      if (navDropdown && navDropdownToggle) {
+        navDropdown.classList.remove("open");
+        navDropdownToggle.setAttribute("aria-expanded", "false");
       }
     });
   });
@@ -721,3 +740,4 @@ document.addEventListener("click", event => {
 
   setFaqBotOpen(false);
 });
+
