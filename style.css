@@ -6629,3 +6629,180 @@ html[data-theme="dark"] .theme-toggle.is-switching .theme-toggle-icon::before {
     display: none;
   }
 }
+
+/* =========================================================
+   FINAL RESPONSIVE POLISH - iPad / large screens / mobile nav
+   ========================================================= */
+
+/* 1) Chatbot: stop ugly over-wrapping on iPad/tablet */
+@media (min-width: 701px) and (max-width: 1180px) {
+  .faq-bot {
+    right: max(22px, env(safe-area-inset-right));
+    bottom: max(84px, env(safe-area-inset-bottom));
+  }
+
+  .faq-bot-window {
+    width: min(440px, calc(100vw - 44px));
+    max-height: calc(100dvh - 178px);
+    right: max(22px, env(safe-area-inset-right));
+    bottom: calc(max(84px, env(safe-area-inset-bottom)) + 86px);
+  }
+
+  .faq-bot-body {
+    max-height: calc(100dvh - 292px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .faq-question {
+    padding: 13px 40px 13px 14px;
+    font-size: 13.5px;
+    line-height: 1.35;
+  }
+
+  .faq-question span,
+  .faq-answer,
+  .faq-answer p,
+  .bot-message,
+  .bot-message p {
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .faq-bot-window {
+    width: min(470px, calc(100vw - 56px));
+  }
+}
+
+/* 2) Start page hero logo: center it and scale nicer per screen size */
+.hero-logo {
+  margin-left: auto;
+  margin-right: auto;
+  width: clamp(320px, 34vw, 560px);
+}
+
+@media (min-width: 1181px) {
+  .hero {
+    align-items: center;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-text p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero-logo {
+    width: clamp(520px, 32vw, 660px);
+  }
+
+  .hero-card {
+    padding: 44px;
+  }
+
+  .content-section,
+  .about {
+    padding-top: 108px;
+    padding-bottom: 108px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero-logo {
+    width: clamp(620px, 30vw, 760px);
+  }
+
+  .hero-text h1 {
+    font-size: clamp(72px, 5vw, 96px);
+  }
+
+  .hero-text p,
+  .section-title p,
+  .about p {
+    font-size: 19px;
+  }
+}
+
+/* 3) Mobile menu: remove strange gaps between service links */
+@media (max-width: 700px) {
+  nav {
+    gap: 0 !important;
+    padding: 14px 18px 18px !important;
+  }
+
+  nav > a,
+  .nav-dropdown-toggle {
+    padding: 11px 2px !important;
+    margin: 0 !important;
+  }
+
+  nav.active .nav-dropdown.open .nav-dropdown-menu {
+    display: grid !important;
+    gap: 0 !important;
+    margin: 2px 0 8px !important;
+    padding: 6px 10px !important;
+  }
+
+  nav.active .nav-dropdown.open .nav-dropdown-menu a,
+  .nav-dropdown-menu a {
+    padding: 8px 6px !important;
+    margin: 0 !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+  }
+
+  .nav-button {
+    margin-top: 8px !important;
+  }
+}
+
+/* 4) Cleaner darkmode toggle animation: calmer slide, less visual noise */
+.theme-toggle::before {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+.theme-toggle-icon {
+  overflow: hidden;
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.2s ease !important;
+}
+
+.theme-toggle-icon::before {
+  transition:
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+.theme-toggle-icon::after {
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s ease !important;
+}
+
+.theme-toggle.is-switching .theme-toggle-icon::before {
+  animation: none !important;
+}
+
+.theme-toggle.is-switching .theme-toggle-text {
+  opacity: 1 !important;
+  transform: none !important;
+}
