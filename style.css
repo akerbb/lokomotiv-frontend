@@ -761,10 +761,13 @@ nav a.active:not(.nav-dropdown-toggle)::after {
 
 .service-text h3 {
   color: var(--white);
-  font-size: 21px;
-  line-height: 1.15;
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  line-height: 1.2;
   margin-bottom: 8px;
-  white-space: nowrap;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .service-text p {
@@ -6102,4 +6105,40 @@ h3,
   .service-text {
     min-width: 0;
   }
+}
+
+/* Förhindra sidscroll på mobil */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Alla sektioner ska hålla sig inom viewport */
+* {
+  max-width: 100%;
+}
+
+/* Bilder och iframes får aldrig trycka ut sidan */
+img,
+iframe,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Flex/grid-fixar */
+.services-grid,
+.contact-layout,
+.historia-grid,
+.about,
+.social-grid {
+  min-width: 0;
+}
+
+.service-text,
+.contact-details,
+.card {
+  min-width: 0;
 }
