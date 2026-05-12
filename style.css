@@ -5806,3 +5806,26 @@ form.submitted {
 .form-message {
   white-space: pre-line;
 }
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  min-width: 0;
+}
+
+.faq-bot,
+.faq-panel,
+.faq-content,
+.faq-message,
+.faq-answer,
+.faq-question {
+  max-width: 100%;
+  overflow-x: hidden;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
