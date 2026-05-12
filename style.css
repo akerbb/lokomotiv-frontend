@@ -6142,3 +6142,294 @@ video {
 .card {
   min-width: 0;
 }
+/* =====================================================
+   SLUTLIGA FIXAR 2026-05-12
+   1) Stabil radbrytning utan horisontell overflow
+   2) Header följer med hela tiden
+   3) Mjuk darkmode-animation på befintlig knapp
+   ===================================================== */
+
+:root {
+  --header-height: 78px;
+}
+
+html {
+  scroll-padding-top: calc(var(--header-height) + 22px);
+}
+
+body {
+  padding-top: var(--header-height);
+}
+
+header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  z-index: 99999;
+}
+
+main,
+section,
+.content-section,
+.about,
+.card,
+.hero-card,
+.contact-box,
+.contact-details,
+.social-box,
+.stat-box,
+.privacy-card,
+.service-card,
+.service-text,
+.service-hero-detail,
+.service-hero-text,
+.service-info-section,
+.service-info-grid,
+.service-info-text,
+.service-cta,
+.window-premium-section,
+.window-premium-grid,
+form,
+label,
+.checkbox-row,
+.privacy-consent,
+.select-button,
+.service-extra,
+.service-extra-toggle,
+.faq-bot-window,
+.faq-question,
+.faq-answer,
+.bot-message {
+  min-width: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+a,
+span,
+strong,
+label,
+button,
+input,
+textarea,
+select,
+.service-hero-text h1,
+body.service-body .service-hero-text h1,
+.service-info-text h2,
+.service-cta h2,
+.service-text h3,
+.section-title h2,
+.contact-details p,
+.privacy-card p,
+.faq-answer p,
+.bot-message p {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+body.service-body .service-hero-text h1,
+.service-hero-text h1,
+.service-text h3,
+.nav-dropdown-menu a {
+  white-space: normal !important;
+}
+
+.nav-dropdown-menu {
+  max-width: min(92vw, 330px);
+}
+
+.nav-dropdown-menu a {
+  line-height: 1.35;
+}
+
+@media (min-width: 1101px) {
+  nav {
+    min-width: 0;
+  }
+
+  nav a,
+  .nav-dropdown-toggle {
+    white-space: nowrap;
+  }
+
+  .nav-dropdown-menu a {
+    white-space: normal !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --header-height: 66px;
+  }
+
+  body {
+    padding-top: var(--header-height);
+  }
+
+  nav {
+    position: fixed !important;
+    top: calc(var(--header-height) + 8px) !important;
+    left: 12px !important;
+    right: 12px !important;
+    inset: calc(var(--header-height) + 8px) 12px auto 12px !important;
+    max-height: calc(100dvh - var(--header-height) - 24px);
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .service-hero-text h1,
+  body.service-body .service-hero-text h1 {
+    font-size: clamp(2rem, 10vw, 2.9rem);
+    line-height: 1.08;
+    letter-spacing: -0.06em;
+  }
+
+  .section-title h2,
+  .service-info-text h2,
+  .service-cta h2 {
+    font-size: clamp(1.65rem, 8vw, 2.25rem);
+    line-height: 1.12;
+  }
+}
+
+.theme-toggle {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    background 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.theme-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -55%;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.7), transparent 24%),
+    radial-gradient(circle at 70% 70%, rgba(156, 35, 36, 0.28), transparent 34%);
+  opacity: 0;
+  transform: scale(0.55) rotate(0deg);
+  pointer-events: none;
+}
+
+.theme-toggle.is-switching::after {
+  animation: themePulseSweep 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle-icon {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.theme-toggle-icon::before {
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.45s ease,
+    box-shadow 0.45s ease,
+    opacity 0.35s ease;
+}
+
+.theme-toggle-icon::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  right: 6px;
+  top: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    -7px 8px 0 rgba(255, 255, 255, 0.7),
+    5px 9px 0 rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  transform: translateY(5px) scale(0.7);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-theme="dark"] .theme-toggle-icon::after {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.theme-toggle.is-switching .theme-toggle-icon {
+  animation: themeButtonTilt 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle.is-switching .theme-toggle-icon::before {
+  animation: themeKnobBounce 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes themePulseSweep {
+  0% {
+    opacity: 0;
+    transform: scale(0.55) rotate(0deg);
+  }
+  42% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25) rotate(28deg);
+  }
+}
+
+@keyframes themeButtonTilt {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  45% {
+    transform: rotate(-12deg) scale(0.92);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes themeKnobBounce {
+  0% {
+    scale: 1;
+  }
+  45% {
+    scale: 0.82;
+  }
+  72% {
+    scale: 1.12;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle.is-switching::after,
+  .theme-toggle.is-switching .theme-toggle-icon,
+  .theme-toggle.is-switching .theme-toggle-icon::before {
+    animation: none !important;
+  }
+}
