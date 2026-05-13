@@ -1,706 +1,551 @@
-// Förhindra att webbläsaren återställer gammal scroll-position vid refresh/back-forward.
-// Sidan ska alltid börja högst upp om URL:en inte har en hash, t.ex. #kontakt.
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
+// =============================
+// Lokomotiv Städ - optimerad JavaScript
+// =============================
 
-window.addEventListener('pageshow', () => {
-  if (!window.location.hash) {
-    window.scrollTo(0, 0);
+(() => {
+  "use strict";
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
   }
-});
 
-// =============================
-// Lokomotiv Städ - JavaScript
-// =============================
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
-const menuBtn = document.getElementById("menuBtn");
-const navMenu = document.getElementById("navMenu");
-const contactForm = document.getElementById("contactForm");
-const phoneInput = document.getElementById("phone");
-const serviceDropdownBtn = document.getElementById("serviceDropdownBtn");
-const serviceOptions = document.getElementById("serviceOptions");
-const customSelect = document.querySelector(".custom-select");
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-const header = document.querySelector("header");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-const themeToggle = document.getElementById("themeToggle");
-const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  function onReady(callback) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", callback, { once: true });
+    } else {
+      callback();
+    }
+  }
 
-function getPreferredTheme() {
-  const savedTheme = localStorage.getItem("theme");
-  return savedTheme || (systemThemeQuery.matches ? "dark" : "light");
-}
+  function showFormMessage(element, type, message) {
+    if (!element) return;
 
-function applyTheme(theme) {
-  const isDark = theme === "dark";
+    element.style.display = "block";
+    element.className = `form-message ${type} show`;
+    element.textContent = message;
+  }
 
-  document.body.classList.toggle("theme--dark", isDark);
+  function resetSubmitButton(button) {
+    if (!button) return;
 
-  if (themeToggle) {
+    button.disabled = false;
+    button.classList.remove("loading");
+    button.textContent = "Skicka förfrågan";
+  }
+
+  function getPreferredTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme || (systemThemeQuery.matches ? "dark" : "light");
+  }
+
+  function applyTheme(theme, themeToggle) {
+    const isDark = theme === "dark";
+
+    document.documentElement.dataset.theme = theme;
+    document.body.classList.toggle("theme--dark", isDark);
+
+    if (!themeToggle) return;
+
     themeToggle.setAttribute("aria-pressed", String(isDark));
-    themeToggle.setAttribute(
-      "aria-label",
-      isDark ? "Byt till ljust läge" : "Byt till mörkt läge"
-    );
+    themeToggle.setAttribute("aria-label", isDark ? "Byt till ljust läge" : "Byt till mörkt läge");
 
-    const icon = themeToggle.querySelector(".dark-mode-toggle__icon");
-
+    const icon = $(".dark-mode-toggle__icon", themeToggle);
     if (icon) {
       icon.classList.toggle("dark-mode-toggle__icon--moon", isDark);
     }
   }
-}
 
-applyTheme(getPreferredTheme());
+  onReady(() => {
+    const menuBtn = $("#menuBtn");
+    const navMenu = $("#navMenu");
+    const contactForm = $("#contactForm");
+    const phoneInput = $("#phone");
+    const serviceDropdownBtn = $("#serviceDropdownBtn");
+    const serviceOptions = $("#serviceOptions");
+    const customSelect = $(".custom-select");
+    const scrollTopBtn = $("#scrollTopBtn");
+    const header = $("header");
+    const floatingCall = $(".floating-call");
+    const themeToggle = $("#themeToggle");
+    const faqBot = $("#faqBot");
+    const faqBotToggle = $("#faqBotToggle");
+    const faqBotClose = $("#faqBotClose");
+    const faqAnswer = $("#faqAnswer");
+    const faqTyping = $("#faqTyping");
+    const faqQuestions = $$(".faq-question");
+    const navDropdown = $(".nav-dropdown");
+    const navDropdownToggle = $(".nav-dropdown-toggle");
+    const sections = $$("main section[id]");
+    const navLinks = $$("nav a[href^='#']");
 
-if (themeToggle) {
-  themeToggle.addEventListener("click", event => {
-    event.stopPropagation();
+    let faqTypingTimeout = null;
+    let ticking = false;
+    let activeSectionId = "";
 
-    const isDark = document.body.classList.contains("theme--dark");
-    const nextTheme = isDark ? "light" : "dark";
-
-    localStorage.setItem("theme", nextTheme);
-    applyTheme(nextTheme);
-  });
-}
-
-systemThemeQuery.addEventListener("change", () => {
-  if (!localStorage.getItem("theme")) {
-    applyTheme(getPreferredTheme());
-  }
-});
-
-// Telefonformattering
-if (phoneInput) {
-  phoneInput.addEventListener("input", () => {
-    let numbers = phoneInput.value.replace(/\D/g, "").slice(0, 10);
-
-    if (numbers.length > 6) {
-      phoneInput.value = `${numbers.slice(0, 3)}-${numbers.slice(3, 6)} ${numbers.slice(6)}`;
-    } else if (numbers.length > 3) {
-      phoneInput.value = `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
-    } else {
-      phoneInput.value = numbers;
-    }
-  });
-}
-
-// Tjänste-dropdown
-if (serviceDropdownBtn && serviceOptions && customSelect) {
-  serviceDropdownBtn.addEventListener("click", () => {
-    customSelect.classList.toggle("open");
-  });
-
-  serviceOptions.addEventListener("change", () => {
-    const selectedServices = document.querySelectorAll(".service-checkbox:checked");
-
-    serviceDropdownBtn.textContent =
-      selectedServices.length === 0
-        ? "Välj tjänster"
-        : `${selectedServices.length} valda tjänster`;
-
-    document.querySelectorAll(".service-extra").forEach(extraBox => {
-      extraBox.classList.remove("active");
-    });
-
-    selectedServices.forEach(checkbox => {
-      const matchingBox = document.querySelector(
-        `.service-extra[data-service="${checkbox.value}"]`
-      );
-
-      if (matchingBox) {
-  matchingBox.classList.add("active", "open");
-}
-    });
-  });
-
-  document.addEventListener("click", event => {
-    if (!customSelect.contains(event.target)) {
-      customSelect.classList.remove("open");
-    }
-  });
-}
-
-// Kontaktformulär
-if (contactForm) {
-  contactForm.addEventListener("submit", async event => {
-  event.preventDefault();
-
-  console.log("Formuläret försöker skickas");
-
-const selectedServices = document.querySelectorAll(".service-checkbox:checked");
-const messageBox = document.getElementById("formMessage");
-const hiddenInput = document.getElementById("selectedServicesInput");
-const submitBtn = document.getElementById("submitFormBtn");    const privacyConsent = document.getElementById("privacyConsent");
-    const honeypot = document.getElementById("website");
-    const cleanPhone = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
-
-    if (!messageBox || !hiddenInput || !submitBtn) {
-  console.error("Saknar formMessage, selectedServicesInput eller submit-knapp");
-  return;
-}
-
-    messageBox.className = "form-message";
-    messageBox.style.display = "none";
-    messageBox.textContent = "";
-
-    if (honeypot && honeypot.value.trim() !== "") return;
-
-    if (privacyConsent && !privacyConsent.checked) {
-      showFormMessage(messageBox, "error", "Du behöver godkänna integritetspolicyn innan du skickar formuläret.");
-      return;
+    if (!window.location.hash) {
+      window.addEventListener("pageshow", () => window.scrollTo(0, 0), { once: true });
     }
 
-    if (cleanPhone.length < 7) {
-      showFormMessage(messageBox, "error", "Fyll i ett giltigt telefonnummer.");
-      return;
-    }
+    applyTheme(getPreferredTheme(), themeToggle);
 
-    //if (selectedServices.length === 0) {
-      //showFormMessage(messageBox, "error", "Välj minst en tjänst.");
-      //return;
-    //}
+    if (themeToggle) {
+      themeToggle.addEventListener("click", event => {
+        event.stopPropagation();
 
-    const selectedServiceNames = Array.from(selectedServices).map(service => service.value);
-    hiddenInput.value = selectedServiceNames.join(", ");
+        const isDark = document.body.classList.contains("theme--dark");
+        const nextTheme = isDark ? "light" : "dark";
 
-    const summaryInput = document.getElementById("mailSummary");
-
-    if (summaryInput) {
-  const formData = new FormData(contactForm);
-
-  let summary = `Ny offertförfrågan från hemsidan
-================================
-
-KUNDUPPGIFTER
---------------------------------
-Namn: ${formData.get("Namn") || "-"}
-E-post: ${formData.get("E-post") || "-"}
-Telefon: ${formData.get("Telefonnummer") || "-"}
-
-VALDA TJÄNSTER
---------------------------------
-${selectedServiceNames.length > 0 ? selectedServiceNames.join(", ") : "Ingen specifik tjänst vald"}
-
-TJÄNSTEDETALJER
---------------------------------
-`;
-
-  selectedServiceNames.forEach(serviceName => {
-    summary += `\n${serviceName}\n`;
-
-    contactForm
-      .querySelectorAll(
-        `.service-extra[data-service="${serviceName}"] input,
-         .service-extra[data-service="${serviceName}"] textarea,
-         .service-extra[data-service="${serviceName}"] select`
-      )
-      .forEach(field => {
-        if (field.type === "file") {
-  if (field.files.length > 0) {
-    summary += `[[BILDER_${field.name}]]\n`;
-  }
-} else if (field.value.trim() !== "") {
-          const label = field.dataset.mailLabel || field.name || "Fält";
-          summary += `• ${label}: ${field.value.trim()}\n`;
-        }
+        localStorage.setItem("theme", nextTheme);
+        applyTheme(nextTheme, themeToggle);
       });
-  });
-
-  summary += `
-MEDDELANDE
---------------------------------
-${formData.get("Övrigt tillägg") || "Inget"}
-
-SAMTYCKE
---------------------------------
-${formData.get("Samtycke") || "-"}
-
-================================
-Skickat från lokomotivstad.se
-`;
-
-  summaryInput.value = summary;
-}
-
-    submitBtn.disabled = true;
-    submitBtn.classList.add("loading");
-    submitBtn.textContent = "Skickar...";
-
-    const fileInputs = contactForm.querySelectorAll('input[type="file"]');
-
-let totalSize = 0;
-let totalFiles = 0;
-
-fileInputs.forEach(input => {
-  Array.from(input.files).forEach(file => {
-    totalSize += file.size;
-    totalFiles++;
-  });
-});
-
-const maxSizeMB = 10;
-const totalSizeMB = totalSize / (1024 * 1024);
-
-if (totalSizeMB > maxSizeMB) {
-  showFormMessage(
-    messageBox,
-    "error",
-    `Bilderna är för stora (${totalSizeMB.toFixed(1)} MB). Max ${maxSizeMB} MB totalt.`
-  );
-
-  submitBtn.disabled = false;
-  submitBtn.classList.remove("loading");
-  submitBtn.textContent = "Skicka förfrågan";
-
-  return;
-}
-
-if (totalFiles > 10) {
-  showFormMessage(
-    messageBox,
-    "error",
-    "Max 10 bilder kan laddas upp samtidigt."
-  );
-
-  submitBtn.disabled = false;
-  submitBtn.classList.remove("loading");
-  submitBtn.textContent = "Skicka förfrågan";
-
-  return;
-}
-    try {
-document.querySelectorAll(".service-extra").forEach(extraBox => {
-  const isActive = extraBox.classList.contains("active");
-
-  extraBox.querySelectorAll("input, textarea, select").forEach(field => {
-    field.disabled = !isActive;
-  });
-});
-const controller = new AbortController();
-
-const timeout = setTimeout(() => {
-  controller.abort();
-}, 90000);
-
-const response = await fetch("https://lokomotiv-backend.onrender.com/send-email", {
-  method: "POST",
-  body: new FormData(contactForm),
-  signal: controller.signal
-});
-
-clearTimeout(timeout);
-
-  if (response.ok) {
-
-    showFormMessage(
-      messageBox,
-      "success",
-      "✓ Tack! Din förfrågan har skickats. Vi återkommer så fort vi kan med en offert! Ha en trevlig dag :)"
-    );
-
-    contactForm.reset();
-
-    if (serviceDropdownBtn) {
-      serviceDropdownBtn.textContent = "Välj tjänster";
     }
 
-    document.querySelectorAll(".service-extra").forEach(extraBox => {
-      extraBox.classList.remove("active", "open");
-
-      extraBox.querySelectorAll("input, textarea, select").forEach(field => {
-        field.disabled = false;
-        field.value = "";
-      });
-    });
-
-    contactForm.classList.add("submitted");
-
-contactForm.scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
-
-  } else {
-
-    showFormMessage(
-      messageBox,
-      "error",
-      "Något gick fel. Försök igen."
-    );
-
-  }
-
-} catch (error) {
-  console.error("Fetch error:", error);
-
-  showFormMessage(
-    messageBox,
-    "error",
-    "Nätverksfel. Kontrollera din uppkoppling."
-  );
-
-} finally {
-
-  submitBtn.disabled = false;
-  submitBtn.classList.remove("loading");
-  submitBtn.textContent = "Skicka förfrågan";
-
-}
-  });
-}
-
-function showFormMessage(element, type, message) {
-  element.style.display = "block";
-  element.classList.add(type, "show");
-  element.textContent = message;
-}
-
-// Reveal on scroll
-// Reveal on scroll - bättre för mobil/iPad
-const revealElements = document.querySelectorAll(
-  ".content-section, .about, .hero-card, .service-card, .historia-image, .contact-box, .contact-details, .social-box, .privacy-card, .privacy-hero, .service-cta, .before-after-section, .window-premium-section"
-);
-
-revealElements.forEach(element => {
-  element.classList.add("reveal");
-});
-
-const revealObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        revealObserver.unobserve(entry.target);
+    systemThemeQuery.addEventListener("change", () => {
+      if (!localStorage.getItem("theme")) {
+        applyTheme(getPreferredTheme(), themeToggle);
       }
     });
-  },
-  {
-    threshold: 0.12,
-    rootMargin: "0px 0px -40px 0px"
-  }
-);
 
-revealElements.forEach(element => {
-  revealObserver.observe(element);
-});
-// Pil upp
-function toggleScrollTopButton() {
-  if (!scrollTopBtn) return;
+    if (phoneInput) {
+      phoneInput.addEventListener("input", () => {
+        const numbers = phoneInput.value.replace(/\D/g, "").slice(0, 10);
 
-  if (window.scrollY > 500 || document.body.classList.contains("privacy-body")) {
-    scrollTopBtn.classList.add("show");
-  } else {
-    scrollTopBtn.classList.remove("show");
-  }
-}
-
-if (scrollTopBtn) {
-  scrollTopBtn.addEventListener("click", event => {
-    if (scrollTopBtn.getAttribute("href") === "#") {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+        if (numbers.length > 6) {
+          phoneInput.value = `${numbers.slice(0, 3)}-${numbers.slice(3, 6)} ${numbers.slice(6)}`;
+        } else if (numbers.length > 3) {
+          phoneInput.value = `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+        } else {
+          phoneInput.value = numbers;
+        }
+      });
     }
-  });
-}
 
-window.addEventListener("scroll", toggleScrollTopButton);
-window.addEventListener("load", toggleScrollTopButton);
+    function updateServiceSelection() {
+      if (!serviceDropdownBtn || !contactForm) return;
 
-// Header-effekt
-function updateHeaderOnScroll() {
-  if (!header) return;
-  header.classList.toggle("scrolled", window.scrollY > 40);
-}
+      const selectedServices = $$(".service-checkbox:checked", contactForm);
 
-window.addEventListener("scroll", updateHeaderOnScroll);
-window.addEventListener("load", updateHeaderOnScroll);
+      serviceDropdownBtn.textContent =
+        selectedServices.length === 0 ? "Välj tjänster" : `${selectedServices.length} valda tjänster`;
 
-// Floating call button
-const floatingCall = document.querySelector(".floating-call");
+      $$(".service-extra", contactForm).forEach(extraBox => {
+        extraBox.classList.remove("active", "open");
+      });
 
-function toggleFloatingCall() {
-  if (!floatingCall) return;
-
-  if (window.scrollY > 10) {
-    floatingCall.classList.add("show");
-  } else {
-    floatingCall.classList.remove("show");
-  }
-}
-
-window.addEventListener("scroll", toggleFloatingCall);
-window.addEventListener("load", toggleFloatingCall);
-
-// Mobilmeny + Header tjänster-dropdown
-const navDropdown = document.querySelector(".nav-dropdown");
-const navDropdownToggle = document.querySelector(".nav-dropdown-toggle");
-
-function isMobileHeader() {
-  return window.matchMedia(
-    "(max-width: 1200px), (hover: none), (pointer: coarse)"
-  ).matches;
-}
-
-if (menuBtn && navMenu) {
-  menuBtn.addEventListener("click", event => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const isOpen = navMenu.classList.toggle("active");
-    menuBtn.setAttribute("aria-expanded", String(isOpen));
-
-    if (!isOpen && navDropdown && navDropdownToggle) {
-      navDropdown.classList.remove("open");
-      navDropdownToggle.setAttribute("aria-expanded", "false");
+      selectedServices.forEach(checkbox => {
+        const matchingBox = $(`.service-extra[data-service="${CSS.escape(checkbox.value)}"]`, contactForm);
+        if (matchingBox) {
+          matchingBox.classList.add("active", "open");
+        }
+      });
     }
-  });
 
-  navMenu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", event => {
-      const isDropdownToggle = link.classList.contains("nav-dropdown-toggle");
-      const isDropdownItem = link.closest(".nav-dropdown-menu");
+    if (serviceDropdownBtn && serviceOptions && customSelect) {
+      serviceDropdownBtn.addEventListener("click", event => {
+        event.stopPropagation();
+        customSelect.classList.toggle("open");
+      });
 
-      if (!isMobileHeader()) return;
+      serviceOptions.addEventListener("change", updateServiceSelection);
 
-      if (isDropdownToggle) {
-        if (!navDropdown || !navDropdownToggle) return;
+      document.addEventListener("click", event => {
+        if (!customSelect.contains(event.target)) {
+          customSelect.classList.remove("open");
+        }
+      });
+    }
 
-        const dropdownIsOpen = navDropdown.classList.contains("open");
+    $$(".service-extra-toggle").forEach(button => {
+      button.addEventListener("click", () => {
+        const extraBox = button.closest(".service-extra");
+        if (extraBox) extraBox.classList.toggle("open");
+      });
+    });
 
-        if (!dropdownIsOpen) {
-          event.preventDefault();
-          event.stopPropagation();
+    if (contactForm) {
+      contactForm.addEventListener("submit", async event => {
+        event.preventDefault();
 
-          navDropdown.classList.add("open");
-          navDropdownToggle.setAttribute("aria-expanded", "true");
+        const selectedServices = $$(".service-checkbox:checked", contactForm);
+        const selectedServiceNames = selectedServices.map(service => service.value);
+        const messageBox = $("#formMessage");
+        const hiddenInput = $("#selectedServicesInput");
+        const summaryInput = $("#mailSummary");
+        const submitBtn = $("#submitFormBtn");
+        const privacyConsent = $("#privacyConsent");
+        const honeypot = $("#website");
+        const cleanPhone = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
+
+        if (!messageBox || !hiddenInput || !submitBtn) return;
+
+        messageBox.className = "form-message";
+        messageBox.style.display = "none";
+        messageBox.textContent = "";
+
+        if (honeypot && honeypot.value.trim() !== "") return;
+
+        if (privacyConsent && !privacyConsent.checked) {
+          showFormMessage(messageBox, "error", "Du behöver godkänna integritetspolicyn innan du skickar formuläret.");
           return;
         }
 
-        // Andra klicket på Tjänster:
-        // låt href="#tjanster" fungera, men stäng mobilmenyn efter klicket
-        navMenu.classList.remove("active");
-        menuBtn.setAttribute("aria-expanded", "false");
-        navDropdown.classList.remove("open");
-        navDropdownToggle.setAttribute("aria-expanded", "false");
-        return;
+        if (cleanPhone.length < 7) {
+          showFormMessage(messageBox, "error", "Fyll i ett giltigt telefonnummer.");
+          return;
+        }
+
+        hiddenInput.value = selectedServiceNames.join(", ");
+
+        if (summaryInput) {
+          const formData = new FormData(contactForm);
+          let summary = `Ny offertförfrågan från hemsidan\n================================\n\nKUNDUPPGIFTER\n--------------------------------\nNamn: ${formData.get("Namn") || "-"}\nE-post: ${formData.get("E-post") || "-"}\nTelefon: ${formData.get("Telefonnummer") || "-"}\n\nVALDA TJÄNSTER\n--------------------------------\n${selectedServiceNames.length > 0 ? selectedServiceNames.join(", ") : "Ingen specifik tjänst vald"}\n\nTJÄNSTEDETALJER\n--------------------------------\n`;
+
+          selectedServiceNames.forEach(serviceName => {
+            summary += `\n${serviceName}\n`;
+
+            $$(`.service-extra[data-service="${CSS.escape(serviceName)}"] input, .service-extra[data-service="${CSS.escape(serviceName)}"] textarea, .service-extra[data-service="${CSS.escape(serviceName)}"] select`, contactForm)
+              .forEach(field => {
+                if (field.type === "file") {
+                  if (field.files.length > 0) summary += `[[BILDER_${field.name}]]\n`;
+                } else if (field.value.trim() !== "") {
+                  const label = field.dataset.mailLabel || field.name || "Fält";
+                  summary += `• ${label}: ${field.value.trim()}\n`;
+                }
+              });
+          });
+
+          summary += `\nMEDDELANDE\n--------------------------------\n${formData.get("Övrigt tillägg") || "Inget"}\n\nSAMTYCKE\n--------------------------------\n${formData.get("Samtycke") || "-"}\n\n================================\nSkickat från lokomotivstad.se\n`;
+          summaryInput.value = summary;
+        }
+
+        const fileInputs = $$("input[type='file']", contactForm);
+        let totalSize = 0;
+        let totalFiles = 0;
+
+        fileInputs.forEach(input => {
+          Array.from(input.files).forEach(file => {
+            totalSize += file.size;
+            totalFiles += 1;
+          });
+        });
+
+        const totalSizeMB = totalSize / (1024 * 1024);
+
+        if (totalSizeMB > 10) {
+          showFormMessage(messageBox, "error", `Bilderna är för stora (${totalSizeMB.toFixed(1)} MB). Max 10 MB totalt.`);
+          return;
+        }
+
+        if (totalFiles > 10) {
+          showFormMessage(messageBox, "error", "Max 10 bilder kan laddas upp samtidigt.");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.classList.add("loading");
+        submitBtn.textContent = "Skickar...";
+
+        $$(".service-extra", contactForm).forEach(extraBox => {
+          const isActive = extraBox.classList.contains("active");
+          $$("input, textarea, select", extraBox).forEach(field => {
+            field.disabled = !isActive;
+          });
+        });
+
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), 90000);
+
+        try {
+          const response = await fetch("https://lokomotiv-backend.onrender.com/send-email", {
+            method: "POST",
+            body: new FormData(contactForm),
+            signal: controller.signal
+          });
+
+          if (!response.ok) {
+            throw new Error(`Server svarade med status ${response.status}`);
+          }
+
+          showFormMessage(
+            messageBox,
+            "success",
+            "✓ Tack! Din förfrågan har skickats. Vi återkommer så fort vi kan med en offert! Ha en trevlig dag :)"
+          );
+
+          contactForm.reset();
+          updateServiceSelection();
+
+          $$(".service-extra", contactForm).forEach(extraBox => {
+            extraBox.classList.remove("active", "open");
+            $$("input, textarea, select", extraBox).forEach(field => {
+              field.disabled = false;
+              if (field.type !== "file") field.value = "";
+            });
+          });
+
+          contactForm.classList.add("submitted");
+          contactForm.scrollIntoView({ behavior: prefersReducedMotion.matches ? "auto" : "smooth", block: "start" });
+        } catch (error) {
+          const message = error.name === "AbortError"
+            ? "Det tog för lång tid att skicka. Försök igen."
+            : "Nätverksfel. Kontrollera din uppkoppling.";
+
+          showFormMessage(messageBox, "error", message);
+        } finally {
+          window.clearTimeout(timeoutId);
+          resetSubmitButton(submitBtn);
+
+          $$(".service-extra input, .service-extra textarea, .service-extra select", contactForm).forEach(field => {
+            field.disabled = false;
+          });
+        }
+      });
+    }
+
+    const revealElements = $$([
+      ".content-section",
+      ".about",
+      ".hero-card",
+      ".service-card",
+      ".historia-image",
+      ".contact-box",
+      ".contact-details",
+      ".social-box",
+      ".privacy-card",
+      ".privacy-hero",
+      ".service-cta",
+      ".before-after-section",
+      ".window-premium-section"
+    ].join(", "));
+
+    revealElements.forEach(element => element.classList.add("reveal"));
+
+    if ("IntersectionObserver" in window && !prefersReducedMotion.matches) {
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+      revealElements.forEach(element => revealObserver.observe(element));
+    } else {
+      revealElements.forEach(element => element.classList.add("show"));
+    }
+
+    function setActiveNav(sectionId) {
+      if (!sectionId || sectionId === activeSectionId) return;
+
+      activeSectionId = sectionId;
+
+      navLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${sectionId}`);
+      });
+
+      if (navDropdownToggle) {
+        navDropdownToggle.classList.toggle("active", sectionId === "tjanster");
       }
+    }
 
-      if (isDropdownItem) {
-        navMenu.classList.remove("active");
-        menuBtn.setAttribute("aria-expanded", "false");
+    function updateActiveNav() {
+      if (sections.length === 0) return;
 
-        if (navDropdown && navDropdownToggle) {
+      const checkLine = window.innerHeight * 0.38;
+      let currentSection = sections[0].id;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= checkLine && rect.bottom > checkLine) {
+          currentSection = section.id;
+        }
+      });
+
+      setActiveNav(currentSection);
+    }
+
+    function updateScrollUI() {
+      const scrolledY = window.scrollY;
+
+      if (header) header.classList.toggle("scrolled", scrolledY > 40);
+      if (scrollTopBtn) scrollTopBtn.classList.toggle("show", scrolledY > 500 || document.body.classList.contains("privacy-body"));
+      if (floatingCall) floatingCall.classList.toggle("show", scrolledY > 10);
+
+      updateActiveNav();
+      ticking = false;
+    }
+
+    function requestScrollUpdate() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateScrollUI);
+    }
+
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+    window.addEventListener("resize", requestScrollUpdate, { passive: true });
+    window.addEventListener("load", requestScrollUpdate, { once: true });
+    requestScrollUpdate();
+
+    if (scrollTopBtn) {
+      scrollTopBtn.addEventListener("click", event => {
+        if (scrollTopBtn.getAttribute("href") === "#" || scrollTopBtn.getAttribute("href") === "#hem") {
+          event.preventDefault();
+          window.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? "auto" : "smooth" });
+        }
+      });
+    }
+
+    function isMobileHeader() {
+      return window.matchMedia("(max-width: 1200px), (hover: none), (pointer: coarse)").matches;
+    }
+
+    function closeMobileMenu() {
+      if (navMenu) navMenu.classList.remove("active");
+      if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+      if (navDropdown) navDropdown.classList.remove("open");
+      if (navDropdownToggle) navDropdownToggle.setAttribute("aria-expanded", "false");
+    }
+
+    if (menuBtn && navMenu) {
+      menuBtn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen = navMenu.classList.toggle("active");
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+
+        if (!isOpen && navDropdown && navDropdownToggle) {
           navDropdown.classList.remove("open");
           navDropdownToggle.setAttribute("aria-expanded", "false");
         }
+      });
 
-        return;
+      $$("a", navMenu).forEach(link => {
+        link.addEventListener("click", event => {
+          if (!isMobileHeader()) return;
+
+          const isDropdownToggle = link.classList.contains("nav-dropdown-toggle");
+          const isDropdownItem = Boolean(link.closest(".nav-dropdown-menu"));
+
+          if (isDropdownToggle && navDropdown && navDropdownToggle) {
+            const dropdownIsOpen = navDropdown.classList.contains("open");
+
+            if (!dropdownIsOpen) {
+              event.preventDefault();
+              event.stopPropagation();
+              navDropdown.classList.add("open");
+              navDropdownToggle.setAttribute("aria-expanded", "true");
+              return;
+            }
+          }
+
+          if (!isDropdownToggle || isDropdownItem || link.getAttribute("href")?.startsWith("#")) {
+            closeMobileMenu();
+          }
+        });
+      });
+
+      document.addEventListener("click", event => {
+        if (!event.target.closest("header")) closeMobileMenu();
+      });
+    }
+
+    $$(".before-after-slider").forEach(slider => {
+      const input = $(".slider-input", slider);
+      const after = $(".after-wrapper", slider);
+      const line = $(".slider-line", slider);
+
+      if (!input || !after || !line) return;
+
+      let sliderTicking = false;
+
+      function updateSlider() {
+        const value = Number(input.value) || 50;
+        after.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+        line.style.left = `${value}%`;
+        sliderTicking = false;
       }
 
-      navMenu.classList.remove("active");
-      menuBtn.setAttribute("aria-expanded", "false");
+      function requestSliderUpdate() {
+        if (sliderTicking) return;
+        sliderTicking = true;
+        window.requestAnimationFrame(updateSlider);
+      }
 
-      if (navDropdown && navDropdownToggle) {
-        navDropdown.classList.remove("open");
-        navDropdownToggle.setAttribute("aria-expanded", "false");
+      input.addEventListener("input", requestSliderUpdate, { passive: true });
+      input.addEventListener("change", requestSliderUpdate);
+      updateSlider();
+    });
+
+    function setFaqBotOpen(isOpen) {
+      if (!faqBot) return;
+
+      faqBot.classList.toggle("open", isOpen);
+
+      if (faqBotToggle) {
+        faqBotToggle.setAttribute("aria-expanded", String(isOpen));
+      }
+    }
+
+    if (faqBot && faqBotToggle) {
+      faqBotToggle.addEventListener("click", () => {
+        setFaqBotOpen(!faqBot.classList.contains("open"));
+      });
+    }
+
+    if (faqBot && faqBotClose) {
+      faqBotClose.addEventListener("click", () => setFaqBotOpen(false));
+    }
+
+    faqQuestions.forEach(button => {
+      button.addEventListener("click", () => {
+        if (!faqAnswer) return;
+
+        window.clearTimeout(faqTypingTimeout);
+
+        faqQuestions.forEach(question => question.classList.remove("active"));
+        button.classList.add("active");
+        faqAnswer.innerHTML = "";
+
+        if (faqTyping) faqTyping.classList.add("show");
+
+        faqTypingTimeout = window.setTimeout(() => {
+          if (faqTyping) faqTyping.classList.remove("show");
+          faqAnswer.innerHTML = button.dataset.answer || "";
+        }, 280);
+      });
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        setFaqBotOpen(false);
+        closeMobileMenu();
       }
     });
+
+    document.addEventListener("click", event => {
+      if (!faqBot || !faqBot.classList.contains("open")) return;
+      if (event.target.closest("#faqBot")) return;
+      setFaqBotOpen(false);
+    });
+
+    document.addEventListener("touchend", event => {
+      const touchedElement = event.target.closest("a, button");
+      if (!touchedElement) return;
+
+      window.setTimeout(() => {
+        touchedElement.blur();
+        if (document.activeElement && document.activeElement !== document.body) {
+          document.activeElement.blur();
+        }
+      }, 80);
+    }, { passive: true });
   });
-
-  document.addEventListener("click", event => {
-    if (event.target.closest("header")) return;
-
-    navMenu.classList.remove("active");
-    menuBtn.setAttribute("aria-expanded", "false");
-
-    if (navDropdown && navDropdownToggle) {
-      navDropdown.classList.remove("open");
-      navDropdownToggle.setAttribute("aria-expanded", "false");
-    }
-  });
-}
-
-document.querySelectorAll(".before-after-slider").forEach(slider => {
-  const input = slider.querySelector(".slider-input");
-  const after = slider.querySelector(".after-wrapper");
-  const line = slider.querySelector(".slider-line");
-
-  if (!input || !after || !line) return;
-
-  function update() {
-    const value = input.value;
-    after.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
-    line.style.left = `${value}%`;
-  }
-
-  input.addEventListener("input", update);
-  input.addEventListener("change", update);
-
-  update();
-});
-
-// Mouse glow background
-const mouseGlow = document.querySelector(".mouse-glow");
-
-if (mouseGlow && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-  let currentX = window.innerWidth / 2;
-  let currentY = window.innerHeight / 2;
-
-  let targetX = currentX;
-  let targetY = currentY;
-
-  window.addEventListener("mousemove", event => {
-    targetX = event.clientX;
-    targetY = event.clientY;
-
-    mouseGlow.style.opacity = "1";
-  });
-
-  function animateGlow() {
-    currentX += (targetX - currentX) * 0.08;
-    currentY += (targetY - currentY) * 0.08;
-
-    mouseGlow.style.transform =
-      `translate(${currentX - 325}px, ${currentY - 325}px)`;
-
-    requestAnimationFrame(animateGlow);
-  }
-
-  animateGlow();
-}
-
-// Öppna/stäng detaljer för valda tjänster
-document.querySelectorAll(".service-extra-toggle").forEach(button => {
-  button.addEventListener("click", () => {
-    const extraBox = button.closest(".service-extra");
-
-    if (!extraBox) return;
-
-    extraBox.classList.toggle("open");
-  });
-});
-
-// FAQ bot
-const faqBotToggle = document.getElementById("faqBotToggle");
-const faqBotClose = document.getElementById("faqBotClose");
-const faqAnswer = document.getElementById("faqAnswer");
-const faqTyping = document.getElementById("faqTyping");
-const faqQuestions = document.querySelectorAll(".faq-question");
-let faqTypingTimeout;
-
-function setFaqBotOpen(isOpen) {
-  if (!faqBot) return;
-
-  faqBot.classList.toggle("open", isOpen);
-
-  if (faqBotToggle) {
-    faqBotToggle.setAttribute("aria-expanded", String(isOpen));
-  }
-}
-
-if (faqBot && faqBotToggle) {
-  faqBotToggle.addEventListener("click", () => {
-    setFaqBotOpen(!faqBot.classList.contains("open"));
-  });
-}
-
-if (faqBotClose && faqBot) {
-  faqBotClose.addEventListener("click", () => {
-    setFaqBotOpen(false);
-  });
-}
-
-faqQuestions.forEach(button => {
-  button.addEventListener("click", () => {
-    if (!faqAnswer) return;
-
-    clearTimeout(faqTypingTimeout);
-
-    faqQuestions.forEach(question => question.classList.remove("active"));
-    button.classList.add("active");
-
-    faqAnswer.innerHTML = "";
-
-    if (faqTyping) {
-      faqTyping.classList.add("show");
-    }
-
-    faqTypingTimeout = setTimeout(() => {
-      if (faqTyping) {
-        faqTyping.classList.remove("show");
-      }
-
-      faqAnswer.innerHTML = button.dataset.answer || "";
-    }, 420);
-  });
-});
-
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    setFaqBotOpen(false);
-  }
-});
-
-document.addEventListener("click", event => {
-  if (!faqBot || !faqBot.classList.contains("open")) return;
-  if (event.target.closest("#faqBot")) return;
-
-  setFaqBotOpen(false);
-});
-
-
-// Ta bort "fastnat hover/focus" efter touch
-document.addEventListener("touchend", event => {
-  const touchedElement = event.target.closest("a, button");
-
-  if (touchedElement) {
-    setTimeout(() => {
-      touchedElement.blur();
-
-      if (document.activeElement && document.activeElement !== document.body) {
-        document.activeElement.blur();
-      }
-    }, 80);
-  }
-}, { passive: true });
-
-// Aktiv navigation vid scroll - stabilare version
-const sections = document.querySelectorAll("main section[id]");
-const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
-function setActiveNav(sectionId) {
-  navLinks.forEach(link => {
-    link.classList.toggle(
-      "active",
-      link.getAttribute("href") === `#${sectionId}`
-    );
-  });
-
-  const dropdownToggle = document.querySelector(".nav-dropdown-toggle");
-
-  if (dropdownToggle) {
-    dropdownToggle.classList.toggle("active", sectionId === "tjanster");
-  }
-}
-
-function updateActiveNav() {
-  const checkLine = window.innerHeight * 0.38;
-  let currentSection = sections[0]?.id || "";
-
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-
-    if (rect.top <= checkLine && rect.bottom > checkLine) {
-      currentSection = section.id;
-    }
-  });
-
-  setActiveNav(currentSection);
-}
-
-window.addEventListener("scroll", updateActiveNav, { passive: true });
-window.addEventListener("load", updateActiveNav);
-window.addEventListener("resize", updateActiveNav);
+})();

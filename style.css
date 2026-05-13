@@ -19,8 +19,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
+}
+
+img {
+  display: block;
   max-width: 100%;
+  height: auto;
 }
 
 html {
@@ -4948,22 +4953,11 @@ body.theme--dark .bot-message p {
   }
 }
 
-body {
-  zoom: 0.9;
-}
-
 @supports not (zoom: 1) {
   body {
     transform: scale(0.88);
     transform-origin: top center;
     width: 113.64%;
-  }
-}
-
-@media (min-width: 701px) {
-  main,
-  footer {
-    zoom: .8;
   }
 }
 
@@ -6274,5 +6268,107 @@ main,
 
 .scroll-top-btn:active {
   transform: translateY(1px) scale(.98);
+}
+
+main,
+.hero,
+.about,
+.content-section,
+.service-page,
+.privacy-shell {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   Performance overrides
+   Minskar lagg genom att ta bort dyra blur/filter-lager,
+   kontinuerliga bakgrundsanimationer och mus-glow.
+   ========================================================= */
+:root {
+  --header-height: 82px;
+}
+
+body::before,
+body::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+
+body::before {
+  display: none !important;
+}
+
+.mouse-glow {
+  display: none !important;
+}
+
+.content-section,
+.card,
+.contact-box,
+.contact-details,
+.hero-card,
+.privacy-card,
+.service-text,
+.social-box,
+.stat-box,
+.btn-secondary,
+.select-options,
+header {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.service-card img,
+.before-image,
+.after-image,
+.after-wrapper,
+.slider-line {
+  will-change: auto;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+body::before,
+body::after,
+.mouse-glow {
+  display: none !important;
+}
+
+* {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.service-card img {
+  will-change: auto;
 }
 
