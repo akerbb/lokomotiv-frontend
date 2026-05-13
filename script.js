@@ -25,7 +25,6 @@ const scrollTopBtn = document.getElementById("scrollTopBtn");
 const header = document.querySelector("header");
 
 const themeToggle = document.getElementById("themeToggle");
-const themeToggleText = themeToggle ? themeToggle.querySelector(".theme-toggle-text") : null;
 const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
 function getPreferredTheme() {
@@ -36,7 +35,7 @@ function getPreferredTheme() {
 function applyTheme(theme) {
   const isDark = theme === "dark";
 
-  document.documentElement.dataset.theme = theme;
+  document.body.classList.toggle("theme--dark", isDark);
 
   if (themeToggle) {
     themeToggle.setAttribute("aria-pressed", String(isDark));
@@ -44,10 +43,12 @@ function applyTheme(theme) {
       "aria-label",
       isDark ? "Byt till ljust läge" : "Byt till mörkt läge"
     );
-  }
 
-  if (themeToggleText) {
-    themeToggleText.textContent = isDark ? "Ljust" : "Mörkt";
+    const icon = themeToggle.querySelector(".dark-mode-toggle__icon");
+
+    if (icon) {
+      icon.classList.toggle("dark-mode-toggle__icon--moon", isDark);
+    }
   }
 }
 
@@ -57,32 +58,11 @@ if (themeToggle) {
   themeToggle.addEventListener("click", event => {
     event.stopPropagation();
 
-    const faqWasOpen = faqBot?.classList.contains("open");
-
-    const nextTheme =
-      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-
-    document.documentElement.classList.add("theme-changing");
-
-    themeToggle.classList.remove("is-switching");
-    void themeToggle.offsetWidth;
-    themeToggle.classList.add("is-switching");
+    const isDark = document.body.classList.contains("theme--dark");
+    const nextTheme = isDark ? "light" : "dark";
 
     localStorage.setItem("theme", nextTheme);
     applyTheme(nextTheme);
-
-    if (faqWasOpen && faqBot) {
-      faqBot.classList.add("open");
-    }
-
-    window.setTimeout(() => {
-      themeToggle.classList.remove("is-switching");
-      document.documentElement.classList.remove("theme-changing");
-
-      if (faqWasOpen && faqBot) {
-        faqBot.classList.add("open");
-      }
-    }, 180);
   });
 }
 
@@ -91,8 +71,6 @@ systemThemeQuery.addEventListener("change", () => {
     applyTheme(getPreferredTheme());
   }
 });
-
-
 
 // Telefonformattering
 if (phoneInput) {
@@ -673,6 +651,7 @@ document.querySelectorAll(".service-extra-toggle").forEach(button => {
 
 // FAQ bot
 const faqBot = document.getElementById("faqBot");
+
 const faqBotToggle = document.getElementById("faqBotToggle");
 const faqBotClose = document.getElementById("faqBotClose");
 const faqAnswer = document.getElementById("faqAnswer");
@@ -739,4 +718,3 @@ document.addEventListener("click", event => {
 
   setFaqBotOpen(false);
 });
-
