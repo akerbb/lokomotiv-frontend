@@ -436,7 +436,6 @@ window.addEventListener("scroll", updateActiveMenuLink, {
   passive: true
 });
 
-window.addEventListener("load", updateActiveMenuLink);
 window.addEventListener("resize", updateActiveMenuLink);
 
 // Om användaren avbryter smooth-scroll manuellt
@@ -507,7 +506,9 @@ const navDropdown = document.querySelector(".nav-dropdown");
 const navDropdownToggle = document.querySelector(".nav-dropdown-toggle");
 
 function isMobileHeader() {
-  return window.matchMedia("(max-width: 1200px)").matches;
+  return window.matchMedia(
+    "(max-width: 1200px), (hover: none), (pointer: coarse)"
+  ).matches;
 }
 
 if (menuBtn && navMenu) {
@@ -611,7 +612,7 @@ document.querySelectorAll(".before-after-slider").forEach(slider => {
 // Mouse glow background
 const mouseGlow = document.querySelector(".mouse-glow");
 
-if (mouseGlow) {
+if (mouseGlow && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
   let currentX = window.innerWidth / 2;
   let currentY = window.innerHeight / 2;
 
@@ -650,8 +651,6 @@ document.querySelectorAll(".service-extra-toggle").forEach(button => {
 });
 
 // FAQ bot
-const faqBot = document.getElementById("faqBot");
-
 const faqBotToggle = document.getElementById("faqBotToggle");
 const faqBotClose = document.getElementById("faqBotClose");
 const faqAnswer = document.getElementById("faqAnswer");
@@ -718,3 +717,4 @@ document.addEventListener("click", event => {
 
   setFaqBotOpen(false);
 });
+
