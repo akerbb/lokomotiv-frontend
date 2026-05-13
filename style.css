@@ -6432,3 +6432,315 @@ body.theme--dark .social-icons .dark-mode-toggle:hover {
     0 8px 18px rgba(15,23,42,.12);
 }
 
+/* =========================================================
+   FIX: Smooth tjänstekort på scroll
+   Använder befintlig JS som lägger till .reveal och .show.
+   Ingen extra JS behövs.
+   ========================================================= */
+.service-card.reveal {
+  opacity: 0 !important;
+  transform: translate3d(0, 26px, 0) !important;
+  transition:
+    opacity .65s ease,
+    transform .65s ease,
+    box-shadow .25s ease !important;
+  will-change: opacity, transform;
+}
+
+.service-card.reveal.show {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.services-grid .service-card.reveal:nth-child(1) { transition-delay: .04s !important; }
+.services-grid .service-card.reveal:nth-child(2) { transition-delay: .10s !important; }
+.services-grid .service-card.reveal:nth-child(3) { transition-delay: .16s !important; }
+.services-grid .service-card.reveal:nth-child(4) { transition-delay: .22s !important; }
+.services-grid .service-card.reveal:nth-child(5) { transition-delay: .28s !important; }
+.services-grid .service-card.reveal:nth-child(6) { transition-delay: .34s !important; }
+
+/* Behåll hover på desktop, men bara när kortet redan syns */
+@media (hover: hover) and (pointer: fine) {
+  .service-card.reveal.show:hover {
+    transform: translate3d(0, -5px, 0) !important;
+  }
+}
+
+/* På mobil ska korten inte hoppa vid touch/hover */
+@media (max-width:700px) {
+  .service-card.reveal {
+    transform: translate3d(0, 18px, 0) !important;
+  }
+
+  .service-card.reveal.show {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  .service-card.reveal.show:hover,
+  .service-card:hover,
+  .service-card:hover .service-text,
+  .service-card:hover img {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card.reveal,
+  .service-card.reveal.show {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   FINISHING FIXES: social embeds, hero spacing, stat/cards
+   Safe visual-only overrides. No layout/JS logic changed.
+   ========================================================= */
+
+/* Social media cards: let embedded content fill the card cleanly */
+.social-grid {
+  align-items: stretch;
+}
+
+.social-box {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(520px, 58vw, 680px);
+  overflow: hidden;
+}
+
+.social-header {
+  flex: 0 0 auto;
+}
+
+.social-box > iframe,
+.social-frame,
+.social-box .instagram-media {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto !important;
+  border-radius: 18px;
+}
+
+.social-frame {
+  min-height: 560px;
+}
+
+.social-box .instagram-media {
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+/* If an Instagram iframe/embed is added later, it will match Facebook sizing */
+.social-box iframe:not(.social-frame),
+.social-box blockquote.instagram-media {
+  min-height: 560px !important;
+}
+
+/* Hero/start text: slightly more breathing room without changing structure */
+.hero-text {
+  max-width: 760px;
+}
+
+.hero-text h1 {
+  margin-bottom: clamp(20px, 2.4vw, 32px);
+}
+
+.hero-text p {
+  max-width: 680px;
+  line-height: 1.85;
+  margin-bottom: clamp(28px, 3vw, 40px);
+}
+
+.hero-buttons {
+  gap: 16px;
+}
+
+/* Cleaner card borders and depth */
+.card,
+.contact-box,
+.contact-details,
+.hero-card,
+.privacy-card,
+.service-text,
+.social-box,
+.stat-box,
+.service-cta,
+.service-detail-card,
+.service-hero-detail,
+.service-info-section,
+.window-premium-section,
+.window-offer-list,
+.before-after-card,
+.premium-before-after {
+  border: 1px solid rgba(156, 35, 36, 0.11);
+  box-shadow:
+    0 14px 34px rgba(15, 23, 42, 0.08),
+    0 28px 70px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.card:hover,
+.contact-box:hover,
+.contact-details:hover,
+.hero-card:hover,
+.privacy-card:hover,
+.social-box:hover,
+.stat-box:hover {
+  border-color: rgba(156, 35, 36, 0.18);
+  box-shadow:
+    0 18px 42px rgba(15, 23, 42, 0.11),
+    0 36px 86px rgba(15, 23, 42, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+/* Stats: prevent words like “Värmland” from splitting on large screens */
+.stat-box {
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.stat-box strong {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+  font-size: clamp(24px, 2.15vw, 32px);
+  letter-spacing: -0.02em;
+}
+
+.stat-box span {
+  overflow-wrap: normal;
+  word-break: normal;
+  line-height: 1.45;
+}
+
+/* Make stat grid breathe a bit more on wide screens */
+@media (min-width: 950px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(190px, 1fr));
+  }
+
+  .stat-box {
+    padding-inline: clamp(22px, 2.4vw, 34px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .stats {
+    gap: 22px;
+  }
+}
+
+/* Mobile social embeds: fill their cards but avoid absurd height */
+@media (max-width: 700px) {
+  .social-box {
+    min-height: 500px;
+  }
+
+  .social-frame,
+  .social-box iframe:not(.social-frame),
+  .social-box blockquote.instagram-media {
+    min-height: 430px !important;
+  }
+
+  .hero-text p {
+    line-height: 1.72;
+    margin-bottom: 28px;
+  }
+}
+
+/* Dark theme version of the new card polish */
+body.theme--dark .card,
+body.theme--dark .contact-box,
+body.theme--dark .contact-details,
+body.theme--dark .hero-card,
+body.theme--dark .privacy-card,
+body.theme--dark .service-text,
+body.theme--dark .social-box,
+body.theme--dark .stat-box,
+body.theme--dark .service-cta,
+body.theme--dark .service-detail-card,
+body.theme--dark .service-hero-detail,
+body.theme--dark .service-info-section,
+body.theme--dark .window-premium-section,
+body.theme--dark .window-offer-list,
+body.theme--dark .before-after-card,
+body.theme--dark .premium-before-after {
+  border-color: rgba(255, 255, 255, 0.11);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.28),
+    0 34px 84px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.theme--dark .social-frame {
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.stat-box span {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+/* LIGHT MODE */
+.scroll-top-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+
+  background: var(--primary);
+  color: #fff;
+  border: 2px solid var(--primary);
+
+  box-shadow: 0 12px 28px rgba(156,35,36,.28);
+
+  transition:
+    background .22s ease,
+    color .22s ease,
+    border-color .22s ease,
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+.scroll-top-btn:hover {
+  background: #fff;
+  color: var(--primary);
+  border-color: var(--primary);
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 18px 34px rgba(156,35,36,.22);
+}
+
+.scroll-top-btn:active {
+  transform: scale(.96);
+}
+
+/* DARK MODE */
+body.dark-mode .scroll-top-btn {
+  background: var(--primary);
+  color: #fff;
+  border: 2px solid var(--primary);
+
+  box-shadow: 0 12px 28px rgba(0,0,0,.38);
+}
+
+body.dark-mode .scroll-top-btn:hover {
+  background: #2f353f; /* samma typ av grå som ni använder */
+  color: #fff;
+  border-color: #2f353f;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 18px 36px rgba(0,0,0,.45);
+}
