@@ -359,6 +359,7 @@ function showFormMessage(element, type, message) {
 }
 
 // Reveal on scroll
+// Reveal on scroll - bättre för mobil/iPad
 const revealElements = document.querySelectorAll(
   ".content-section, .about, .hero-card, .service-card, .historia-image, .contact-box, .contact-details, .social-box, .privacy-card, .privacy-hero, .service-cta, .before-after-section, .window-premium-section"
 );
@@ -367,92 +368,24 @@ revealElements.forEach(element => {
   element.classList.add("reveal");
 });
 
-function revealOnScroll() {
-  revealElements.forEach(element => {
-    const elementTop = element.getBoundingClientRect().top;
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.12,
+    rootMargin: "0px 0px -40px 0px"
+  }
+);
 
-    if (elementTop < window.innerHeight - 90) {
-      element.classList.add("show");
-    }
-  });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
-
-// Header active link
-const navLinks = document.querySelectorAll("nav > a, .nav-dropdown-toggle");
-
-function getSections() {
-  return document.querySelectorAll("main section[id]");
-}
-
-function setActiveMenuLink(sectionId) {
-  navLinks.forEach(link => {
-    const href = link.getAttribute("href") || "";
-
-    link.classList.toggle(
-      "active",
-      href === `#${sectionId}` || href === `index.html#${sectionId}`
-    );
-  });
-}
-
-function updateActiveMenuLink() {
-  const sections = Array.from(getSections());
-
-  if (sections.length === 0) return;
-
-  const headerHeight = header ? header.offsetHeight : 0;
-
-  // Punkt i viewporten där vi avgör aktiv sektion
-  const checkpoint = headerHeight + window.innerHeight * 0.28;
-
-  let currentSection = sections[0].id;
-
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-
-    if (rect.top <= checkpoint) {
-      currentSection = section.id;
-    }
-  });
-
-  setActiveMenuLink(currentSection);
-}
-
-navLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    const href = link.getAttribute("href") || "";
-
-    if (!href.startsWith("#")) return;
-
-    const targetId = href.replace("#", "");
-    setActiveMenuLink(targetId);
-  });
+revealElements.forEach(element => {
+  revealObserver.observe(element);
 });
-
-window.addEventListener("scroll", updateActiveMenuLink, {
-  passive: true
-});
-
-window.addEventListener("resize", updateActiveMenuLink);
-
-// Om användaren avbryter smooth-scroll manuellt
-["wheel", "touchstart", "keydown"].forEach(eventName => {
-  window.addEventListener(eventName, () => {
-    if (!isHeaderScrolling) return;
-
-    isHeaderScrolling = false;
-    headerScrollTarget = "";
-    clearTimeout(headerScrollTimeout);
-    updateActiveMenuLink();
-  }, { passive: true });
-});
-
-window.addEventListener("scroll", updateActiveMenuLink);
-window.addEventListener("load", updateActiveMenuLink);
-
 // Pil upp
 function toggleScrollTopButton() {
   if (!scrollTopBtn) return;

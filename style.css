@@ -4067,10 +4067,27 @@ body.theme--dark .nav-dropdown-toggle.active {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
+}
 
-  .reveal,
-  .reveal.show {
-    transition: none !important;
-    transform: none !important;
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.65s ease-out,
+    transform 0.65s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 700px), (hover: none), (pointer: coarse) {
+  .reveal {
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 0.55s ease-out,
+      transform 0.55s ease-out;
   }
 }
