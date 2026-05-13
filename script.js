@@ -651,3 +651,56 @@ document.addEventListener("click", event => {
   setFaqBotOpen(false);
 });
 
+
+// Ta bort "fastnat hover/focus" efter touch
+document.addEventListener("touchend", event => {
+  const touchedElement = event.target.closest("a, button");
+
+  if (touchedElement) {
+    setTimeout(() => {
+      touchedElement.blur();
+
+      if (document.activeElement && document.activeElement !== document.body) {
+        document.activeElement.blur();
+      }
+    }, 80);
+  }
+}, { passive: true });
+
+// Aktiv navigation vid scroll - stabilare version
+const sections = document.querySelectorAll("main section[id]");
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+function setActiveNav(sectionId) {
+  navLinks.forEach(link => {
+    link.classList.toggle(
+      "active",
+      link.getAttribute("href") === `#${sectionId}`
+    );
+  });
+
+  const dropdownToggle = document.querySelector(".nav-dropdown-toggle");
+
+  if (dropdownToggle) {
+    dropdownToggle.classList.toggle("active", sectionId === "tjanster");
+  }
+}
+
+function updateActiveNav() {
+  const checkLine = window.innerHeight * 0.38;
+  let currentSection = sections[0]?.id || "";
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+
+    if (rect.top <= checkLine && rect.bottom > checkLine) {
+      currentSection = section.id;
+    }
+  });
+
+  setActiveNav(currentSection);
+}
+
+window.addEventListener("scroll", updateActiveNav, { passive: true });
+window.addEventListener("load", updateActiveNav);
+window.addEventListener("resize", updateActiveNav);
