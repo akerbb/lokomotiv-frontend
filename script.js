@@ -549,3 +549,23 @@
     }, { passive: true });
   });
 })();
+
+const serviceCards = document.querySelectorAll(".service-card");
+
+const serviceCardObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate-in");
+        serviceCardObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.2,
+  }
+);
+
+serviceCards.forEach((card) => {
+  serviceCardObserver.observe(card);
+});
