@@ -5861,3 +5861,418 @@ body.theme--dark .social-icons .dark-mode-toggle:hover {
 .back-link:hover {
   transform: none !important;
 }
+
+/* Button1 från CodePen, anpassad till hemsidan */
+.btn,
+.nav-button,
+.floating-call,
+.floating-cta {
+  color: #fff !important;
+  background-color: var(--primary) !important;
+
+  border: 3px solid transparent !important;
+  border-radius: 50px !important;
+
+  padding: 10px 18px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  box-shadow: none !important;
+  transform: none;
+
+  transition: .2s ease;
+}
+
+/* Hover */
+.btn:hover,
+.nav-button:hover,
+.floating-call:hover,
+.floating-cta:hover {
+  color: var(--primary) !important;
+  background-color: #fff !important;
+
+  border: 3px solid var(--primary) !important;
+
+  transform: scale(1.1) !important;
+
+  box-shadow:
+    0 4px 8px rgba(0,0,0,.20),
+    0 6px 20px rgba(0,0,0,.20) !important;
+}
+
+/* Klick */
+.btn:active,
+.nav-button:active,
+.floating-call:active,
+.floating-cta:active {
+  transform: scale(1.02) !important;
+}
+
+/* Secondary-knapp */
+.btn-secondary {
+  color: var(--primary) !important;
+  background-color: #fff !important;
+
+  border: 3px solid var(--primary) !important;
+
+  box-sizing: border-box;
+}
+
+.btn-secondary:hover {
+  color: #fff !important;
+  background-color: var(--primary) !important;
+
+  border: 3px solid var(--primary) !important;
+
+  transform: scale(1.1) !important;
+}
+
+/* Dark mode */
+body.theme--dark .btn,
+body.theme--dark .nav-button,
+body.theme--dark .floating-call,
+body.theme--dark .floating-cta {
+  background-color: #c43a3b !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+body.theme--dark .btn:hover,
+body.theme--dark .nav-button:hover,
+body.theme--dark .floating-call:hover,
+body.theme--dark .floating-cta:hover {
+  background-color: #fff !important;
+  color: #c43a3b !important;
+  border-color: #c43a3b !important;
+}
+
+/* Secondary ska kännas som samma knappfamilj, inte inverterad */
+.btn-secondary {
+  background: rgba(156,35,36,.08) !important;
+  color: var(--primary) !important;
+  border: 3px solid rgba(156,35,36,.18) !important;
+  box-shadow: none !important;
+}
+
+.btn-secondary:hover {
+  background: rgba(156,35,36,.14) !important;
+  color: var(--primary-hover) !important;
+  border-color: rgba(156,35,36,.28) !important;
+  transform: scale(1.04) !important;
+}
+
+/* TA BORT GLASS-EFFEKT ÖVERALLT */
+header,
+.content-section,
+.about,
+.card,
+.contact-box,
+.contact-details,
+.hero-card,
+.privacy-card,
+.service-text,
+.social-box,
+.stat-box,
+.btn-secondary,
+.select-button,
+input,
+select,
+textarea,
+.nav-dropdown-menu,
+.select-options {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* RENARE YTOR */
+.card,
+.contact-box,
+.contact-details,
+.hero-card,
+.privacy-card,
+.social-box,
+.stat-box,
+.content-section,
+.about {
+  background: #fff !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 6px 18px rgba(15,23,42,.06) !important;
+}
+
+/* DARKMODE UTAN GLASS */
+body.theme--dark .card,
+body.theme--dark .contact-box,
+body.theme--dark .contact-details,
+body.theme--dark .hero-card,
+body.theme--dark .privacy-card,
+body.theme--dark .social-box,
+body.theme--dark .stat-box,
+body.theme--dark .content-section,
+body.theme--dark .about {
+  background: #151b24 !important;
+  border-color: rgba(255,255,255,.08) !important;
+  box-shadow: none !important;
+}
+
+/* ALLA CTA-KNAPPAR SAMMA STIL */
+.btn-primary,
+.btn-secondary,
+.nav-button,
+.floating-call,
+.floating-cta,
+button[type="submit"] {
+  color: #fff !important;
+  background-color: var(--primary) !important;
+  border: 3px solid transparent !important;
+  border-radius: 50px !important;
+
+  padding: 10px 18px !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  box-shadow: none !important;
+  transform: none;
+  transition: .2s ease;
+}
+
+/* SAMMA HOVER FÖR PRIMARY + SECONDARY */
+.btn-primary:hover,
+.btn-secondary:hover,
+.nav-button:hover,
+.floating-call:hover,
+.floating-cta:hover,
+button[type="submit"]:hover {
+  color: var(--primary) !important;
+  background-color: #fff !important;
+  border-color: var(--primary) !important;
+
+  transform: scale(1.06) !important;
+
+  box-shadow:
+    0 4px 8px rgba(0,0,0,.14),
+    0 6px 18px rgba(0,0,0,.12) !important;
+}
+
+/* DARKMODE LUGNARE RÖD */
+body.theme--dark {
+  --primary: #8b3a3b;
+  --primary-hover: #743132;
+}
+
+/* DARKMODE HOVER */
+body.theme--dark .btn-primary:hover,
+body.theme--dark .btn-secondary:hover,
+body.theme--dark .nav-button:hover,
+body.theme--dark .floating-call:hover,
+body.theme--dark .floating-cta:hover,
+body.theme--dark button[type="submit"]:hover {
+  color: var(--primary) !important;
+  background-color: #f8fafc !important;
+  border-color: var(--primary) !important;
+}
+
+/* TA BORT ALL GRADIENT PÅ KNAPPAR */
+.btn-primary,
+.btn-secondary,
+.nav-button,
+.floating-call,
+.floating-cta,
+button[type="submit"] {
+  background-image: none !important;
+}
+
+/* Darkmode */
+body.theme--dark .btn-primary,
+body.theme--dark .btn-secondary,
+body.theme--dark .nav-button,
+body.theme--dark .floating-call,
+body.theme--dark .floating-cta,
+body.theme--dark button[type="submit"] {
+  background: #8b3a3b !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+/* BACK-LINK = samma familj som secondary */
+.back-link {
+  background: rgba(156,35,36,.08) !important;
+  color: var(--primary) !important;
+
+  border: 3px solid rgba(156,35,36,.18) !important;
+  border-radius: 50px !important;
+
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+
+  padding: 10px 18px !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  transition: .2s ease;
+}
+
+.back-link:hover {
+  background: rgba(156,35,36,.14) !important;
+  color: var(--primary-hover) !important;
+
+  border-color: rgba(156,35,36,.28) !important;
+
+  transform: scale(1.04) !important;
+}
+
+/* Begränsa desktop-bredd så sidan inte känns enorm på stora skärmar */
+main,
+.service-page,
+.privacy-shell,
+.content-section,
+.about {
+  width: min(100% - 48px, 1180px);
+  margin-inline: auto;
+}
+
+/* Lite lugnare storlekar på stora skärmar */
+@media (min-width: 1200px) {
+  .hero {
+    min-height: 76vh;
+    padding: 95px 6% 80px;
+    gap: 42px;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(44px, 5vw, 68px);
+  }
+
+  .content-section,
+  .about {
+    padding: 72px 5%;
+  }
+
+  body.service-body .service-hero-detail {
+    min-height: 460px;
+  }
+}
+
+/* Snyggare tillbaka-knapp */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  margin-bottom: 26px;
+  padding: 12px 18px 12px 14px;
+  border-radius: 999px;
+  color: var(--primary);
+  background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(156,35,36,.07));
+  border: 1px solid rgba(156,35,36,.18);
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 10px 26px rgba(15,23,42,.07);
+  transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+}
+
+.back-link::before {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--primary), var(--wine));
+  box-shadow: 0 8px 18px rgba(156,35,36,.24);
+  transition: transform .2s;
+}
+
+.back-link:hover {
+  background: linear-gradient(135deg, var(--primary), var(--wine));
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(156,35,36,.22);
+}
+
+.back-link:hover::before {
+  background: rgba(255,255,255,.22);
+  transform: translateX(-3px);
+}
+
+.btn-primary,
+.floating-call,
+.floating-cta,
+.scroll-top-btn {
+  color: var(--white);
+  background: linear-gradient(
+    135deg,
+    #b92b2c 0,
+    var(--primary) 42%,
+    var(--wine) 100%
+  );
+
+  box-shadow:
+    0 14px 28px rgba(156,35,36,.28),
+    inset 0 1px 0 rgba(255,255,255,.22);
+
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.btn-primary:hover,
+.floating-call:hover,
+.floating-cta:hover,
+.scroll-top-btn:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-hover),
+    var(--primary)
+  );
+
+  box-shadow:
+    0 16px 34px rgba(156,35,36,.32),
+    inset 0 1px 0 rgba(255,255,255,.18);
+
+  border-color: rgba(255,255,255,.2);
+}
+
+.scroll-top-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 999px;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+
+  transition:
+    transform .22s,
+    box-shadow .22s,
+    background .22s,
+    border-color .22s,
+    opacity .25s;
+}
+
+.scroll-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:active {
+  transform: translateY(1px) scale(.98);
+}
+
