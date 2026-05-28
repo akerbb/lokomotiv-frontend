@@ -1,45 +1,220 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personalchatt | Lokomotiv</title>
-  <link rel="stylesheet" href="dashboard.css" />
-</head>
-<body>
-  <header class="dashboard-header">
-    <div>
-      <p class="eyebrow">Lokomotiv Städ</p>
-      <h1>Personalchatt</h1>
-      <p class="header-subtitle">En enkel intern chatt för personalen.</p>
-    </div>
+:root {
+  --bg: #f4f1ea;
+  --panel: #fffdf8;
+  --panel-soft: #faf6ed;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --border: #ddd6c8;
+  --green: #2f6f4e;
+  --green-dark: #24563d;
+  --green-soft: #e3eee7;
+  --danger: #b42318;
+}
 
-    <nav class="dashboard-nav" aria-label="Personalmeny">
-      <a href="index.html">Hemsida</a>
-      <button id="logoutBtn" class="ghost-btn" type="button">Logga ut</button>
-    </nav>
-  </header>
+* { box-sizing: border-box; }
 
-  <main class="dashboard-main">
-    <section class="chat-panel" aria-labelledby="chatTitle">
-      <div class="chat-title-row">
-        <div>
-          <h2 id="chatTitle">Meddelanden</h2>
-          <p>Skriv korta meddelanden till teamet.</p>
-        </div>
-      </div>
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+}
 
-      <div id="messages" class="messages" aria-live="polite">
-        <div class="empty-state">Inga meddelanden ännu.</div>
-      </div>
+button, input, textarea { font: inherit; }
+button { border: 0; cursor: pointer; }
 
-      <form id="messageForm" class="message-form">
-        <input id="messageInput" type="text" placeholder="Skriv ett meddelande..." autocomplete="off" required />
-        <button type="submit">Skicka</button>
-      </form>
-    </section>
-  </main>
+.dashboard-header,
+.dashboard-main {
+  width: min(980px, calc(100% - 32px));
+  margin-inline: auto;
+}
 
-  <script src="dashboard.js"></script>
-</body>
-</html>
+.dashboard-header {
+  margin-top: 20px;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(47, 50, 45, .08);
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--green);
+  font-size: .82rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  letter-spacing: -.025em;
+}
+
+.header-subtitle {
+  margin: 7px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.dashboard-nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dashboard-nav a,
+.ghost-btn,
+.message-form button {
+  min-height: 42px;
+  padding: 0 15px;
+  border-radius: 10px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.dashboard-nav a,
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  color: var(--green-dark);
+  background: var(--green-soft);
+  border: 1px solid #c8dccf;
+}
+
+.message-form button {
+  color: white;
+  background: var(--green);
+}
+
+.message-form button:hover { background: var(--green-dark); }
+.dashboard-nav a:hover, .ghost-btn:hover { background: #d8e9de; }
+
+.dashboard-main {
+  margin-top: 18px;
+  margin-bottom: 36px;
+}
+
+.chat-panel {
+  min-height: 650px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(47, 50, 45, .08);
+  overflow: hidden;
+}
+
+.chat-title-row {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel-soft);
+}
+
+.chat-title-row h2 {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+}
+
+.chat-title-row p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  overflow-y: auto;
+}
+
+.message-item {
+  max-width: 78%;
+  padding: 11px 13px;
+  border-radius: 13px;
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.message-item.own {
+  margin-left: auto;
+  background: var(--green-soft);
+  border-color: #c8dccf;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 650;
+}
+
+.message-item p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.message-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding: 14px;
+  border-top: 1px solid var(--border);
+  background: var(--panel-soft);
+}
+
+.message-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  color: var(--text);
+}
+
+.message-form input:focus {
+  outline: 2px solid rgba(47, 111, 78, .18);
+  border-color: var(--green);
+}
+
+.empty-state {
+  max-width: 520px;
+  margin: auto;
+  padding: 18px;
+  color: var(--muted);
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .6);
+}
+
+@media (max-width: 700px) {
+  .dashboard-header,
+  .chat-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-nav { width: 100%; }
+  .dashboard-nav a, .ghost-btn { flex: 1; justify-content: center; }
+
+  .message-item { max-width: 92%; }
+  .message-form { grid-template-columns: 1fr; }
+}
