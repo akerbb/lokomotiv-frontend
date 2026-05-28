@@ -16,10 +16,7 @@ loginBtn.addEventListener("click", async () => {
         "Content-Type": "application/json"
       },
       credentials: "include",
-      body: JSON.stringify({
-        username,
-        password
-      })
+      body: JSON.stringify({ username, password })
     });
 
     const data = await response.json();
@@ -30,11 +27,10 @@ loginBtn.addEventListener("click", async () => {
     }
 
     if (data.mustChangePassword) {
-  window.location.href = "change-password.html";
-} else {
-  window.location.href = "dashboard.html";
-}
-
+      window.location.href = "change-password.html";
+    } else {
+      window.location.href = "dashboard.html";
+    }
   } catch (error) {
     console.error(error);
     message.textContent = "Kunde inte ansluta till backend";
