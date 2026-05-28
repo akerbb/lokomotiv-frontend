@@ -1,47 +1,35 @@
 <!DOCTYPE html>
 <html lang="sv">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>Personal Login</title>
-
-<link rel="stylesheet"
-href="dashboard.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Login | Lokomotiv</title>
+  <link rel="stylesheet" href="personal.css" />
 </head>
-
 <body>
+  <main class="login-card">
+    <p class="login-brand">Lokomotiv</p>
+    <h1>Personal</h1>
+    <p class="login-text">Logga in för att komma åt personalportalen.</p>
 
-<div class="login-container">
+    <form id="loginForm" class="login-form">
+      <label>
+        Användarnamn
+        <input id="username" name="username" type="text" autocomplete="username" required />
+      </label>
 
-<h1>Personal</h1>
+      <label>
+        Lösenord
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+      </label>
 
-<input
-id="username"
-placeholder="Användarnamn">
+      <button id="loginBtn" type="submit">Logga in</button>
+      <p id="message" class="message" aria-live="polite"></p>
+    </form>
 
-<input
-id="password"
-type="password"
-placeholder="Lösenord">
+    <a class="back-link" href="index.html">Till hemsidan</a>
+  </main>
 
-<button id="loginBtn">
-
-Logga in
-
-</button>
-
-<p id="message"></p>
-
-</div>
-
-<script src="personal.js"></script>
-
+  <script src="personal.js"></script>
 </body>
-
 </html>
