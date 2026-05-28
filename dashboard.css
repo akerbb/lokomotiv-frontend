@@ -1,13 +1,11 @@
 :root {
-  --primary: #9c2324;
-  --primary-dark: #741819;
-  --bg: #f7f4ef;
+  --bg: #f3f1ed;
   --card: #ffffff;
-  --text: #172033;
-  --muted: #64748b;
-  --border: rgba(156, 35, 36, 0.14);
-  --shadow: 0 14px 34px rgba(15, 23, 42, 0.08),
-            0 28px 70px rgba(15, 23, 42, 0.08);
+  --text: #1f2933;
+  --muted: #6b7280;
+  --border: #d9d2c7;
+  --accent: #2f3a45;
+  --accent-dark: #18212b;
 }
 
 * {
@@ -16,117 +14,170 @@
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at top left, rgba(156,35,36,.08), transparent 34%),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-button,
+/* LOGIN / CHANGE PASSWORD */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.login-card h1 {
+  margin: 18px 0 8px;
+  font-size: 28px;
+}
+
+.login-subtitle {
+  margin: 0 0 24px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.login-form {
+  display: grid;
+  gap: 14px;
+}
+
+.login-form label {
+  font-weight: 700;
+}
+
 input,
 textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
   font: inherit;
 }
 
-button {
-  cursor: pointer;
-  border: none;
+input:focus,
+textarea:focus {
+  outline: 2px solid rgba(47, 58, 69, 0.18);
+  border-color: var(--accent);
 }
 
+button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.login-form button,
+.message-form button,
+.event-form button,
+.dashboard-nav button {
+  background: var(--accent);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.login-form button:hover,
+.message-form button:hover,
+.event-form button:hover,
+.dashboard-nav button:hover {
+  background: var(--accent-dark);
+}
+
+.back-link,
+.dashboard-nav a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover,
+.dashboard-nav a:hover {
+  text-decoration: underline;
+}
+
+.form-message {
+  min-height: 22px;
+  margin: 4px 0 0;
+  color: #8a3b12;
+  font-weight: 700;
+}
+
+/* DASHBOARD */
+
 .dashboard-header {
+  max-width: 1180px;
+  margin: 24px auto 0;
+  padding: 22px 26px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  padding: 28px 42px;
-  background: rgba(255, 255, 255, 0.94);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+  gap: 20px;
 }
 
 .eyebrow {
-  margin: 0 0 6px;
-  color: var(--primary);
+  margin: 0 0 4px;
+  color: var(--muted);
   font-size: 13px;
-  font-weight: 800;
-  letter-spacing: .08em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .dashboard-header h1 {
   margin: 0;
-  font-size: clamp(26px, 3vw, 38px);
-  letter-spacing: -0.04em;
+  font-size: 30px;
 }
 
 .dashboard-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.dashboard-nav a,
-.back-link {
-  color: var(--primary);
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.dashboard-nav a:hover,
-.back-link:hover {
-  text-decoration: underline;
-}
-
-.dashboard-nav button,
-.message-form button,
-.event-form button,
-.login-form button {
-  background: var(--primary);
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 999px;
-  font-weight: 800;
-  box-shadow: 0 12px 28px rgba(156,35,36,.24);
-  transition: .2s ease;
-}
-
-.dashboard-nav button:hover,
-.message-form button:hover,
-.event-form button:hover,
-.login-form button:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
+  gap: 14px;
 }
 
 .dashboard-layout {
+  max-width: 1180px;
+  margin: 24px auto 40px;
+  padding: 0;
   display: grid;
-  grid-template-columns: 390px 1fr;
-  gap: 26px;
-  padding: 34px 42px;
-}
-
-.panel,
-.login-card,
-.modal-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  box-shadow: var(--shadow);
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
 }
 
 .panel {
-  padding: 26px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
 }
 
 .section-header {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .section-header h2 {
-  margin: 0 0 6px;
-  font-size: 24px;
-  letter-spacing: -0.03em;
+  margin: 0 0 5px;
+  font-size: 22px;
 }
 
 .section-header p {
@@ -138,18 +189,17 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: 360px;
-  max-height: 520px;
+  min-height: 320px;
+  max-height: 480px;
   overflow-y: auto;
-  padding-right: 4px;
 }
 
 .message-item,
 .event-item {
-  padding: 15px;
-  background: #faf7f2;
-  border: 1px solid rgba(156, 35, 36, 0.11);
-  border-radius: 16px;
+  background: #f8f7f4;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
 }
 
 .message-meta {
@@ -164,66 +214,47 @@ button {
 .message-item p,
 .event-item p {
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .message-form {
   display: flex;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .message-form input {
   flex: 1;
 }
 
-input,
-textarea {
-  width: 100%;
-  padding: 13px 15px;
-  border: 1px solid rgba(15, 23, 42, 0.15);
-  border-radius: 14px;
-  background: #fff;
-  color: var(--text);
-}
-
-input:focus,
-textarea:focus {
-  outline: 3px solid rgba(156, 35, 36, 0.14);
-  border-color: var(--primary);
-}
-
 .weekdays,
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 
 .weekdays {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: var(--muted);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
 }
 
 .calendar-day {
-  min-height: 96px;
-  padding: 13px;
-  background: #faf7f2;
-  border: 1px solid rgba(156, 35, 36, 0.11);
-  border-radius: 16px;
+  min-height: 82px;
+  padding: 10px;
+  background: #f8f7f4;
+  border: 1px solid var(--border);
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: 800;
-  transition: .2s ease;
+  font-weight: 700;
 }
 
 .calendar-day:hover {
-  background: #fff;
-  border-color: rgba(156, 35, 36, 0.28);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.10);
+  background: #ffffff;
+  border-color: var(--accent);
 }
 
 .modal {
@@ -232,7 +263,7 @@ textarea:focus {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(15, 23, 42, 0.55);
+  background: rgba(15, 23, 42, 0.45);
 }
 
 .hidden {
@@ -241,28 +272,30 @@ textarea:focus {
 
 .modal-card {
   position: relative;
-  width: min(560px, 100%);
+  width: min(520px, 100%);
   max-height: 90vh;
   overflow-y: auto;
-  padding: 28px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px;
 }
 
 .modal-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 38px;
-  height: 38px;
-  background: #faf7f2;
-  color: var(--primary);
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  background: #f3f1ed;
+  color: var(--text);
   border-radius: 999px;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .events-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 12px;
   margin: 18px 0;
 }
@@ -276,55 +309,16 @@ textarea:focus {
   gap: 12px;
 }
 
-.login-page {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
-
-.login-card {
-  width: min(430px, 100%);
-  padding: 30px;
-}
-
-.login-card h1 {
-  margin: 22px 0 8px;
-  font-size: 32px;
-}
-
-.login-subtitle {
-  margin: 0 0 22px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.login-form {
-  display: grid;
-  gap: 12px;
-}
-
-.login-form label {
-  font-weight: 800;
-}
-
-.form-message {
-  min-height: 22px;
-  margin: 4px 0 0;
-  color: var(--primary);
-  font-weight: 800;
-}
-
 @media (max-width: 900px) {
   .dashboard-header {
+    margin: 16px;
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px;
   }
 
   .dashboard-layout {
+    margin: 16px;
     grid-template-columns: 1fr;
-    padding: 24px;
   }
 
   .message-form {
@@ -332,6 +326,6 @@ textarea:focus {
   }
 
   .calendar-day {
-    min-height: 70px;
+    min-height: 64px;
   }
 }
