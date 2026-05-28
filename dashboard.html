@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="sv">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+href="dashboard.css">
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="app-shell">
+
+<aside class="sidebar">
+
+<div class="brand">
+
+<div>
+
+<h2>Lokomotiv</h2>
+
+<p>Personalportal</p>
+
+</div>
+
+</div>
+
+<div class="chat-box">
+
+<div class="chat-header">
+
+<div>
+
+<span class="chat-kicker">
+
+Intern
+
+</span>
+
+<h3>Gruppchat</h3>
+
+</div>
+
+</div>
+
+<div
+class="messages-list"
+id="messages">
+
+</div>
+
+<form
+id="messageForm"
+class="chat-form">
+
+<input
+id="messageInput"
+placeholder="Skriv meddelande">
+
+<button>
+
+Skicka
+
+</button>
+
+</form>
+
+</div>
+
+<button
+id="logoutBtn">
+
+Logga ut
+
+</button>
+
+</aside>
+
+<main class="calendar-main">
+
+<div class="calendar-header">
+
+<div>
+
+<h1 id="monthTitle"></h1>
+
+<p>Klicka på datum för event</p>
+
+</div>
+
+</div>
+
+<div class="weekdays">
+
+<div>Mån</div>
+<div>Tis</div>
+<div>Ons</div>
+<div>Tor</div>
+<div>Fre</div>
+<div>Lör</div>
+<div>Sön</div>
+
+</div>
+
+<div
+class="calendar-grid"
+id="calendar">
+
+</div>
+
+</main>
+
+</div>
+
+<div
+class="modal hidden"
+id="modal">
+
+<div class="modal-content">
+
+<button
+class="close-btn"
+id="closeModal">
+
+×
+
+</button>
+
+<h2 id="modalDateTitle">
+
+</h2>
+
+<form id="eventForm">
+
+<input
+id="eventTitle"
+placeholder="Titel">
+
+<input
+id="eventTime"
+type="time">
+
+<textarea
+id="eventDescription"
+placeholder="Beskrivning"></textarea>
+
+<button>
+
+Skapa event
+
+</button>
+
+</form>
+
+<div
+id="eventsContainer">
+
+</div>
+
+</div>
+
+</div>
+
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>
