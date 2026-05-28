@@ -29,7 +29,11 @@ loginBtn.addEventListener("click", async () => {
       return;
     }
 
-    window.location.href = "dashboard.html";
+    if (data.mustChangePassword) {
+  window.location.href = "change-password.html";
+} else {
+  window.location.href = "dashboard.html";
+}
 
   } catch (error) {
     console.error(error);
