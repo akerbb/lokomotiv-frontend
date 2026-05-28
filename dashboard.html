@@ -1,177 +1,98 @@
 <!DOCTYPE html>
-
 <html lang="sv">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>Dashboard</title>
-
-<link rel="stylesheet"
-href="dashboard.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personalportal | Lokomotiv</title>
+  <link rel="stylesheet" href="dashboard.css" />
 </head>
-
-<body class="dashboard-body">
-
-<div class="app-shell">
-
-<aside class="sidebar">
-
-<div class="brand">
-
-<div>
-
-<h2>Lokomotiv</h2>
-
-<p>Personalportal</p>
-
-</div>
-
-</div>
-
-<div class="chat-box">
-
-<div class="chat-header">
-
-<div>
-
-<span class="chat-kicker">
-
-Intern
-
-</span>
-
-<h3>Gruppchat</h3>
-
-</div>
-
-</div>
-
-<div
-class="messages-list"
-id="messages">
-
-</div>
-
-<form
-id="messageForm"
-class="chat-form">
-
-<input
-id="messageInput"
-placeholder="Skriv meddelande">
-
-<button>
-
-Skicka
-
-</button>
-
-</form>
-
-</div>
-
-<button
-id="logoutBtn">
-
-Logga ut
-
-</button>
-
-</aside>
-
-<main class="calendar-main">
-
-<div class="calendar-header">
-
-<div>
-
-<h1 id="monthTitle"></h1>
-
-<p>Klicka på datum för event</p>
-
-</div>
-
-</div>
-
-<div class="weekdays">
-
-<div>Mån</div>
-<div>Tis</div>
-<div>Ons</div>
-<div>Tor</div>
-<div>Fre</div>
-<div>Lör</div>
-<div>Sön</div>
-
-</div>
-
-<div
-class="calendar-grid"
-id="calendar">
-
-</div>
-
-</main>
-
-</div>
-
-<div
-class="modal hidden"
-id="modal">
-
-<div class="modal-content">
-
-<button
-class="close-btn"
-id="closeModal">
-
-×
-
-</button>
-
-<h2 id="modalDateTitle">
-
-</h2>
-
-<form id="eventForm">
-
-<input
-id="eventTitle"
-placeholder="Titel">
-
-<input
-id="eventTime"
-type="time">
-
-<textarea
-id="eventDescription"
-placeholder="Beskrivning"></textarea>
-
-<button>
-
-Skapa event
-
-</button>
-
-</form>
-
-<div
-id="eventsContainer">
-
-</div>
-
-</div>
-
-</div>
-
-<script src="dashboard.js"></script>
-
+<body>
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">Lokomotiv</p>
+      <h1>Personalportal</h1>
+    </div>
+
+    <nav class="dashboard-nav">
+      <a href="index.html">Till hemsidan</a>
+      <button id="logoutBtn" type="button">Logga ut</button>
+    </nav>
+  </header>
+
+  <main class="dashboard-layout">
+    <section class="panel chat-panel">
+      <div class="section-header">
+        <h2>Gruppchatt</h2>
+        <p>Intern kommunikation</p>
+      </div>
+
+      <div id="messages" class="messages"></div>
+
+      <form id="messageForm" class="message-form">
+        <input
+          id="messageInput"
+          type="text"
+          placeholder="Skriv ett meddelande..."
+          required
+        />
+        <button type="submit">Skicka</button>
+      </form>
+    </section>
+
+    <section class="panel calendar-panel">
+      <div class="section-header">
+        <h2 id="monthTitle">Kalender</h2>
+        <p>Klicka på ett datum för att skapa eller visa event</p>
+      </div>
+
+      <div class="weekdays">
+        <span>Mån</span>
+        <span>Tis</span>
+        <span>Ons</span>
+        <span>Tor</span>
+        <span>Fre</span>
+        <span>Lör</span>
+        <span>Sön</span>
+      </div>
+
+      <div id="calendar" class="calendar"></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <button id="closeModal" class="modal-close" type="button">×</button>
+
+      <h2 id="modalDateTitle"></h2>
+
+      <div id="eventsContainer" class="events-container"></div>
+
+      <form id="eventForm" class="event-form">
+        <h3>Skapa event</h3>
+
+        <input
+          id="eventTitle"
+          type="text"
+          placeholder="Titel"
+          required
+        />
+
+        <input
+          id="eventTime"
+          type="time"
+        />
+
+        <textarea
+          id="eventDescription"
+          placeholder="Beskrivning"
+          rows="4"
+        ></textarea>
+
+        <button type="submit">Spara event</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
 </body>
-
 </html>
