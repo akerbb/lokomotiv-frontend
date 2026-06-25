@@ -3,51 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lokomotiv Städ & Fönsterputs AB</title>
-  <meta name="description" content="Städfirma i Värmland. Vi erbjuder fönsterputs, städning och golvvård i Hagfors med omnejd.">
-  <meta name="keywords" content="städning Hagfors, fönsterputs Värmland, städfirma">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://lokomotiv-backend.onrender.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com https://*.fbcdn.net https://*.googleusercontent.com; frame-src https://www.facebook.com https://www.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">  <script>
-    (function () {
-      const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const theme = savedTheme || (prefersDark ? "dark" : "light");
-      document.documentElement.dataset.theme = theme;
-    })();
-  </script>
-   <link rel="stylesheet" href="style.css" />
+  <title>Fönsterputsning | Lokomotiv Städ & Fönsterputs AB</title>
+  <meta name="description" content="Fönsterputsning i Hagfors och Värmland. Traditionell fönsterputsning för hem, kontor och butik.">
+  <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="bilder/favicon.ico">
-  <script defer data-domain="lokomotivstad.se" src="https://plausible.io/js/script.js"></script>
-  <meta property="og:title" content="Städfirma i Hagfors | Lokomotiv Städ">
-<meta property="og:description" content="Fönsterputs, städning och golvvård i Värmland">
-<meta property="og:image" content="https://lokomotivstad.se/bilder/logo.png">
-<meta property="og:type" content="website">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CleaningService",
-  "name": "Lokomotiv Städ & Fönsterputs AB",
-  "image": "https://lokomotivstad.se/bilder/logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Björnängsvägen 16",
-    "addressLocality": "Hagfors",
-    "postalCode": "68333",
-    "addressCountry": "SE"
-  },
-  "telephone": "+4656330990",
-  "areaServed": "Värmland"
-}
-</script>
 </head>
-
-<body>
-  <div class="mouse-glow"></div>
+<body class="service-body" id="top">
+    <div class="mouse-glow"></div>
 <header>
-    <a href="#hem" class="logo">
+    <a href="index.html#hem" class="logo">
   <img src="bilder/logo.png" alt="Lokomotiv Städ & Fönsterputs AB">
 </a>
 
@@ -58,7 +26,7 @@
 </button>
 
     <nav id="navMenu">
-      <a href="#hem">Start</a>
+      <a href="index.html#hem">Start</a>
       <div class="nav-dropdown">
   <a href="#tjanster" class="nav-dropdown-toggle">
   Tjänster
@@ -73,10 +41,10 @@
     <a href="hoghojdsdammsugning.html">Höghöjdsdammsugning</a>
   </div>
 </div>
-      <a href="#historia">Historia</a>
-      <a href="#kvalitet">Kvalitet & Miljö</a>
-      <a href="#sociala-medier">Sociala medier</a>
-      <a href="#kontakt" class="nav-button">Kontakta oss</a>
+      <a href="index.html#historia">Historia</a>
+      <a href="index.html#kvalitet">Kvalitet & Miljö</a>
+      <a href="index.html#sociala-medier">Sociala medier</a>
+      <a href="index.html#kontakt" class="nav-button">Kontakta oss</a>
     </nav>
      <div class="header-actions">
   
@@ -127,449 +95,92 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero" id="hem">
-      <div class="hero-text">
-<img src="bilder/logotext.png" alt="Lokomotiv Städ & Fönsterputs AB" class="hero-logo">
-        <h1>Det går som på <span>räls!</span></h1>
+<main class="service-page">
+  <section class="service-hero-detail">
+    <div class="service-hero-text">
+      <a href="index.html#tjanster" class="back-link">← Tillbaka till tjänster</a>
+      <h1>Fönsterputsning</h1>
+      <p>Vi putsar fönster noggrant och effektivt för både privatpersoner och företag i Hagfors med omnejd.
+          Vi kan även utföra arbeten där skylift behövs.</p>
+      <div class="service-actions">
+        <a href="index.html#kontakt" class="btn btn-primary">Kontakta oss för offert</a>
+      </div>
+    </div>
+    <div class="service-hero-image">
+      <img src="bilder/fonsterputs.avif" alt="Fönsterputsning från Lokomotiv Städ & Fönsterputs AB" loading="eager" />
+    </div>
+  </section>
+
+  <section class="service-info-section window-premium-section reveal">
+    <div class="service-info-grid">
+      <div class="service-info-text">
+        <span class="eyebrow">Om tjänsten</span>
+        <h2>Fönsterputsning som gör skillnad</h2>
         <p>
-          Lokomotiv Städ & Fönsterputs AB erbjuder professionell städning,
-          fönsterputsning och golvvård till både företag och privatpersoner.
+          Rena fönster ger ett ljusare intryck både hemma och på arbetsplatsen. Vi utför fönsterputsning
+          noggrant, effektivt och med rätt metod beroende på fönstrets skick, placering och behov.
+        </p>
+        <p>
+          Tjänsten passar både privatpersoner, kontor, butiker, fastigheter och företag som vill ha ett
+          professionellt resultat utan ränder, fläckar eller krångel.
         </p>
 
-        <div class="hero-buttons">
-          <a href="#kontakt" class="btn btn-primary">Kontakta oss för offert</a>
-          <a href="#tjanster" class="btn btn-secondary">Se våra tjänster</a>
-        </div>
-      </div>
-
-      <div class="hero-card">
-        <h2>Varför välja Lokomotiv?</h2>
-
-        <ul class="check-list">
-          <li>Mer än 25 års branschvana</li>
-          <li>Personligt företag med stort kunnande</li>
-          <li>För både företag och privatpersoner</li>
-          <li>Utgår från Hagfors och arbetar i hela Värmland</li>
+        <h3>Detta utför vi</h3>
+        <ul class="service-offer-checklist">
+          <li>Utvändig fönsterputsning</li>
+          <li>Invändig fönsterputsning</li>
+          <li>Putsning mellan glas där det är möjligt</li>
+          <li>Rengöring av karmar och fönsterbågar vid behov</li>
+          <li>Fönsterputs för villor, lägenheter, kontor och butik</li>
+          <li>Återkommande putsning för företag och fastigheter</li>
+          <li>Arbeten där skylift behövs efter överenskommelse</li>
         </ul>
       </div>
-    </section>
 
-    <section id="tjanster" class="content-section">
-      <div class="section-title">
-        <span>Vad vi gör</span>
-        <h2>Våra tjänster</h2>
-        <p>
-          Vi erbjuder professionella städtjänster i Värmland. Här är några av
-          våra vanligaste tjänster.
-        </p>
-      </div>
+      <!--
+<div class="slider-showcase">
+  <h3 class="slider-section-title">
+    Se våra före- och efterbilder
+  </h3>
 
-      <div class="services-grid">
-        <a href="fonsterputsning.html" class="service-card" aria-label="Läs mer om Fönsterputsning">
-          <img src="bilder/fonsterputs.avif" alt="Fönsterputsning för hem och företag i Värmland" loading="lazy" />
-          <div class="service-text">
-            <h3>Fönsterputsning</h3>
-            <p>
-              Traditionell fönsterputsning i hemmet, på kontoret eller i butiken.
-              Vi har även behörighet att köra skylift.
-            </p>
-          <span class="service-link-text">Läs mer</span>
-          </div>
-        </a>
+  <div class="before-after-slider premium-slider">
+    <img src="bilder/fonsterputsefter.jpg" alt="Före fönsterputsning" class="before-image">
 
-        <a href="stadning.html" class="service-card" aria-label="Läs mer om Städning">
-          <img src="bilder/stadning.avif" alt="Professionell städning för företag och privatpersoner" loading="lazy" />
-          <div class="service-text">
-            <h3>Städning</h3>
-            <p>
-              Kontor/företagsstädning, flyttstädning, byggstädning, hemstädning, höghöjdsdammsugning mm.
-            </p>
-          <span class="service-link-text">Läs mer</span>
-          </div>
-        </a>
+    <div class="after-wrapper">
+      <img src="bilder/fonsterputs.avif" alt="Efter fönsterputsning" class="after-image">
+    </div>
 
-        <a href="ultrarent-vatten.html" class="service-card" aria-label="Läs mer om Ultrarent vatten">
-          <img src="bilder/ultrarent.avif" alt="Rengöring med ultrarent vatten på fönster och fasader" loading="lazy" />
-          <div class="service-text">
-            <h3>Ultrarent vatten</h3>
-            <p>
-              Utvändig tvätt av fönster, karmar, fasader, plåt, glas, plast,
-              skyltar, stuprännor och solpaneler upp till cirka 8 meter.
-            </p>
-          <span class="service-link-text">Läs mer</span>
-          </div>
-        </a>
+    <div class="slider-label before-label">Före</div>
+    <div class="slider-label after-label">Efter</div>
+    <div class="slider-line"><span></span></div>
 
-        <a href="golvvard.html" class="service-card" aria-label="Läs mer om Golvvård">
-          <img src="bilder/golvvard.avif" alt="Maskinell golvvård på plast- och linoleumgolv" loading="lazy" />
-          <div class="service-text">
-            <h3>Golvvård</h3>
-            <p>Maskinell golvvård på plast- och linoleumgolv.</p>
-          <span class="service-link-text">Läs mer</span>
-          </div>
-        </a>
-
-        <a href="skyltputs.html" class="service-card" aria-label="Läs mer om Skyltputs">
-          <img src="bilder/skyltputs.avif" alt="Skyltputs och fönsterputsning av skyltfönster" loading="lazy" />
-          <div class="service-text">
-            <h3>Skyltputs</h3>
-            <p>Fönsterputsning av skyltfönster med teleskopskaft.</p>
-          <span class="service-link-text">Läs mer</span>
-          </div>
-        </a>
-
-<a href="hoghojdsdammsugning.html" class="service-card" aria-label="Läs mer om Höghöjdsdammsugning">
-          <img src="bilder/hoghojd.jpg" alt="Höghöjdsdammsugning på svåråtkomliga platser" loading="lazy" />
-          <div class="service-text">
-            <h3>Höghöjdsdammsugning</h3>
-            <p>Dammsugning på höga höjder!</p>
-          <span class="service-link-text">Läs mer</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
- <section id="historia" class="content-section">
-      <div class="section-title">
-        <span>Om företaget</span>
-        <h2>Lite historia</h2>
-        <p>
-          Lokomotiv Städ & Fönsterputs AB startades i november 2021 och drivs
-          med lång erfarenhet, noggrannhet och personlig service.
-        </p>
-      </div>
-
-      <div class="historia-grid">
-        <div class="historia-text card">
-          <h3>Företagets historia fram tills nutid</h3>
-
-          <div class="text-block">
-            <strong>Start</strong>
-            <p>
-              Företaget startades av Eric Rauti som med mer än 25 års
-              branschvana kände att det var dags att starta något eget.
-            </p>
-          </div>
-
-          <div class="text-block">
-            <strong>Erfarenhet</strong>
-            <p>
-              Eric har genom åren arbetat för flera av branschens ledande
-              aktörer i Göteborg och senare i Värmland.
-            </p>
-          </div>
-
-          <div class="text-block">
-            <strong>Idag</strong>
-            <p>
-              Lokomotiv utgår från Hagfors och har hela Värmland som
-              arbetsområde.
-            </p>
-          </div>
-        </div>
-
-        <div class="historia-image">
-          <img src="bilder/eric.png" alt="Eric Rauti från Lokomotiv Städ & Fönsterputs AB" loading="lazy" />
-        </div>
-      </div>
-    </section>
-
-    <section class="about" id="kvalitet">
-      <div class="about-text">
-        <span class="eyebrow">Tryggt utfört arbete</span>
-        <h2>Kvalitet & Miljö</h2>
-
-        <p>
-          Vi ser oss som det företag med det stora kunnandet inom
-          städning och fönsterputsning.
-        </p>
-
-        <p>
-          Vi arbetar professionellt, följer gällande lagar och regler och väljer
-          säkra metoder när vi utför våra tjänster.
-        </p>
-
-        <p>
-          Vi ska vara tillgängliga, hålla det vi lovat och vårt mål är 100%
-          nöjda kunder.
-        </p>
-
-        <p>
-          Vi strävar efter att välja metoder som ger minst miljöpåverkan och
-          använder i första hand miljövänliga kemikalier.
-        </p>
-      </div>
-
-      <div class="stats">
-        <div class="stat-box">
-          <strong>100%</strong>
-          <span>Mål: nöjda kunder</span>
-        </div>
-
-        <div class="stat-box">
-          <strong>Säkert</strong>
-          <span>Trygga arbetsmetoder</span>
-        </div>
-
-        <div class="stat-box">
-          <strong>Miljö</strong>
-          <span>Miljövänliga val</span>
-        </div>
-
-        <div class="stat-box">
-          <strong>Värmland</strong>
-          <span>Hela länet som arbetsområde</span>
-        </div>
-      </div>
-    </section>
-
-<section id="sociala-medier" class="content-section">
-  <div class="section-title">
-    <span>Följ oss</span>
-    <h2>Sociala medier</h2>
-    <p>
-      Följ Lokomotiv Städ & Fönsterputs AB på Instagram och Facebook för att se
-      uppdateringar, bilder och senaste nytt.
-    </p>
+    <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Jämför före- och efterbild">
   </div>
 
-  <div class="social-grid">
-    <div class="social-box">
-      <div class="social-header">
-        <h3>Instagram</h3>
-        <a href="https://www.instagram.com/lokomotivstad" target="_blank" rel="noopener noreferrer">Öppna Instagram</a>
-      </div>
+  <div class="before-after-slider premium-slider">
+    <img src="bilder/fonsterputsefter.jpg" alt="Före fönsterputsning" class="before-image">
 
+    <div class="after-wrapper">
+      <img src="bilder/fonsterputs.avif" alt="Efter fönsterputsning" class="after-image">
     </div>
 
-    <div class="social-box">
-      <div class="social-header">
-        <h3>Facebook</h3>
-        <a href="https://www.facebook.com/lokomotivstad" target="_blank" rel="noopener noreferrer">Öppna Facebook</a>
-      </div>
+    <div class="slider-label before-label">Före</div>
+    <div class="slider-label after-label">Efter</div>
+    <div class="slider-line"><span></span></div>
 
-      <iframe
-        title="Lokomotiv Städ & Fönsterputs AB på Facebook"
-        src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/lokomotivstad&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-        class="social-frame"
-        style="border:none;overflow:hidden"
-        scrolling="no"
-        frameborder="0"
-        allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-      </iframe>
-    </div>
+    <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Jämför före- och efterbild">
   </div>
-</section>
-
-
-    <section id="kontakt" class="content-section">
-      <div class="section-title">
-        <span>Offert & kontakt</span>
-        <h2>Kontakta oss för offert</h2>
-        <p>
-          Beskriv vad du behöver hjälp med så återkommer vi snabbt med en gratis offert.
-        </p>
-      </div>
-
-      <div class="contact-layout">
-        <div class="contact-details">
-          <h3>Kontaktuppgifter</h3>
-
-          <p>
-            <strong>Företag:</strong><br />
-            Lokomotiv Städ & Fönsterputs AB
-          </p>
-
-	  <p>
-	    <strong>Plats:</strong><br />
-	    Björnängsvägen 16, Hagfors, 68333
-</p>
-
-          <p>
-            <strong>E-post:</strong><br />
-            <a href="mailto:eric@lokomotivstad.se">eric@lokomotivstad.se</a>
-          </p>
-
-          <p>
-            <strong>Telefon:</strong><br />
-            <a href="tel:+4656330990">0563-309 90</a>
-          </p>
-<iframe title="Karta till Lokomotiv Städ & Fönsterputs AB i Hagfors" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13406.415727035208!2d13.695739672536886!3d60.03371457185117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4642d2c95155b8bf%3A0x7f8824b2a2e443ed!2zQmrDtnJuw6RuZ3N2w6RnZW4gMTYsIDY4MyAzMyBIYWdmb3JzLCBTdmVyaWdl!5e0!3m2!1ssv!2sus!4v1777454362989!5m2!1ssv!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-        </div>
-
-        <div class="contact-box">
-          <form id="contactForm">
-          <p id="formMessage" class="form-message"></p>
-
-  <input type="text" id="name" name="Namn" placeholder="Ditt namn" required>
-  <input type="email" id="email" name="E-post" placeholder="Din e-post" required>
-
-  <input 
-    type="tel" 
-    id="phone" 
-    name="Telefonnummer" 
-    placeholder="Ditt telefonnummer" 
-    required
-    pattern="[0-9+\-\s]{7,15}"
-    inputmode="tel"
-  >
-
-  <div class="custom-select">
-    <button type="button" class="select-button" id="serviceDropdownBtn">
-      Välj tjänster
-    </button>
-
-    <div class="select-options" id="serviceOptions">
-      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Fönsterputsning"> <span>Fönsterputsning</span></label>
-      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Städning"> <span>Städning</span></label>
-      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Ultrarent vatten"> <span>Ultrarent vatten</span></label>
-      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Golvvård"> <span>Golvvård</span></label>
-      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Skyltputs"> <span>Skyltputs</span></label>
-      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Fasadtvätt"> <span>Fasadtvätt</span></label>
+</div>
+ -->
     </div>
-  </div>
+  </section>
 
-  <input type="hidden" id="selectedServicesInput" name="Valda Tjänster">
-  <input type="hidden" name="_subject" value="Ny offertförfrågan från hemsidan">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_next" value="http://127.0.0.1:5500/tack.html">
-
-  <textarea id="mailSummary" name="Sammanfattning" hidden></textarea>
-
-  <div class="honeypot-field" aria-hidden="true">
-    <label for="website">Lämna detta fält tomt</label>
-    <input type="text" id="website" name="_honey" tabindex="-1" autocomplete="off">
-  </div>
-
-  <div id="serviceExtraFields">
-
-    <div class="service-extra" data-service="Fönsterputsning">
-      <button type="button" class="service-extra-toggle">Fönsterputsning - detaljer</button>
-      <div class="service-extra-content">
-        <input type="text" name="_fonsterputsning_antal_fonster" data-mail-label="Fönsterputsning - antal fönster" placeholder="Antal fönster">
-        <textarea name="_fonsterputsning_beskrivning" data-mail-label="Fönsterputsning - beskrivning" placeholder="Beskriv jobbet"></textarea>
-        <label class="upload-label">
-          Lägg till bilder
-<input 
-  type="file" 
-  name="fonsterputsning_bilder"
-  data-mail-label="Bilder"
-  accept="image/png, image/jpeg, image/webp"
-  multiple
->        </label>
-      </div>
-    </div>
-
-    <div class="service-extra" data-service="Städning">
-      <button type="button" class="service-extra-toggle">Städning - detaljer</button>
-      <div class="service-extra-content">
-        <input type="text" name="_stadning_typ" data-mail-label="Städning - typ" placeholder="Typ av städning (t.ex. flytt, kontor)">
-        <textarea name="_stadning_beskrivning" data-mail-label="Städning - beskrivning" placeholder="Beskriv jobbet"></textarea>
-        <label class="upload-label">
-          Lägg till bilder
-<input 
-  type="file" 
-  name="stadning_bilder"
-  data-mail-label="Bilder"
-  accept="image/png, image/jpeg, image/webp"
-  multiple
->        </label>
-      </div>
-    </div>
-
-    <div class="service-extra" data-service="Ultrarent vatten">
-      <button type="button" class="service-extra-toggle">Ultrarent vatten - detaljer</button>
-      <div class="service-extra-content">
-        <input type="text" name="_ultrarent_yta" data-mail-label="Ultrarent - yta" placeholder="Typ av yta (fasad, fönster osv)">
-        <textarea name="_ultrarent_beskrivning" data-mail-label="Ultrarent - beskrivning" placeholder="Beskriv jobbet"></textarea>
-        <label class="upload-label">
-          Lägg till bilder
-<input 
-  type="file" 
-  name="ultrarent_bilder"
-  data-mail-label="Bilder"
-  accept="image/png, image/jpeg, image/webp"
-  multiple
->        </label>
-      </div>
-    </div>
-
-    <div class="service-extra" data-service="Golvvård">
-      <button type="button" class="service-extra-toggle">Golvvård - detaljer</button>
-      <div class="service-extra-content">
-        <input type="text" name="_golvvard_typ" data-mail-label="Golvvård - typ" placeholder="Typ av golv">
-        <textarea name="_golvvard_beskrivning" data-mail-label="Golvvård - beskrivning" placeholder="Beskriv jobbet"></textarea>
-        <label class="upload-label">
-          Lägg till bilder
-<input 
-  type="file" 
-  name="golvvard_bilder"
-  data-mail-label="Bilder"
-  accept="image/png, image/jpeg, image/webp"
-  multiple
->        </label>
-      </div>
-    </div>
-
-    <div class="service-extra" data-service="Skyltputs">
-      <button type="button" class="service-extra-toggle">Skyltputs - detaljer</button>
-      <div class="service-extra-content">
-        <input type="text" name="_skyltputs_antal" data-mail-label="Skyltputs - antal" placeholder="Antal skyltar">
-        <textarea name="_skyltputs_beskrivning" data-mail-label="Skyltputs - beskrivning" placeholder="Beskriv jobbet"></textarea>
-        <label class="upload-label">
-          Lägg till bilder
-<input 
-  type="file" 
-  name="skyltputs_bilder"
-  data-mail-label="Bilder"
-  accept="image/png, image/jpeg, image/webp"
-  multiple
->
-        </label>
-      </div>
-    </div>
-
-    <div class="service-extra" data-service="Fasadtvätt">
-      <button type="button" class="service-extra-toggle">Fasadtvätt - detaljer</button>
-      <div class="service-extra-content">
-        <input type="text" name="_fasadtvatt_yta" data-mail-label="Fasadtvätt - yta" placeholder="Storlek / yta">
-        <textarea name="_fasadtvatt_beskrivning" data-mail-label="Fasadtvätt - beskrivning" placeholder="Beskriv jobbet"></textarea>
-        <label class="upload-label">
-          Lägg till bilder
-<input 
-  type="file" 
-  name="fasadtvatt_bilder"
-  data-mail-label="Bilder"
-  accept="image/png, image/jpeg, image/webp"
-  multiple
->
-        </label>
-      </div>
-    </div>
-
-  </div>
-
-  <textarea id="messageField" name="Övrigt tillägg" placeholder="Övrigt tillägg eller meddelande"></textarea>
-
-  <label class="checkbox-row privacy-consent" for="privacyConsent">
-    <input type="checkbox" id="privacyConsent" name="Samtycke" value="Godkänner integritetspolicyn" required>
-    <span>Jag godkänner att mina uppgifter används för att besvara min förfrågan enligt <a href="integritet.html" target="_blank" rel="noopener noreferrer">integritetspolicyn</a>.</span>
-  </label>
-
-  <button id="submitFormBtn" type="submit" class="btn btn-primary">
-  Skicka förfrågan
-</button>
-</form>
-        </div>
-      </div>
-    </section>
-
-
-  </main>
+  <section class="service-cta reveal">
+    <h2>Vill du veta mer?</h2>
+    <p>Skicka en offertförfrågan eller ring oss så hjälper vi dig vidare.</p>
+    <a href="index.html#kontakt" class="btn btn-primary">Gå till kontaktformuläret</a>
+  </section>
+</main>
 
   <footer>
   <p>
@@ -589,12 +200,6 @@
 
     <span class="footer-divider"></span>
 
-    <a href="personal.html" class="staff-login-link" aria-label="Personalinloggning">
-      Personal
-    </a>
-
-    <span class="footer-divider"></span>
-
     <a href="tel:+4656330990">
       0563-309 90
     </a>
@@ -603,8 +208,9 @@
 
         
       <div class="floating-buttons">
-  <a href="#hem" class="scroll-top-btn" id="scrollTopBtn" aria-label="Till toppen">↑</a>
+  <a href="#top" class="scroll-top-btn" id="scrollTopBtn" aria-label="Till toppen">↑</a>
 </div>
+
   <script src="script.js"></script>
 
 </body>
