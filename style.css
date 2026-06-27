@@ -3562,11 +3562,18 @@ body.theme--dark .social-frame {
   border: 1px solid var(--dark-border);
 }
 
-.section-title h2,.service-card h3,h1,h2,h3 {
+.section-title h2,
+.service-card h3,
+h1,
+h2,
+h3 {
   max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  hyphens: auto;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
 }
 
 .service-card h3 {
@@ -3620,10 +3627,13 @@ header {
 
 .contact-details p,.privacy-card p,.section-title h2,.service-cta h2,.service-hero-text h1,.service-info-text h2,.service-text h3,a,body.service-body .service-hero-text h1,button,h1,h2,h3,h4,input,label,li,p,select,span,strong,textarea {
   max-width: 100%;
-  overflow-wrap: anywhere;
-  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-wrap: normal;
   word-break: normal;
-  hyphens: auto;
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
 }
 
 .nav-dropdown-menu a,.service-hero-text h1,.service-text h3,body.service-body .service-hero-text h1 {
@@ -6410,18 +6420,4 @@ body.theme--dark .premium-slider {
 
 .hero-card:hover {
   box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12) !important;
-}
-
-html {
-    hyphens: none;
-    -webkit-hyphens: none;
-    -ms-hyphens: none;
-}
-
-body {
-    hyphens: none;
-    -webkit-hyphens: none;
-    -ms-hyphens: none;
-    word-break: normal;
-    overflow-wrap: break-word;
 }
