@@ -15,6 +15,8 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
+  const BACKEND_URL = "https://lokomotiv-backend.onrender.com/send-email";
+
   function onReady(callback) {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", callback, { once: true });
@@ -73,18 +75,11 @@
     const header = $("header");
     const floatingCall = $(".floating-call");
     const themeToggle = $("#themeToggle");
-    const faqBot = $("#faqBot");
-    const faqBotToggle = $("#faqBotToggle");
-    const faqBotClose = $("#faqBotClose");
-    const faqAnswer = $("#faqAnswer");
-    const faqTyping = $("#faqTyping");
-    const faqQuestions = $$(".faq-question");
     const navDropdown = $(".nav-dropdown");
     const navDropdownToggle = $(".nav-dropdown-toggle");
     const sections = $$("main section[id]");
     const navLinks = $$("nav a[href^='#']");
 
-    let faqTypingTimeout = null;
     let ticking = false;
     let activeSectionId = "";
 
@@ -204,23 +199,51 @@
 
         if (summaryInput) {
           const formData = new FormData(contactForm);
-          let summary = `Ny offertförfrågan från hemsidan\n================================\n\nKUNDUPPGIFTER\n--------------------------------\nNamn: ${formData.get("Namn") || "-"}\nE-post: ${formData.get("E-post") || "-"}\nTelefon: ${formData.get("Telefonnummer") || "-"}\n\nVALDA TJÄNSTER\n--------------------------------\n${selectedServiceNames.length > 0 ? selectedServiceNames.join(", ") : "Ingen specifik tjänst vald"}\n\nTJÄNSTEDETALJER\n--------------------------------\n`;
+
+          let summary =
+            `Ny offertförfrågan från hemsidan\n` +
+            `================================\n\n` +
+            `KUNDUPPGIFTER\n` +
+            `--------------------------------\n` +
+            `Namn: ${formData.get("Namn") || "-"}\n` +
+            `E-post: ${formData.get("E-post") || "-"}\n` +
+            `Telefon: ${formData.get("Telefonnummer") || "-"}\n\n` +
+            `VALDA TJÄNSTER\n` +
+            `--------------------------------\n` +
+            `${selectedServiceNames.length > 0 ? selectedServiceNames.join(", ") : "Ingen specifik tjänst vald"}\n\n` +
+            `TJÄNSTEDETALJER\n` +
+            `--------------------------------\n`;
 
           selectedServiceNames.forEach(serviceName => {
             summary += `\n${serviceName}\n`;
 
-            $$(`.service-extra[data-service="${CSS.escape(serviceName)}"] input, .service-extra[data-service="${CSS.escape(serviceName)}"] textarea, .service-extra[data-service="${CSS.escape(serviceName)}"] select`, contactForm)
-              .forEach(field => {
-                if (field.type === "file") {
-                  if (field.files.length > 0) summary += `[[BILDER_${field.name}]]\n`;
-                } else if (field.value.trim() !== "") {
-                  const label = field.dataset.mailLabel || field.name || "Fält";
-                  summary += `• ${label}: ${field.value.trim()}\n`;
+            $$(
+              `.service-extra[data-service="${CSS.escape(serviceName)}"] input, ` +
+              `.service-extra[data-service="${CSS.escape(serviceName)}"] textarea, ` +
+              `.service-extra[data-service="${CSS.escape(serviceName)}"] select`,
+              contactForm
+            ).forEach(field => {
+              if (field.type === "file") {
+                if (field.files.length > 0) {
+                  summary += `[[BILDER_${field.name}]]\n`;
                 }
-              });
+              } else if (field.value.trim() !== "") {
+                const label = field.dataset.mailLabel || field.name || "Fält";
+                summary += `• ${label}: ${field.value.trim()}\n`;
+              }
+            });
           });
 
-          summary += `\nMEDDELANDE\n--------------------------------\n${formData.get("Övrigt tillägg") || "Inget"}\n\nSAMTYCKE\n--------------------------------\n${formData.get("Samtycke") || "-"}\n\n================================\nSkickat från lokomotivstad.se\n`;
+          summary +=
+            `\nMEDDELANDE\n` +
+            `--------------------------------\n` +
+            `${formData.get("Övrigt tillägg") || "Inget"}\n\n` +
+            `SAMTYCKE\n` +
+            `--------------------------------\n` +
+            `${formData.get("Samtycke") || "-"}\n\n` +
+            `================================\n` +
+            `Skickat från lokomotivstad.se\n`;
+
           summaryInput.value = summary;
         }
 
@@ -262,14 +285,43 @@
         const timeoutId = window.setTimeout(() => controller.abort(), 90000);
 
         try {
-          const response = await fetch("https://lokomotiv-backend.onrender.com/send-email", {
+          const response = await fetch(BACKEND_URL, {
             method: "POST",
+            mode: "cors",
             body: new FormData(contactForm),
             signal: controller.signal
           });
 
+          let rawText = "";
+          let result = null;
+
+          try {
+            rawText = await response.text();
+            result = rawText ? JSON.parse(rawText) : null;
+          } catch {
+            result = null;
+          }
+
           if (!response.ok) {
-            throw new Error(`Server svarade med status ${response.status}`);
+            console.error("Backend error:", {
+              status: response.status,
+              body: result || rawText
+            });
+
+            const serverMessage =
+              result?.error?.message ||
+              result?.error ||
+              result?.message ||
+              rawText ||
+              `Serverfel ${response.status}`;
+
+            showFormMessage(
+              messageBox,
+              "error",
+              `Formuläret kunde inte skickas: ${serverMessage}`
+            );
+
+            return;
           }
 
           showFormMessage(
@@ -290,13 +342,20 @@
           });
 
           contactForm.classList.add("submitted");
-          contactForm.scrollIntoView({ behavior: prefersReducedMotion.matches ? "auto" : "smooth", block: "start" });
+          contactForm.scrollIntoView({
+            behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+            block: "start"
+          });
+
         } catch (error) {
+          console.error("Fetch failed:", error);
+
           const message = error.name === "AbortError"
             ? "Det tog för lång tid att skicka. Försök igen."
-            : "Nätverksfel. Kontrollera din uppkoppling.";
+            : "Anropet blockerades eller nådde inte servern. Kontrollera CORS, CSP eller backend-URL.";
 
           showFormMessage(messageBox, "error", message);
+
         } finally {
           window.clearTimeout(timeoutId);
           resetSubmitButton(submitBtn);
@@ -397,7 +456,10 @@
       scrollTopBtn.addEventListener("click", event => {
         if (scrollTopBtn.getAttribute("href") === "#" || scrollTopBtn.getAttribute("href") === "#hem") {
           event.preventDefault();
-          window.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? "auto" : "smooth" });
+          window.scrollTo({
+            top: 0,
+            behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+          });
         }
       });
     }
@@ -484,56 +546,10 @@
       updateSlider();
     });
 
-    function setFaqBotOpen(isOpen) {
-      if (!faqBot) return;
-
-      faqBot.classList.toggle("open", isOpen);
-
-      if (faqBotToggle) {
-        faqBotToggle.setAttribute("aria-expanded", String(isOpen));
-      }
-    }
-
-    if (faqBot && faqBotToggle) {
-      faqBotToggle.addEventListener("click", () => {
-        setFaqBotOpen(!faqBot.classList.contains("open"));
-      });
-    }
-
-    if (faqBot && faqBotClose) {
-      faqBotClose.addEventListener("click", () => setFaqBotOpen(false));
-    }
-
-    faqQuestions.forEach(button => {
-      button.addEventListener("click", () => {
-        if (!faqAnswer) return;
-
-        window.clearTimeout(faqTypingTimeout);
-
-        faqQuestions.forEach(question => question.classList.remove("active"));
-        button.classList.add("active");
-        faqAnswer.innerHTML = "";
-
-        if (faqTyping) faqTyping.classList.add("show");
-
-        faqTypingTimeout = window.setTimeout(() => {
-          if (faqTyping) faqTyping.classList.remove("show");
-          faqAnswer.innerHTML = button.dataset.answer || "";
-        }, 280);
-      });
-    });
-
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
-        setFaqBotOpen(false);
         closeMobileMenu();
       }
-    });
-
-    document.addEventListener("click", event => {
-      if (!faqBot || !faqBot.classList.contains("open")) return;
-      if (event.target.closest("#faqBot")) return;
-      setFaqBotOpen(false);
     });
 
     document.addEventListener("touchend", event => {
@@ -553,8 +569,8 @@
 const serviceCards = document.querySelectorAll(".service-card");
 
 const serviceCardObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
+  entries => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("animate-in");
         serviceCardObserver.unobserve(entry.target);
@@ -562,10 +578,10 @@ const serviceCardObserver = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.2,
+    threshold: 0.2
   }
 );
 
-serviceCards.forEach((card) => {
+serviceCards.forEach(card => {
   serviceCardObserver.observe(card);
 });
