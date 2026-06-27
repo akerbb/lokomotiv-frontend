@@ -3569,11 +3569,9 @@ h2,
 h3 {
   max-width: 100%;
   white-space: normal;
-  overflow-wrap: break-word;
   word-break: normal;
+  overflow-wrap: break-word;
   hyphens: none;
-  -webkit-hyphens: none;
-  -ms-hyphens: none;
 }
 
 .service-card h3 {
