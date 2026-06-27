@@ -3695,14 +3695,22 @@ header {
     --header-height: 64px;
   }
 
-  .service-hero-text h1,body.service-body .service-hero-text h1 {
-    font-size: clamp(2rem, 10vw, 2.9rem);
+  .service-hero-text h1,
+  body.service-body .service-hero-text h1 {
+    font-size: clamp(1.8rem, 7.5vw, 2.4rem);
     line-height: 1.08;
-    letter-spacing: -.06em;
+    letter-spacing: -0.04em;
+
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
   }
 
-  .section-title h2,.service-cta h2,.service-info-text h2 {
-    font-size: clamp(1.65rem, 8vw, 2.25rem);
+  .section-title h2,
+  .service-cta h2,
+  .service-info-text h2 {
+    font-size: clamp(1.6rem, 7vw, 2rem);
     line-height: 1.12;
   }
 }
@@ -6340,20 +6348,7 @@ body.dark-mode .scroll-top-btn:hover {
       0 14px 34px rgba(15, 23, 42, 0.12) !important;
   }
 }
-@media (max-width: 700px) {
 
-  .section-title h2,
-  .service-card h3,
-  h1,
-  h2,
-  h3 {
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: none;
-    -webkit-hyphens: none;
-  }
-
-}
 /* Hover only on devices that actually support hover */
 @media (hover: hover) and (pointer: fine) {
   .card:hover,
