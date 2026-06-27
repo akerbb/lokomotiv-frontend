@@ -6340,7 +6340,20 @@ body.dark-mode .scroll-top-btn:hover {
       0 14px 34px rgba(15, 23, 42, 0.12) !important;
   }
 }
+@media (max-width: 700px) {
 
+  .section-title h2,
+  .service-card h3,
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: none;
+    -webkit-hyphens: none;
+  }
+
+}
 /* Hover only on devices that actually support hover */
 @media (hover: hover) and (pointer: fine) {
   .card:hover,
