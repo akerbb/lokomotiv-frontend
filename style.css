@@ -6411,3 +6411,17 @@ body.theme--dark .premium-slider {
 .hero-card:hover {
   box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12) !important;
 }
+
+html {
+    hyphens: none;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+}
+
+body {
+    hyphens: none;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
