@@ -243,11 +243,13 @@ nav a.active:not(.nav-dropdown-toggle)::after {
   transition: .2s;
 }
 
-.social-icons a:hover,
-.social-icons .dark-mode-toggle:hover {
-  color: var(--white);
-  background: var(--primary);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .social-icons a:hover,
+  .social-icons .dark-mode-toggle:hover {
+    color: var(--white);
+    background: var(--primary);
+    transform: translateY(-2px);
+  }
 }
 
 .icon {
@@ -4464,10 +4466,13 @@ html,body {
   transition: 0.2s;
 }
 
-.social-icons a:hover,.dark-mode-toggle:hover {
-  color: var(--white);
-  background: var(--primary);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .social-icons a:hover,
+  .social-icons .dark-mode-toggle:hover {
+    color: var(--white);
+    background: var(--primary);
+    transform: translateY(-2px);
+  }
 }
 
 .icon,.dark-mode-toggle__icon {
@@ -4944,11 +4949,13 @@ body.theme--dark .nav-dropdown-toggle.active {
   transition: .2s;
 }
 
-.social-icons a:hover,
-.dark-mode-toggle:hover {
-  color: var(--white);
-  background: var(--primary);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .social-icons a:hover,
+  .social-icons .dark-mode-toggle:hover {
+    color: var(--white);
+    background: var(--primary);
+    transform: translateY(-2px);
+  }
 }
 
 .dark-mode-toggle__icon {
