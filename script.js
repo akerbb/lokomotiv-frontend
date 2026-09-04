@@ -419,13 +419,20 @@
 
       const checkLine = window.innerHeight * 0.38;
       let currentSection = sections[0].id;
+      const pageBottom = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const isAtPageBottom = pageBottom >= documentHeight - 4;
 
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= checkLine && rect.bottom > checkLine) {
-          currentSection = section.id;
-        }
-      });
+      if (isAtPageBottom) {
+        currentSection = sections[sections.length - 1].id;
+      } else {
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= checkLine && rect.bottom > checkLine) {
+            currentSection = section.id;
+          }
+        });
+      }
 
       setActiveNav(currentSection);
     }
@@ -585,3 +592,76 @@ const serviceCardObserver = new IntersectionObserver(
 serviceCards.forEach(card => {
   serviceCardObserver.observe(card);
 });
+
+// Tillgängliga, beroendefria innehållssliders.
+(() => {
+  "use strict";
+
+  function initSlider(slider) {
+    const slides = Array.from(slider.querySelectorAll(".blog-slider__item"));
+    const pagination = slider.querySelector(".blog-slider__pagination");
+    if (slides.length < 2 || !pagination) return;
+
+    let activeIndex = Math.max(0, slides.findIndex(slide => slide.classList.contains("is-active")));
+    let touchStartX = 0;
+
+    const bullets = slides.map((slide, index) => {
+      const bullet = document.createElement("button");
+      bullet.type = "button";
+      bullet.className = "blog-slider__bullet";
+      bullet.setAttribute("aria-label", `Visa sida ${index + 1} av ${slides.length}`);
+      bullet.addEventListener("click", () => showSlide(index));
+      pagination.appendChild(bullet);
+      return bullet;
+    });
+
+    function showSlide(index) {
+      activeIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === activeIndex;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+
+        slide.querySelectorAll("a, button").forEach(control => {
+          control.tabIndex = isActive ? 0 : -1;
+        });
+      });
+
+      bullets.forEach((bullet, bulletIndex) => {
+        const isActive = bulletIndex === activeIndex;
+        bullet.classList.toggle("is-active", isActive);
+        bullet.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+    }
+
+    slider.addEventListener("keydown", event => {
+      if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+      event.preventDefault();
+      const direction = event.key === "ArrowLeft" || event.key === "ArrowUp" ? -1 : 1;
+      showSlide(activeIndex + direction);
+      bullets[activeIndex].focus();
+    });
+
+    slider.addEventListener("touchstart", event => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    slider.addEventListener("touchend", event => {
+      const distance = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(distance) >= 50) showSlide(activeIndex + (distance < 0 ? 1 : -1));
+    }, { passive: true });
+
+    showSlide(activeIndex);
+  }
+
+  function initSliders() {
+    document.querySelectorAll(".blog-slider").forEach(initSlider);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSliders, { once: true });
+  } else {
+    initSliders();
+  }
+})();
