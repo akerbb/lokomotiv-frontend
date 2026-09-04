@@ -3789,14 +3789,32 @@ body.dark-mode .scroll-top-btn:hover {
   }
 }
 
-@media (max-width: 1024px),(hover: none),(pointer: coarse) {
+/* Keep the hamburger menu compact all the way up to the desktop breakpoint. */
+@media (max-width: 1200px),(hover: none),(pointer: coarse) {
   nav {
+    position: fixed !important; top: calc(var(--header-height) + 8px) !important;
     left: 50% !important; right: auto !important; width: min(92vw,420px) !important;
+    flex-direction: column !important; align-items: stretch !important; gap: 4px !important;
+    padding: 16px !important; border: 1px solid rgba(0,0,0,.06) !important; border-radius: 22px !important;
+    background: rgba(255,255,255,.96) !important; box-shadow: 0 24px 60px rgba(15,23,42,.14) !important;
+    max-height: calc(100dvh - var(--header-height) - 24px); overflow-y: auto;
     transform: translateX(-50%) translateY(-12px) !important; opacity: 0; pointer-events: none;
     transition: opacity .24s ease,transform .3s cubic-bezier(.22,1,.36,1) !important;
   }
 
+  nav a, .nav-dropdown { width: 100%; }
+
+  nav a, .nav-dropdown-toggle {
+    display: flex; align-items: center; justify-content: space-between; padding: 14px 12px; border-radius: 14px;
+  }
+
+  .nav-button { justify-content: center !important; margin-top: 8px; text-align: center; }
+
   nav.active { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0) !important; }
+
+  body.theme--dark nav.active {
+    background: rgba(15,23,42,.97) !important; border-color: rgba(51,65,85,.9) !important;
+  }
 }
 
 body.theme--dark .card,
@@ -3864,5 +3882,65 @@ body.theme--dark .btn-primary:hover, body.theme--dark .btn-secondary:hover {
     width: min(82vw, 350px) !important;
     height: min(82vw, 350px) !important;
     border-width: 4px !important;
+  }
+}
+
+/* Final mobile density: prevent the broad touch rules above from making phones feel zoomed in. */
+@media (max-width: 700px) {
+  .hero {
+    padding: clamp(36px,10vw,48px) 18px 38px !important;
+    gap: 24px !important;
+  }
+
+  .hero-logo {
+    width: min(280px,78vw) !important;
+    margin-bottom: 16px !important;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(30px,8.5vw,36px) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -1px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .hero-text p {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+    margin-bottom: 24px !important;
+  }
+
+  .hero-card {
+    padding: 20px !important;
+    border-radius: 22px !important;
+  }
+
+  .hero-card h2 { font-size: 22px !important; margin-bottom: 16px !important; }
+
+  .check-list li, .service-check-list li { padding: 13px 14px !important; }
+
+  .about, .content-section {
+    width: calc(100% - 18px) !important;
+    margin: 14px auto !important;
+    padding: 34px 18px !important;
+    border-radius: 22px !important;
+  }
+
+  .section-title { margin-bottom: 28px !important; }
+
+  .section-title h2 {
+    font-size: clamp(26px,7.5vw,30px) !important;
+    margin-bottom: 12px !important;
+  }
+
+  .section-title p { font-size: 15px !important; line-height: 1.65 !important; }
+
+  .card, .contact-box, .contact-details { padding: 20px !important; }
+
+  .services-grid { gap: 18px !important; }
+
+  .services-grid .service-card {
+    height: 280px !important;
+    min-height: 280px !important;
   }
 }
