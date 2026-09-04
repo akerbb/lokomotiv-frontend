@@ -3944,3 +3944,106 @@ body.theme--dark .btn-primary:hover, body.theme--dark .btn-secondary:hover {
     min-height: 280px !important;
   }
 }
+
+/* Skinande sociala knappar i sidhuvudet */
+.header-actions .social-icons .social-button {
+  --social-color: var(--primary);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid !important;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: var(--social-color) !important;
+  background: #fff !important;
+  border: 1px solid rgba(15, 23, 42, .08);
+  border-radius: 28%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 5px 14px rgba(15, 23, 42, .12);
+  transition: color .35s cubic-bezier(.31, -.105, .43, 1.59),
+              transform .35s cubic-bezier(.31, -.105, .43, 1.59),
+              box-shadow .35s ease;
+}
+
+.header-actions .social-icons .social-button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 90%;
+  left: -110%;
+  width: 120%;
+  height: 120%;
+  background: var(--social-color);
+  transform: rotate(45deg);
+  transition: top .35s cubic-bezier(.31, -.105, .43, 1.59),
+              left .35s cubic-bezier(.31, -.105, .43, 1.59);
+}
+
+.header-actions .social-icons .social-button--instagram,
+.header-actions .social-icons .social-button--facebook {
+  --social-color: var(--primary);
+}
+
+.header-actions .social-icons .social-button .icon {
+  position: relative;
+  z-index: 1;
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+  transform: scale(.86);
+  transition: transform .35s cubic-bezier(.31, -.105, .43, 1.59);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header-actions .social-icons .social-button:hover {
+    color: #fff !important;
+    background: #fff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .2);
+  }
+
+  .header-actions .social-icons .social-button:hover::before {
+    top: -10%;
+    left: -10%;
+  }
+
+  .header-actions .social-icons .social-button:hover .icon {
+    transform: scale(1);
+  }
+}
+
+.header-actions .social-icons .social-button:focus-visible {
+  color: #fff !important;
+  outline: 3px solid color-mix(in srgb, var(--social-color) 30%, transparent);
+  outline-offset: 4px;
+}
+
+.header-actions .social-icons .social-button:focus-visible::before {
+  top: -10%;
+  left: -10%;
+}
+
+.header-actions .social-icons .social-button:focus-visible .icon {
+  transform: scale(1);
+}
+
+body.theme--dark .header-actions .social-icons .social-button {
+  color: var(--social-color) !important;
+  background: #111827 !important;
+  border-color: rgba(255, 255, 255, .12);
+}
+
+body.theme--dark .header-actions .social-icons .social-button:hover,
+body.theme--dark .header-actions .social-icons .social-button:focus-visible {
+  color: #fff !important;
+  background: #111827 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-actions .social-icons .social-button,
+  .header-actions .social-icons .social-button::before,
+  .header-actions .social-icons .social-button .icon {
+    transition-duration: .01ms !important;
+  }
+}
