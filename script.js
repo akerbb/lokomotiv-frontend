@@ -53,7 +53,7 @@
     const navDropdown = $(".nav-dropdown");
     const navDropdownToggle = $(".nav-dropdown-toggle");
     const sections = $$("main section[id]");
-    const navLinks = $$("nav a[href^='#']");
+    const navLinks = $$("nav a[href*='#']");
 
     let ticking = false;
     let activeSectionId = "";
@@ -360,7 +360,14 @@
       activeSectionId = sectionId;
 
       navLinks.forEach(link => {
-        link.classList.toggle("active", link.getAttribute("href") === `#${sectionId}`);
+        let linkHash = "";
+        try {
+          linkHash = new URL(link.getAttribute("href"), window.location.href).hash;
+        } catch {
+          linkHash = "";
+        }
+
+        link.classList.toggle("active", linkHash === `#${sectionId}`);
       });
 
       if (navDropdownToggle) {
@@ -431,7 +438,14 @@
 
     function closeMobileMenu() {
       if (navMenu) navMenu.classList.remove("active");
-      if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+
+      if (menuBtn) {
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Öppna meny");
+      }
+
+      document.body.classList.remove("mobile-menu-open");
+
       if (navDropdown) navDropdown.classList.remove("open");
       if (navDropdownToggle) navDropdownToggle.setAttribute("aria-expanded", "false");
     }
@@ -442,7 +456,10 @@
         event.stopPropagation();
 
         const isOpen = navMenu.classList.toggle("active");
+
         menuBtn.setAttribute("aria-expanded", String(isOpen));
+        menuBtn.setAttribute("aria-label", isOpen ? "Stäng meny" : "Öppna meny");
+        document.body.classList.toggle("mobile-menu-open", isOpen);
 
         if (!isOpen && navDropdown && navDropdownToggle) {
           navDropdown.classList.remove("open");
@@ -467,9 +484,13 @@
               navDropdownToggle.setAttribute("aria-expanded", "true");
               return;
             }
+
+            // Andra trycket på Tjänster går till tjänstesektionen och stänger menyn.
+            closeMobileMenu();
+            return;
           }
 
-          if (!isDropdownToggle || isDropdownItem || link.getAttribute("href")?.startsWith("#")) {
+          if (!isDropdownToggle || isDropdownItem) {
             closeMobileMenu();
           }
         });
@@ -479,6 +500,58 @@
         if (!event.target.closest("header")) closeMobileMenu();
       });
     }
+
+
+
+    /* =========================================
+       Navigering mellan undersidor och startsidans sektioner
+       ========================================= */
+    const homeSectionIds = new Set([
+      "hem",
+      "tjanster",
+      "historia",
+      "kvalitet",
+      "sociala-medier",
+      "kontakt"
+    ]);
+
+    document.addEventListener("click", event => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const rawHref = link.getAttribute("href");
+      if (!rawHref || rawHref === "#") return;
+
+      const targetId = decodeURIComponent(rawHref.slice(1));
+      if (!homeSectionIds.has(targetId)) return;
+
+      // Om sektionen inte finns på aktuell sida ligger den på index.html.
+      if (!document.getElementById(targetId)) {
+        event.preventDefault();
+        closeMobileMenu();
+        window.location.href = `index.html#${encodeURIComponent(targetId)}`;
+      }
+    });
+
+    function alignCurrentHashTarget() {
+      if (!window.location.hash) return;
+
+      const targetId = decodeURIComponent(window.location.hash.slice(1));
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      // scroll-padding-top i CSS tar hänsyn till den fasta headern.
+      target.scrollIntoView({
+        behavior: "auto",
+        block: "start"
+      });
+    }
+
+    window.addEventListener("load", () => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(alignCurrentHashTarget);
+      });
+    }, { once: true });
 
     $$(".before-after-slider").forEach(slider => {
       const input = $(".slider-input", slider);
@@ -618,4 +691,76 @@ serviceCards.forEach(card => {
   } else {
     initSliders();
   }
+})();
+
+/* Historia – markera passerade steg när loket faktiskt passerar dem */
+(() => {
+  const history = document.querySelector("#historia .cp-history__inner");
+  if (!history) return;
+
+  const steps = [...history.querySelectorAll(".cp-history__step")];
+  const radios = [...history.querySelectorAll('input[type="radio"]')];
+
+  const train = [...history.children].find(
+    el => el.classList.contains("cp-history__status")
+  );
+
+  if (!train || !steps.length) return;
+
+  let frame = null;
+  let syncing = false;
+
+  function syncPassedSteps() {
+    const trainRect = train.getBoundingClientRect();
+    const trainX = trainRect.left + trainRect.width / 2;
+
+    const activeIndex = radios.findIndex(radio => radio.checked);
+
+    steps.forEach((step, index) => {
+      const rect = step.getBoundingClientRect();
+      const stepX = rect.left + rect.width / 2;
+
+      /* Passerad först när lokets mitt faktiskt gått förbi cirkeln */
+      const passed = trainX > stepX + 2 && index !== activeIndex;
+
+      step.classList.toggle("is-passed", passed);
+    });
+  }
+
+  function tick() {
+    syncPassedSteps();
+
+    if (syncing) {
+      frame = requestAnimationFrame(tick);
+    }
+  }
+
+  function startSync() {
+    syncing = true;
+
+    if (frame) cancelAnimationFrame(frame);
+    tick();
+
+    /* Bara säkerhetsstopp – påverkar inte när cirklarna markeras */
+    setTimeout(() => {
+      syncing = false;
+      syncPassedSteps();
+    }, 1200);
+  }
+
+  radios.forEach(radio => {
+    radio.addEventListener("change", startSync);
+  });
+
+  train.addEventListener("transitionend", event => {
+    if (event.propertyName !== "left") return;
+
+    syncing = false;
+
+    if (frame) cancelAnimationFrame(frame);
+
+    syncPassedSteps();
+  });
+
+  syncPassedSteps();
 })();

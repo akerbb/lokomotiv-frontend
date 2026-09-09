@@ -7,11 +7,12 @@
   <meta name="description" content="Städfirma i Värmland. Vi erbjuder fönsterputs, städning och golvvård i Hagfors med omnejd.">
   <meta name="keywords" content="städning Hagfors, fönsterputs Värmland, städfirma">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://lokomotiv-backend.onrender.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com https://*.fbcdn.net https://*.googleusercontent.com; frame-src https://www.facebook.com https://www.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://lokomotiv-backend.onrender.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com https://*.fbcdn.net https://*.googleusercontent.com; frame-src https://www.facebook.com https://www.google.com https://codepen.io https://cdpn.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
 <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&family=Fira+Sans:wght@400;500;600;700;800&family=Inter:wght@400;600;800&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="bilder/favicon.ico">
   <script defer data-domain="lokomotivstad.se" src="https://plausible.io/js/script.js"></script>
   <meta property="og:title" content="Städfirma i Hagfors | Lokomotiv Städ">
@@ -40,7 +41,7 @@
 <body>
   <div class="mouse-glow"></div>
 <header>
-    <a href="#hem" class="logo">
+    <a href="index.html#hem" class="logo">
   <img src="bilder/logo.png" alt="Lokomotiv Städ & Fönsterputs AB">
 </a>
 
@@ -51,9 +52,9 @@
 </button>
 
     <nav id="navMenu">
-      <a href="#hem">Start</a>
+      <a href="index.html#hem">Start</a>
       <div class="nav-dropdown">
-  <a href="#tjanster" class="nav-dropdown-toggle">
+  <a href="index.html#tjanster" class="nav-dropdown-toggle">
   Tjänster
 </a>
 
@@ -66,21 +67,30 @@
     <a href="hoghojdsdammsugning.html">Höghöjdsdammsugning</a>
   </div>
 </div>
-      <a href="#historia">Historia</a>
-      <a href="#kvalitet">Kvalitet & Miljö</a>
-      <a href="#sociala-medier">Sociala medier</a>
-      <a href="#kontakt">Kontakta oss</a>
+      <a href="index.html#historia">Historia</a>
+      <a href="index.html#kvalitet">Kvalitet & Miljö</a>
+      <a href="index.html#sociala-medier">Sociala medier</a>
+      <a href="index.html#kontakt">Kontakta oss</a>
+      <a href="integritet.html" class="mobile-nav-only">Integritetspolicy</a>
     </nav>
      <div class="header-actions">
 
   <div class="social-icons">
-  <a href="https://www.instagram.com/lokomotivstad" class="social-button social-button--instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+  <a href="https://www.instagram.com/lokomotivstad"
+   class="btn btn-secondary social-button social-button--instagram"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Instagram">
     <svg viewBox="0 0 24 24" class="icon">
       <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 2A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5zm4.8-3.3a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1z"/>
     </svg>
   </a>
 
-  <a href="https://www.facebook.com/lokomotivstad" class="social-button social-button--facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+  <a href="https://www.facebook.com/lokomotivstad"
+   class="btn btn-secondary social-button social-button--facebook"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Facebook">
   <svg viewBox="0 0 24 24" class="icon">
     <path d="M22 12.06C22 6.48 17.52 2 11.94 2S2 6.48 2 12.06c0 5.03 3.68 9.2 8.49 9.94v-7.03H7.96v-2.91h2.53V9.84c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.89h2.77l-.44 2.91H13.6V22c4.81-.74 8.4-4.91 8.4-9.94z"/>
   </svg>
@@ -101,20 +111,9 @@
         </p>
 
         <div class="hero-buttons">
-          <a href="#kontakt" class="btn btn-primary">Kontakta oss för offert</a>
-          <a href="#tjanster" class="btn btn-secondary">Se våra tjänster</a>
+          <a href="index.html#kontakt" class="btn btn-primary">Kontakta oss för offert</a>
+          <a href="index.html#tjanster" class="btn btn-secondary">Se våra tjänster</a>
         </div>
-      </div>
-
-      <div class="hero-card">
-        <h2>Varför välja Lokomotiv?</h2>
-
-        <ul class="check-list">
-          <li>Mer än 25 års branschvana</li>
-          <li>Personligt företag med stort kunnande</li>
-          <li>För både företag och privatpersoner</li>
-          <li>Utgår från Hagfors och arbetar i hela Värmland</li>
-        </ul>
       </div>
     </section>
 
@@ -157,8 +156,8 @@
           <div class="service-text service-card-content">
             <h3>Ultrarent vatten</h3>
             <p>
-              Utvändig tvätt av fönster, karmar, fasader, plåt, glas, plast,
-              skyltar, stuprännor och solpaneler upp till cirka 8 meter.
+              Utvändig tvätt av fönster och fönsterkarmar, släta ytor på fasader som målat trä, plåt eller glas, plast, skyltar, stuprännor, solpaneler mm (upp till ca 8 m med teleskopskaft) med vårt Ultrarent vattensystem.
+              Inget kem behövs utan bara rent vatten vilket innebär minimal miljöpåverkan.
             </p>
           <span class="service-link-text service-card-button">Läs mer</span>
           </div>
@@ -168,7 +167,7 @@
           <img src="bilder/golvvard.avif" alt="Maskinell golvvård på plast- och linoleumgolv" loading="lazy" />
           <div class="service-text service-card-content">
             <h3>Golvvård</h3>
-            <p>Maskinell golvvård på plast- och linoleumgolv.</p>
+            <p>Maskinell golvvård på plast och linoleumgolv. Vi kan även rengöra trätrall och klinkersgolv i tex duschar.</p>
           <span class="service-link-text service-card-button">Läs mer</span>
           </div>
         </a>
@@ -193,141 +192,120 @@
       </div>
     </section>
 
- <section id="historia" class="content-section">
-      <div class="section-title">
-        <span>Om företaget</span>
-        <h2>Lite historia</h2>
-        <p>
-          Lokomotiv Städ & Fönsterputs AB startades i november 2021 och drivs
-          med lång erfarenhet, noggrannhet och personlig service.
-        </p>
+ 
+<section id="historia" class="content-section codepen-history-section" aria-label="Historia">
+  <div class="section-title">
+        <span>Tidslinje</span>
+        <h2>Historia</h2>
+        <p>Tidslinje kring Lokomotivs historia, från grundandet till nu</p>
       </div>
+  <div class="cp-history">
+    <div class="cp-history__inner">
+      <div class="cp-history__step"><label for="cp-step-1">Start</label></div>
+      <div class="cp-history__step"><label for="cp-step-2">Erfarenhet</label></div>
+      <div class="cp-history__step"><label for="cp-step-3">Göteborg</label></div>
+      <div class="cp-history__step"><label for="cp-step-4">Värmland</label></div>
+      <div class="cp-history__step"><label for="cp-step-5">Idag</label></div>
 
-      <div class="blog-slider" role="region" aria-roledescription="bildspel" aria-label="Lokomotivs historia" tabindex="0">
-        <div class="blog-slider__wrp" aria-live="polite">
-          <article class="blog-slider__item is-active" aria-hidden="false">
-            <div class="blog-slider__img">
-              <img src="bilder/eric.png" alt="Eric Rauti, grundare av Lokomotiv Städ &amp; Fönsterputs AB" loading="lazy">
-            </div>
-            <div class="blog-slider__content">
-              <span class="blog-slider__code">November 2021</span>
-              <h3 class="blog-slider__title">Starten på Lokomotiv</h3>
-              <p class="blog-slider__text">
-                Företaget startades av Eric Rauti som, med mer än 25 års
-                branschvana, kände att det var dags att starta något eget.
-              </p>
-              <a href="#kontakt" class="blog-slider__button">Kontakta oss</a>
-            </div>
-          </article>
+      <input type="radio" name="cp-history-step" id="cp-step-1" checked>
+      <input type="radio" name="cp-history-step" id="cp-step-2">
+      <input type="radio" name="cp-history-step" id="cp-step-3">
+      <input type="radio" name="cp-history-step" id="cp-step-4">
+      <input type="radio" name="cp-history-step" id="cp-step-5">
 
-          <article class="blog-slider__item" aria-hidden="true">
-            <div class="blog-slider__img">
-              <img src="bilder/fonsterputs.avif" alt="Professionell fönsterputsning utförd av Lokomotiv" loading="lazy">
-            </div>
-            <div class="blog-slider__content">
-              <span class="blog-slider__code">Mer än 25 år</span>
-              <h3 class="blog-slider__title">Erfarenhet från branschen</h3>
-              <p class="blog-slider__text">
-                Eric har genom åren arbetat för flera av branschens ledande
-                aktörer i Göteborg och senare i Värmland.
-              </p>
-              <a href="#tjanster" class="blog-slider__button">Se våra tjänster</a>
-            </div>
-          </article>
+      <div class="cp-history__bar"></div>
+      <div class="cp-history__bar-set"></div>
 
-          <article class="blog-slider__item" aria-hidden="true">
-            <div class="blog-slider__img">
-              <img src="bilder/stadning.avif" alt="Lokomotiv erbjuder professionella städtjänster i Värmland" loading="lazy">
-            </div>
-            <div class="blog-slider__content">
-              <span class="blog-slider__code">Idag</span>
-              <h3 class="blog-slider__title">Hela Värmland som arbetsområde</h3>
-              <p class="blog-slider__text">
-                Lokomotiv utgår från Hagfors och hjälper både företag och
-                privatpersoner i hela Värmland.
-              </p>
-              <a href="#kontakt" class="blog-slider__button">Be om offert</a>
-            </div>
-          </article>
+      <div class="cp-history__tabs">
+        <div class="cp-history__tab cp-history__tab--1">
+          <h3>Start</h3>
+          <p>Lokomotiv Städ & Fönsterputs AB startades i november 2021 av Eric Rauti, efter många år i städ- och fönsterputsbranschen.</p>
         </div>
-
-        <div class="blog-slider__pagination" role="group" aria-label="Välj historiesida"></div>
-      </div>
-    </section>
-
-    <section id="kvalitet" class="content-section quality-slider-section">
-      <div class="section-title">
-        <span>Tryggt utfört arbete</span>
-        <h2>Kvalitet &amp; Miljö</h2>
-        <p>Professionellt arbete, säkra metoder och omtanke om miljön.</p>
-      </div>
-
-      <div class="blog-slider blog-slider--reverse" role="region" aria-roledescription="bildspel" aria-label="Kvalitet och miljö" tabindex="0">
-        <div class="blog-slider__wrp" aria-live="polite">
-          <article class="blog-slider__item is-active" aria-hidden="false">
-            <div class="blog-slider__img">
-              <img src="bilder/stadning.avif" alt="Professionell städning med fokus på kvalitet" loading="lazy">
-            </div>
-            <div class="blog-slider__content">
-              <span class="blog-slider__code">Kvalitet</span>
-              <h3 class="blog-slider__title">Stort kunnande</h3>
-              <p class="blog-slider__text">
-                Vi arbetar professionellt och använder vår långa erfarenhet inom
-                städning och fönsterputsning i varje uppdrag.
-              </p>
-              <a href="#kontakt" class="blog-slider__button">Be om offert</a>
-            </div>
-          </article>
-
-          <article class="blog-slider__item" aria-hidden="true">
-            <div class="blog-slider__img">
-              <img src="bilder/fonsterputs.avif" alt="Säkert utförd professionell fönsterputsning" loading="lazy">
-            </div>
-            <div class="blog-slider__content">
-              <span class="blog-slider__code">Säkert</span>
-              <h3 class="blog-slider__title">Trygga arbetsmetoder</h3>
-              <p class="blog-slider__text">
-                Vi följer gällande lagar och regler och väljer säkra metoder när
-                vi utför våra tjänster.
-              </p>
-              <a href="#tjanster" class="blog-slider__button">Se våra tjänster</a>
-            </div>
-          </article>
-
-          <article class="blog-slider__item" aria-hidden="true">
-            <div class="blog-slider__img">
-              <img src="bilder/ultrarent.avif" alt="Miljövänlig rengöring med ultrarent vatten" loading="lazy">
-            </div>
-            <div class="blog-slider__content">
-              <span class="blog-slider__code">Miljö</span>
-              <h3 class="blog-slider__title">Miljövänliga val</h3>
-              <p class="blog-slider__text">
-                Vi väljer metoder med så liten miljöpåverkan som möjligt och
-                använder i första hand miljövänliga kemikalier.
-              </p>
-              <a href="ultrarent-vatten.html" class="blog-slider__button">Läs om ultrarent vatten</a>
-            </div>
-          </article>
-
-          <article class="blog-slider__item" aria-hidden="true">
-            <div class="blog-slider__img">
-              <img src="bilder/golvvard.avif" alt="Noggrant utförd golvvård för nöjda kunder" loading="lazy">
-            </div>
-            <div class="blog-slider__content">
-              <span class="blog-slider__code">100 %</span>
-              <h3 class="blog-slider__title">Målet är nöjda kunder</h3>
-              <p class="blog-slider__text">
-                Vi ska vara tillgängliga, hålla det vi lovar och strävar alltid
-                efter att våra kunder ska vara helt nöjda.
-              </p>
-              <a href="#kontakt" class="blog-slider__button">Kontakta oss</a>
-            </div>
-          </article>
+        <div class="cp-history__tab cp-history__tab--2">
+          <h3>Erfarenhet</h3>
+          <p>Med mer än 25 års erfarenhet hade Eric hunnit bygga upp ett stort kunnande inom både praktiskt arbete och arbetsledning.</p>
         </div>
-
-        <div class="blog-slider__pagination" role="group" aria-label="Välj sida om kvalitet och miljö"></div>
+        <div class="cp-history__tab cp-history__tab--3">
+          <h3>Göteborg</h3>
+          <p>Under åren har Eric arbetat för flera av branschens ledande aktörer i Göteborg och fått erfarenhet från många olika typer av uppdrag.</p>
+        </div>
+        <div class="cp-history__tab cp-history__tab--4">
+          <h3>Värmland</h3>
+          <p>Efter senare års arbete i Värmland kändes steget naturligt att starta ett eget, personligt företag med stort kunnande och bred erfarenhet.</p>
+        </div>
+        <div class="cp-history__tab cp-history__tab--5">
+          <h3>Idag</h3>
+          <p>Vi utgår från Hagfors och arbetar i hela Värmland. Våra tjänster riktar sig till både företag och privatpersoner.</p>
+        </div>
       </div>
-    </section>
+
+      <div class="cp-history__status" aria-hidden="true">
+        <img
+          src="bilder/lok.png"
+          alt=""
+          class="cp-train-image"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <section id="kvalitet" class="content-section quality-section">
+
+  <div class="section-title">
+    <span>Kvalitet & miljö</span>
+    <h2>Tryggt utfört arbete</h2>
+    <p>
+      Vi arbetar med fokus på kvalitet, säkerhet och miljö i varje uppdrag.
+    </p>
+  </div>
+
+  <div class="quality-grid">
+
+    <article class="quality-card">
+      <span class="quality-card__number">01</span>
+      <h3>Stort kunnande</h3>
+      <p>
+        Med lång erfarenhet inom städning och fönsterputs arbetar vi noggrant,
+        effektivt och professionellt i varje uppdrag.
+      </p>
+    </article>
+
+    <article class="quality-card">
+      <span class="quality-card__number">02</span>
+      <h3>Trygga arbetsmetoder</h3>
+      <p>
+        Vi följer gällande lagar och regler och väljer säkra arbetsmetoder
+        anpassade efter varje miljö och uppdrag.
+      </p>
+    </article>
+
+    <article class="quality-card">
+      <span class="quality-card__number">03</span>
+      <h3>Miljövänliga val</h3>
+      <p>
+        Vi strävar efter så liten miljöpåverkan som möjligt och använder i
+        första hand miljövänliga produkter och metoder.
+      </p>
+    </article>
+
+    <article class="quality-card">
+      <span class="quality-card__number">04</span>
+      <h3>Målet är nöjda kunder</h3>
+      <p>
+        Vi ska vara tillgängliga, hålla det vi lovar och leverera ett resultat
+        som våra kunder kan känna sig trygga med.
+      </p>
+
+      <a href="index.html#kontakt" class="quality-card__link">
+        Kontakta oss →
+      </a>
+    </article>
+
+  </div>
+
+</section>
 
 <section id="sociala-medier" class="content-section">
   <div class="section-title">
@@ -340,7 +318,7 @@
   </div>
 
   <div class="social-grid">
-    <div class="social-box">
+    <div class="social-box social-box--instagram">
       <div class="social-header">
         <h3>Instagram</h3>
         <a href="https://www.instagram.com/lokomotivstad" target="_blank" rel="noopener noreferrer">Öppna Instagram</a>
@@ -348,7 +326,7 @@
 
     </div>
 
-    <div class="social-box">
+    <div class="social-box social-box--facebook">
       <div class="social-header">
         <h3>Facebook</h3>
         <a href="https://www.facebook.com/lokomotivstad" target="_blank" rel="noopener noreferrer">Öppna Facebook</a>
@@ -358,6 +336,8 @@
         title="Lokomotiv Städ & Fönsterputs AB på Facebook"
         src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/lokomotivstad&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
         class="social-frame"
+        width="500"
+        height="600"
         style="border:none;overflow:hidden"
         scrolling="no"
         frameborder="0"
@@ -388,7 +368,14 @@
 
 	  <p>
 	    <strong>Plats:</strong><br />
-	    Björnängsvägen 16, Hagfors, 68333
+	    <a
+          href="https://www.google.com/maps/search/?api=1&query=Bj%C3%B6rn%C3%A4ngsv%C3%A4gen+16%2C+683+33+Hagfors"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-address"
+        >
+          Björnängsvägen 16, Hagfors, 68333
+        </a>
 </p>
 
           <p>
@@ -574,32 +561,65 @@
 
   </main>
 
-  <footer>
-  <p>
-    © 2026 Lokomotiv Städ & Fönsterputs AB
-  </p>
+<footer class="site-footer">
 
-  <div class="footer-links">
-    <a href="mailto:eric@lokomotivstad.se">
-      eric@lokomotivstad.se
-    </a>
+  <div class="footer-inner">
 
-    <span class="footer-divider"></span>
+    <div class="footer-column footer-brand">
+      <strong>Lokomotiv Städ & Fönsterputs AB</strong>
+      <p>
+        Professionell städning, fönsterputsning och golvvård
+        för företag och privatpersoner i Värmland.
+      </p>
+    </div>
 
-    <a href="integritet.html">
-      Integritetspolicy
-    </a>
 
-    <span class="footer-divider"></span>
+    <div class="footer-column">
+      <h3>Snabblänkar</h3>
 
-    <a href="tel:+4656330990">
-      0563-309 90
-    </a>
+      <div class="footer-nav">
+        <a href="index.html#hem">Start</a>
+        <a href="index.html#tjanster">Tjänster</a>
+        <a href="index.html#historia">Historia</a>
+        <a href="index.html#kvalitet">Kvalitet & Miljö</a>
+        <a href="index.html#sociala-medier">Sociala medier</a>
+        <a href="integritet.html">Integritetspolicy</a>
+      </div>
+    </div>
+
+
+    <div class="footer-column">
+      <h3>Kontakt</h3>
+
+      <div class="footer-contact">
+        <a href="tel:+4656330990">0563-309 90</a>
+        <a href="mailto:eric@lokomotivstad.se">eric@lokomotivstad.se</a>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Bj%C3%B6rn%C3%A4ngsv%C3%A4gen+16%2C+683+33+Hagfors"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-address"
+        >
+          Björnängsvägen 16, Hagfors, 68333
+        </a>
+
+        <a href="index.html#kontakt" class="footer-policy">
+          Kontakta oss
+        </a>
+      </div>
+    </div>
+
   </div>
+
+
+  <div class="footer-bottom">
+    <p>© 2026 Lokomotiv Städ & Fönsterputs AB</p>
+  </div>
+
 </footer>
 
       <div class="floating-buttons">
-  <a href="#hem" class="scroll-top-btn" id="scrollTopBtn" aria-label="Till toppen">↑</a>
+  <a href="index.html#hem" class="scroll-top-btn" id="scrollTopBtn" aria-label="Till toppen">↑</a>
 </div>
   <script src="script.js"></script>
 
