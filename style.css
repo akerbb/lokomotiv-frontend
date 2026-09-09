@@ -795,7 +795,9 @@ main section[id], section{ scroll-margin-top: 120px; scroll-snap-margin-top: 120
 
   nav a{ display: block; padding: 10px 0; color: var(--text-dark); }
 
-  nav a.active::after{ display: none; }
+  nav > a.active::after {
+  display: none;
+}
 
   .nav-dropdown{ width: 100%; padding: 0; }
 
@@ -2178,28 +2180,8 @@ html, body{ width: 100%; max-width: 100%; overflow-x: hidden; }
 
 .icon{ width: 20px; height: 20px; fill: currentColor; color: currentColor; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @supports not (zoom: 1) {
   body{ transform: scale(0.88); transform-origin: top center; width: 113.64%; }
-}
-
-@media (max-width: 700px) {
-  main, footer{ zoom: .9; }
 }
 
 @media (min-width: 951px) {
@@ -2209,15 +2191,6 @@ html, body{ width: 100%; max-width: 100%; overflow-x: hidden; }
 
   .hero-card{ justify-self: end !important; margin-left: auto !important; }
 }
-
-
-
-
-
-
-
-
-
 .menu-btn{
   display: none; background: transparent; border: none; padding: 10px; cursor: pointer; z-index: 1001;
   transition: transform .2s ease;
@@ -2237,24 +2210,6 @@ html, body{ width: 100%; max-width: 100%; overflow-x: hidden; }
 .menu-btn[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
 
 .menu-btn[aria-expanded="true"] span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width: 700px) {
   nav{
@@ -3229,6 +3184,17 @@ body::before, body::after, .mouse-glow{ display: none !important; }
   }
 }
 
+/* Center the full service-card content on layouts where hover expansion is not used. */
+@media (max-width: 700px), (hover: none), (pointer: coarse) {
+  #tjanster .service-card{
+    align-items: center;
+  }
+
+  #tjanster .service-card-content{
+    transform: none;
+  }
+}
+
 @media (max-width: 1050px) {
   #tjanster .services-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -3579,16 +3545,3987 @@ body::before, body::after, .mouse-glow{ display: none !important; }
   -webkit-backdrop-filter: none !important;
 }
 
+/* =========================================
+   FULL-WIDTH HUVUDSEKTIONER
+   Tar bort stora yttre "kort" och låter varje
+   huvuddel löpa kant-till-kant över sidan.
+   ========================================= */
+main > .content-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-top: clamp(76px, 7vw, 112px) !important;
+  padding-bottom: clamp(76px, 7vw, 112px) !important;
+  padding-left: max(24px, calc((100% - 1240px) / 2)) !important;
+  padding-right: max(24px, calc((100% - 1240px) / 2)) !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Tydliga, lugna band mellan delarna */
+main > #tjanster,
+main > #kvalitet,
+main > #kontakt {
+  background: #ffffff !important;
+}
+
+main > #historia,
+main > #sociala-medier {
+  background: #f5f5f6 !important;
+}
+
+main > #historia,
+main > #kvalitet,
+main > #sociala-medier,
+main > #kontakt {
+  border-top: 1px solid rgba(15, 23, 42, .06) !important;
+}
+
+/* Innehållet hålls professionellt centrerat */
+main > .content-section > .section-title {
+  width: min(100%, 780px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+main > .content-section > .services-grid,
+main > .content-section > .social-grid,
+main > .content-section > .contact-layout {
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Läs mer: bara vit text, ingen knappbakgrund */
 #tjanster .service-card-button,
 #tjanster .service-link-text {
   background: transparent !important;
-  color: #fff !important;
+  background-color: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+  color: #fff !important;
   padding: 0 !important;
 }
 
-#tjanster .service-card-button:hover,
-#tjanster .service-link-text:hover {
-  text-decoration: underline;
+@media (max-width: 700px) {
+  main > .content-section {
+    padding-top: 58px !important;
+    padding-bottom: 58px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
 }
+
+/* =========================================
+   TRUE FULL-BLEED HOME SECTIONS
+   Gör själva <main> fullbredd på startsidan så
+   huvudsektionernas bakgrunder når viewportens kanter.
+   ========================================= */
+body:not(.service-body):not(.privacy-body) > main {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > .content-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+  padding-left: max(24px, calc((100vw - 1240px) / 2)) !important;
+  padding-right: max(24px, calc((100vw - 1240px) / 2)) !important;
+}
+
+@media (max-width: 700px) {
+  body:not(.service-body):not(.privacy-body) > main > .content-section {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+}
+
+/* =========================================
+   HOME: HERO FYLLER FÖRSTA SKÄRMEN
+   Våra tjänster börjar först under viewporten.
+   ========================================= */
+body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+  min-height: calc(100svh - var(--header-height)) !important;
+  box-sizing: border-box !important;
+}
+
+/* Fallback för webbläsare utan svh-stöd */
+@supports not (height: 100svh) {
+  body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+    min-height: calc(100vh - var(--header-height)) !important;
+  }
+}
+
+
+/* ========================================
+   EXACT CODEPEN HISTORY EMBED
+   Original pen: jcoulterdesign / zdwajv
+   Kept intentionally unchanged inside iframe.
+   ======================================== */
+#historia.codepen-history-section{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+#historia .codepen-history-frame{
+  display: block;
+  width: 100%;
+  height: 620px;
+  min-height: 620px;
+  border: 0;
+  background: #a6cde2;
+}
+
+@media (max-width: 800px){
+  #historia .codepen-history-frame{
+    height: 620px;
+    min-height: 620px;
+  }
+}
+
+
+/* ========================================
+   CODEPEN HISTORY — LOCAL STATUS REPLACEMENT
+   Keeps the original five-step visual language.
+   Only the gift/package status artwork is replaced.
+   ======================================== */
+
+#historia.codepen-history-section{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+#historia .cp-history{
+  min-height: 620px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #a6cde2;
+  color: #2e6c8e;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+}
+
+#historia .cp-history,
+#historia .cp-history *{
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+#historia .cp-history__inner{
+  position: relative;
+  width: 700px;
+  max-width: calc(100vw - 48px);
+  height: 200px;
+}
+
+#historia .cp-history__step{
+  position: relative;
+  z-index: 4;
+  float: left;
+  width: 20%;
+  padding: 0 10px;
+  color: #000000;
+  font-size: 14px;
+  text-align: center;
+  transition: color .4s ease;
+}
+
+#historia .cp-history__step::before{
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  border: 3px solid #a6cde2;
+  border-radius: 50%;
+  background: #fff;
+  color: #70afd0;
+  line-height: 24px;
+  font-size: 12px;
+  transition: color .4s ease, background .4s ease;
+  pointer-events: none;
+}
+
+#historia .cp-history__step:nth-of-type(1)::before{ content: "1"; }
+#historia .cp-history__step:nth-of-type(2)::before{ content: "2"; }
+#historia .cp-history__step:nth-of-type(3)::before{ content: "3"; }
+#historia .cp-history__step:nth-of-type(4)::before{ content: "4"; }
+#historia .cp-history__step:nth-of-type(5)::before{ content: "5"; }
+
+#historia .cp-history__step label{
+  position: relative;
+  top: -20px;
+  display: block;
+  padding-top: 50px;
+  cursor: pointer;
+}
+
+#historia .cp-history__step:hover{
+  color: #000000;
+}
+
+#historia .cp-history__step:hover::before{
+  color: #fff;
+  background: #9c2324;
+}
+
+#historia .cp-history__inner > input[type="radio"]{
+  display: none;
+}
+
+#historia .cp-history__bar,
+#historia .cp-history__bar-set{
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 10%;
+  height: 6px;
+  border-radius: 6px;
+}
+
+#historia .cp-history__bar{
+  z-index: 2;
+  width: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    #9c2324,
+    #9c2324 4px,
+    #7f1c1d 4px,
+    #7f1c1d 10px
+  );
+  transition: width 800ms cubic-bezier(.915,.015,.3,1.005);
+}
+
+#historia .cp-history__bar-set{
+  width: 80%;
+  background: #7f1c1ead;
+}
+
+#historia .cp-history__tabs{
+  position: absolute;
+  z-index: 3;
+  top: 80px;
+  left: 0;
+  width: 100%;
+}
+
+#historia .cp-history__tab{
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 1px #80b7d5;
+  opacity: 0;
+  text-align: center;
+  transition: opacity .2s ease, top .2s ease;
+  pointer-events: none;
+}
+
+#historia .cp-history__tab h3{
+  margin: 0;
+  color: #000000;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+#historia .cp-history__tab p{
+  margin: 12px 0 0;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+  opacity: .8;
+}
+
+#historia .cp-history__status{
+  position: absolute;
+  z-index: 6;
+  top: -84px;
+  left: 10%;
+  width: 72px;
+  height: 54px;
+  transform: translateX(-50%);
+  transition: left 800ms cubic-bezier(.915,.015,.3,1.005);
+  pointer-events: none;
+}
+
+/* Same five-step mechanics as the CodePen */
+#historia #cp-step-1:checked ~ .cp-history__bar{ width: 0; }
+#historia #cp-step-2:checked ~ .cp-history__bar{ width: 20%; }
+#historia #cp-step-3:checked ~ .cp-history__bar{ width: 40%; }
+#historia #cp-step-4:checked ~ .cp-history__bar{ width: 60%; }
+#historia #cp-step-5:checked ~ .cp-history__bar{ width: 80%; }
+
+#historia #cp-step-1:checked ~ .cp-history__status{ left: 10%; }
+#historia #cp-step-2:checked ~ .cp-history__status{ left: 30%; }
+#historia #cp-step-3:checked ~ .cp-history__status{ left: 50%; }
+#historia #cp-step-4:checked ~ .cp-history__status{ left: 70%; }
+#historia #cp-step-5:checked ~ .cp-history__status{ left: 90%; }
+
+#historia #cp-step-1:checked ~ .cp-history__tabs .cp-history__tab--1,
+#historia #cp-step-2:checked ~ .cp-history__tabs .cp-history__tab--2,
+#historia #cp-step-3:checked ~ .cp-history__tabs .cp-history__tab--3,
+#historia #cp-step-4:checked ~ .cp-history__tabs .cp-history__tab--4,
+#historia #cp-step-5:checked ~ .cp-history__tabs .cp-history__tab--5{
+  top: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep CodePen's fixed desktop composition; scale it instead of redesigning it. */
+@media (max-width: 760px){
+  #historia .cp-history{
+    min-height: 560px;
+  }
+
+  #historia .cp-history__inner{
+    width: 700px;
+    max-width: none;
+    transform: scale(.78);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 560px){
+  #historia .cp-history__inner{
+    transform: scale(.58);
+  }
+}
+
+#historia .cp-history__status {
+  top: -25px !important;
+}
+
+#historia .cp-train-image {
+  width: 110px;
+  height: auto;
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(calc(-50% + 30px));
+}
+
+/* ========================================
+   CODEPEN HISTORY TIMELINE - RESPONSIVE FIX
+   ======================================== */
+
+/* Tablet / smaller laptops */
+@media (max-width: 900px) {
+  #historia .cp-history {
+    min-height: 540px !important;
+    padding: 72px 24px 56px !important;
+  }
+
+  #historia .cp-history__inner {
+    width: min(100%, 700px) !important;
+    max-width: 100% !important;
+    height: 240px !important;
+    transform: none !important;
+    transform-origin: center !important;
+  }
+
+  #historia .cp-history__step {
+    padding-inline: 6px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+
+  #historia .cp-history__tab {
+    padding: 26px 24px !important;
+  }
+
+  #historia .cp-train-image {
+    width: 96px !important;
+    transform: translateX(calc(-50% + 25px)) !important;
+  }
+}
+
+/* Phones */
+@media (max-width: 700px) {
+  #historia .cp-history {
+    min-height: 500px !important;
+    padding: 64px 14px 48px !important;
+    overflow: hidden !important;
+  }
+
+  #historia .cp-history__inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 270px !important;
+    transform: none !important;
+  }
+
+  #historia .cp-history__step {
+    width: 20% !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    line-height: 1.15 !important;
+  }
+
+  #historia .cp-history__step::before {
+    width: 28px !important;
+    height: 28px !important;
+    margin-left: -14px !important;
+    border-width: 3px !important;
+    line-height: 22px !important;
+    font-size: 11px !important;
+  }
+
+  #historia .cp-history__step label {
+    top: -14px !important;
+    padding-top: 46px !important;
+    min-height: 68px !important;
+    overflow-wrap: anywhere;
+  }
+
+  #historia .cp-history__bar,
+  #historia .cp-history__bar-set {
+    top: 11px !important;
+    height: 5px !important;
+  }
+
+  #historia .cp-history__tabs {
+    top: 86px !important;
+  }
+
+  #historia .cp-history__tab {
+    padding: 22px 18px !important;
+    border-radius: 12px !important;
+  }
+
+  #historia .cp-history__tab h3 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+  }
+
+  #historia .cp-history__tab p {
+    margin-top: 10px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  #historia .cp-history__status {
+    top: -18px !important;
+    width: 54px !important;
+    height: 42px !important;
+  }
+
+  #historia .cp-train-image {
+    width: 78px !important;
+    transform: translateX(calc(-50% + 19px)) !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 430px) {
+  #historia .cp-history {
+    min-height: 480px !important;
+    padding-inline: 10px !important;
+  }
+
+  #historia .cp-history__inner {
+    height: 280px !important;
+  }
+
+  #historia .cp-history__step {
+    font-size: 10px !important;
+    padding-inline: 1px !important;
+  }
+
+  #historia .cp-history__step::before {
+    width: 26px !important;
+    height: 26px !important;
+    margin-left: -13px !important;
+    line-height: 20px !important;
+    font-size: 10px !important;
+  }
+
+  #historia .cp-history__step label {
+    padding-top: 43px !important;
+  }
+
+  #historia .cp-history__tabs {
+    top: 82px !important;
+  }
+
+  #historia .cp-history__tab {
+    padding: 20px 15px !important;
+  }
+
+  #historia .cp-history__tab h3 {
+    font-size: 20px !important;
+  }
+
+  #historia .cp-history__tab p {
+    font-size: 13px !important;
+  }
+
+  #historia .cp-history__status {
+    top: -15px !important;
+  }
+
+  #historia .cp-train-image {
+    width: 70px !important;
+    transform: translateX(calc(-50% + 17px)) !important;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  #historia .cp-history__status,
+  #historia .cp-history__bar,
+  #historia .cp-history__tab {
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – samma layout som övriga sektioner
+   ========================================= */
+
+#historia.codepen-history-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+
+  padding-top: clamp(76px, 7vw, 112px) !important;
+  padding-bottom: clamp(76px, 7vw, 112px) !important;
+  padding-left: max(24px, calc((100% - 1240px) / 2)) !important;
+  padding-right: max(24px, calc((100% - 1240px) / 2)) !important;
+
+  background: #f5f5f6 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+
+/* Ingen blå bakgrund bakom tidslinjen */
+#historia .cp-history {
+  background: transparent !important;
+  color: var(--text-dark) !important;
+}
+
+
+/* Stegtexter */
+#historia .cp-history__step {
+  color: var(--text-muted) !important;
+}
+
+#historia .cp-history__step:hover {
+  color: var(--primary) !important;
+}
+
+
+/* Numrerade cirklar */
+#historia .cp-history__step::before {
+  background: #fff !important;
+  color: var(--primary) !important;
+  border-color: #f5f5f6 !important;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, .08);
+}
+
+#historia .cp-history__step:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+
+
+/* Rälsen */
+#historia .cp-history__bar-set {
+  background: #d9dde2 !important;
+}
+
+#historia .cp-history__bar {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--primary),
+    var(--primary) 4px,
+    var(--wine) 4px,
+    var(--wine) 10px
+  ) !important;
+}
+
+
+/* Informationskortet */
+#historia .cp-history__tab {
+  background: #fff !important;
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, .08),
+    0 1px 2px rgba(15, 23, 42, .05) !important;
+}
+
+#historia .cp-history__tab h3 {
+  color: var(--text-strong) !important;
+}
+
+#historia .cp-history__tab p {
+  color: var(--text-muted) !important;
+}
+
+
+/* Mobil – samma padding som övriga sektioner */
+@media (max-width: 700px) {
+  #historia.codepen-history-section {
+    padding-top: 58px !important;
+    padding-bottom: 58px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+}
+
+/* =========================================
+   SHARP SURFACES / 90-DEGREE CARD SYSTEM
+   Mer kontrast, tydligare kanter och raka kort.
+   Pills, knappar, sociala ikoner och tidslinjens
+   nummermarkörer behåller sina avsiktliga runda former.
+   ========================================= */
+
+:root{
+  --surface-page: #e3e5e7;
+  --surface-section: #f0f1f1;
+  --surface-section-alt: #e7e9eb;
+  --surface-card: #f8f8f6;
+  --surface-card-strong: #f2f3f2;
+  --edge: #aeb4ba;
+  --edge-strong: #7f878f;
+}
+
+/* Mindre kritvit startsida och tydligare sektionsband */
+body:not(.service-body):not(.privacy-body){
+  background: var(--surface-page) !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > #hem.hero{
+  background: #e9ebec !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > #tjanster,
+body:not(.service-body):not(.privacy-body) > main > #kvalitet,
+body:not(.service-body):not(.privacy-body) > main > #kontakt{
+  background: var(--surface-section) !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > #historia,
+body:not(.service-body):not(.privacy-body) > main > #sociala-medier{
+  background: var(--surface-section-alt) !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > .content-section{
+  border-top: 1px solid rgba(31,41,55,.20) !important;
+}
+
+/* Faktiska kort/surfaces får 90-graders hörn */
+.card,
+.hero-card,
+.service-card,
+.social-box,
+.contact-box,
+.contact-details,
+.privacy-card,
+.stat-box,
+.service-hero-detail,
+.service-detail-card,
+.service-info-section,
+.service-cta,
+.window-premium-section,
+.window-offer-list,
+.before-after-card,
+.premium-before-after,
+#historia .cp-history__tab,
+#kvalitet .blog-slider{
+  border-radius: 0 !important;
+  border: 1px solid var(--edge) !important;
+  box-shadow: 0 8px 20px rgba(15,23,42,.10) !important;
+}
+
+/* Ljusa kort får en svagt tonad yta så de inte smälter in i bakgrunden */
+.card,
+.hero-card,
+.social-box,
+.contact-box,
+.contact-details,
+.privacy-card,
+.stat-box,
+.service-hero-detail,
+.service-detail-card,
+.service-info-section,
+.service-cta,
+.window-premium-section,
+.window-offer-list,
+.before-after-card,
+.premium-before-after,
+#historia .cp-history__tab,
+#kvalitet .blog-slider{
+  background: var(--surface-card) !important;
+}
+
+/* En diskret brandkant på informationskort – inte på bildkorten */
+.hero-card,
+.social-box,
+.contact-box,
+.contact-details,
+#historia .cp-history__tab,
+#kvalitet .blog-slider{
+  border-top: 3px solid var(--primary) !important;
+}
+
+/* Bild/media följer kortens raka geometri */
+.service-card,
+.service-card img,
+.social-frame,
+.social-box > iframe,
+.social-box .instagram-media,
+#kvalitet .blog-slider__img,
+#kvalitet .blog-slider__img img,
+.contact-details iframe,
+.before-after-slider,
+.premium-slider,
+.service-hero-image img{
+  border-radius: 0 !important;
+}
+
+/* Historia: kort och räls blir skarpare, nummermarkörerna får vara cirklar */
+#historia .cp-history__tab{
+  background: var(--surface-card) !important;
+  border: 1px solid var(--edge-strong) !important;
+  border-top: 3px solid var(--primary) !important;
+}
+
+#historia .cp-history__bar,
+#historia .cp-history__bar-set{
+  border-radius: 0 !important;
+}
+
+#historia .cp-history__step::before{
+  border-color: var(--surface-section-alt) !important;
+}
+
+/* Formytor är också rektangulära, men vanliga CTA-knappar lämnas runda */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+.select-button,
+.select-options,
+.service-extra,
+.service-extra-toggle,
+.service-extra-content,
+.privacy-consent,
+.nav-dropdown-menu{
+  border-radius: 0 !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+.select-button{
+  border-color: var(--edge) !important;
+  background: #f9f9f7 !important;
+}
+
+input[type="checkbox"]{
+  border-radius: 0 !important;
+}
+
+/* Mobilmenyn är en panel/card och får därför också raka hörn */
+@media (max-width: 1200px), (hover: none), (pointer: coarse){
+  header > nav{
+    border-radius: 0 !important;
+    border-color: var(--edge) !important;
+  }
+
+  header > nav a,
+  header > nav .nav-dropdown-toggle{
+    border-radius: 0 !important;
+  }
+}
+
+/* Lite mörkare sekundärtext för bättre kontrast */
+.section-title p,
+.hero-text p,
+.contact-details p,
+#historia .cp-history__tab p{
+  color: #4b5563 !important;
+}
+
+/* Kortens hover bygger på kant/kontrast snarare än mjuka bubblor */
+@media (hover: hover) and (pointer: fine){
+  .card:hover,
+  .hero-card:hover,
+  .social-box:hover,
+  .contact-box:hover,
+  .contact-details:hover,
+  .privacy-card:hover,
+  .stat-box:hover{
+    transform: translateY(-3px) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 10px 24px rgba(15,23,42,.14) !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – kompaktare och mer sammanhållen
+   ========================================= */
+
+#historia .section-title {
+  margin-bottom: 28px !important;
+}
+
+/* Ta bort den enorma tomma ytan */
+#historia .cp-history {
+  min-height: 360px !important;
+  padding: 58px 0 30px !important;
+
+  display: grid !important;
+  place-items: start center !important;
+
+  background: transparent !important;
+}
+
+/* Håll själva tidslinjen samlad */
+#historia .cp-history__inner {
+  width: min(700px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+/* Gör informationskortet lite mer markerat */
+#historia .cp-history__tab {
+  border: 1px solid #9ca3af !important;
+  border-top: 3px solid var(--primary) !important;
+  border-radius: 0 !important;
+
+  box-shadow: 0 8px 18px rgba(15, 23, 42, .08) !important;
+}
+
+
+/* Mobil */
+@media (max-width: 700px) {
+  #historia .section-title {
+    margin-bottom: 20px !important;
+  }
+
+  #historia .cp-history {
+    min-height: 350px !important;
+    padding-top: 48px !important;
+    padding-bottom: 20px !important;
+  }
+}
+
+/* =========================================
+   HERO – centrerad, ren och utan stor ruta
+   ========================================= */
+
+body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+  width: 100% !important;
+  max-width: none !important;
+
+  grid-template-columns: 1fr !important;
+  justify-items: center !important;
+  align-items: center !important;
+
+  margin: 0 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  box-shadow: none !important;
+
+  text-align: center !important;
+}
+
+
+/* Centrera allt hero-innehåll */
+#hem .hero-text {
+  width: min(100%, 950px) !important;
+  max-width: 950px !important;
+
+  margin: 0 auto !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  text-align: center !important;
+}
+
+
+/* Större logga */
+#hem .hero-logo {
+  width: min(650px, 90vw) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+/* Rubrik */
+#hem .hero-text h1 {
+  text-align: center !important;
+}
+
+
+/* Text */
+#hem .hero-text p {
+  max-width: 760px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  text-align: center !important;
+}
+
+
+/* Centrera knappar */
+#hem .hero-buttons {
+  width: 100% !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  gap: 18px !important;
+}
+
+
+/* Större knappar */
+#hem .hero-buttons .btn {
+  min-width: 230px !important;
+
+  padding: 17px 30px !important;
+
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}
+
+
+/* Mobil */
+@media (max-width: 600px) {
+
+  #hem .hero-logo {
+    width: min(480px, 94vw) !important;
+  }
+
+  #hem .hero-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  #hem .hero-buttons .btn {
+    width: min(100%, 340px) !important;
+    min-width: 0 !important;
+
+    padding: 16px 24px !important;
+  }
+}
+
+/* =========================================
+   HERO – större på stora skärmar
+   ========================================= */
+
+@media (min-width: 1500px) {
+
+  #hem .hero-text {
+    width: min(1100px, 90vw) !important;
+    max-width: 1100px !important;
+  }
+
+  #hem .hero-logo {
+    width: min(780px, 52vw) !important;
+    margin-bottom: 28px !important;
+  }
+
+  #hem .hero-text h1 {
+    font-size: clamp(58px, 4vw, 76px) !important;
+    margin-bottom: 24px !important;
+  }
+
+  #hem .hero-text p {
+    max-width: 850px !important;
+    font-size: 20px !important;
+    line-height: 1.75 !important;
+    margin-bottom: 34px !important;
+  }
+
+  #hem .hero-buttons {
+    gap: 20px !important;
+  }
+
+  #hem .hero-buttons .btn {
+    min-width: 250px !important;
+    padding: 19px 34px !important;
+    font-size: 17px !important;
+  }
+}
+
+/* =========================================
+   KVALITET & MILJÖ
+   ========================================= */
+
+#kvalitet {
+  background: #eceeef !important;
+}
+
+#kvalitet .section-title {
+  margin-bottom: 48px !important;
+}
+
+.quality-grid {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.quality-card {
+  position: relative;
+
+  min-height: 260px;
+  padding: 34px;
+
+  background: #f8f8f7;
+  border: 1px solid #aeb4ba;
+  border-top: 4px solid var(--primary);
+  border-radius: 0;
+
+  box-shadow: 0 8px 20px rgba(15, 23, 42, .07);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.quality-card__number {
+  margin-bottom: 34px;
+
+  color: var(--primary);
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.quality-card h3 {
+  margin: 0 0 14px;
+
+  color: var(--text-strong);
+
+  font-size: clamp(24px, 2vw, 30px);
+  line-height: 1.1;
+}
+
+.quality-card p {
+  max-width: 520px;
+
+  color: var(--text-muted);
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+/* Accentkort */
+.quality-card--accent {
+  background: #26292d;
+  border-color: #26292d;
+  border-top-color: var(--primary);
+}
+
+.quality-card--accent h3 {
+  color: #fff;
+}
+
+.quality-card--accent p {
+  color: #cdd1d5;
+}
+
+.quality-card--accent .quality-card__number {
+  color: #d85152;
+}
+
+.quality-card__link {
+  margin-top: auto;
+  padding-top: 28px;
+
+  color: #fff;
+
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.quality-card__link:hover {
+  color: #e36a6b;
+}
+
+
+/* Desktop hover */
+@media (hover: hover) and (pointer: fine) {
+  .quality-card {
+    transition:
+      transform .2s ease,
+      box-shadow .2s ease,
+      border-color .2s ease;
+  }
+
+  .quality-card:hover {
+    transform: translateY(-4px);
+    border-color: #8f969d;
+
+    box-shadow: 0 14px 30px rgba(15, 23, 42, .11);
+  }
+}
+
+
+/* Mobil */
+@media (max-width: 760px) {
+
+  .quality-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .quality-card {
+    min-height: 0;
+    padding: 26px 22px;
+  }
+
+  .quality-card__number {
+    margin-bottom: 22px;
+  }
+
+  .quality-card h3 {
+    font-size: 24px;
+  }
+
+  .quality-card p {
+    font-size: 15px;
+  }
+}
+
+/* Skarpa 90° hörn på knappar */
+.btn,
+.btn-primary,
+.btn-secondary,
+.floating-call,
+.floating-cta,
+.scroll-top-btn,
+button[type="submit"],
+.blog-slider__button,
+.quality-card__link,
+.service-back-button {
+  border-radius: 0 !important;
+}
+
+/* Cards ska inte "sväva" på hover */
+.card:hover,
+.contact-box:hover,
+.contact-details:hover,
+.hero-card:hover,
+.privacy-card:hover,
+.social-box:hover,
+.stat-box:hover,
+.service-card:hover,
+.quality-card:hover,
+.blog-slider:hover {
+  transform: none !important;
+}
+
+/* =========================================
+   KONTAKTFORMULÄR – SKARPA FÄLT
+   ========================================= */
+
+/* Alla vanliga formulärfält */
+#kontakt input,
+#kontakt textarea,
+#kontakt select,
+#kontakt .select-button,
+#kontakt .select-options,
+#kontakt .service-extra,
+#kontakt .service-extra-toggle,
+#kontakt .upload-label {
+  border-radius: 0 !important;
+}
+
+
+/* =========================
+   CHECKBOXAR
+   ========================= */
+
+#kontakt input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  max-width: 20px !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: 2px solid #8f969d !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+
+  display: inline-grid !important;
+  place-items: center !important;
+
+  box-shadow: none !important;
+
+  cursor: pointer !important;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease !important;
+}
+
+
+/* Bock */
+#kontakt input[type="checkbox"]::after {
+  content: "" !important;
+
+  width: 5px !important;
+  height: 9px !important;
+
+  border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important;
+
+  transform: rotate(45deg) scale(0) !important;
+  margin-top: -2px !important;
+
+  transition: transform .12s ease !important;
+}
+
+
+#kontakt input[type="checkbox"]:checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+
+  box-shadow: none !important;
+}
+
+
+#kontakt input[type="checkbox"]:checked::after {
+  transform: rotate(45deg) scale(1) !important;
+}
+
+
+/* Ingen "studs" på checkbox */
+#kontakt input[type="checkbox"]:active {
+  transform: none !important;
+}
+
+
+/* Vald tjänst */
+#kontakt .service-option:has(input[type="checkbox"]:checked) {
+  background: rgba(156, 35, 36, .08) !important;
+  color: var(--primary) !important;
+}
+
+
+/* =========================
+   FILUPPLADDNING
+   ========================= */
+
+#kontakt .upload-label {
+  padding: 16px !important;
+
+  border: 1px solid #b8bdc2 !important;
+  border-left: 3px solid var(--primary) !important;
+
+  background: #f7f7f7 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Själva filfältet */
+#kontakt .upload-label input[type="file"] {
+  width: 100% !important;
+
+  padding: 8px 0 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
+/* Browse / Välj filer */
+#kontakt input[type="file"]::file-selector-button {
+  margin-right: 12px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #8f969d;
+  border-radius: 0;
+
+  background: #fff;
+  color: var(--text-dark);
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease;
+}
+
+
+#kontakt input[type="file"]::file-selector-button:hover {
+  background: #eeeeef;
+  border-color: var(--primary);
+}
+
+
+/* Safari/WebKit fallback */
+#kontakt input[type="file"]::-webkit-file-upload-button {
+  margin-right: 12px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #8f969d;
+  border-radius: 0;
+
+  background: #fff;
+  color: var(--text-dark);
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   TEXTAREAS
+   ========================= */
+
+#kontakt textarea {
+  min-height: 120px !important;
+
+  resize: none !important;
+  overflow-y: hidden !important;
+
+  line-height: 1.55 !important;
+}
+
+/* =========================================
+   MOBILE HERO – FYLL FÖRSTA SKÄRMEN
+   ========================================= */
+
+@media (max-width: 700px) {
+
+  :root {
+    --header-height: 66px;
+  }
+
+  body:not(.service-body):not(.privacy-body) {
+    padding-top: var(--header-height) !important;
+  }
+
+  body:not(.service-body):not(.privacy-body) > main {
+    zoom: 1 !important;
+  }
+
+  body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+    min-height: calc(100svh - var(--header-height)) !important;
+
+    display: grid !important;
+    align-items: center !important;
+
+    box-sizing: border-box !important;
+  }
+}
+
+
+/* Mindre mobiler */
+@media (max-width: 520px) {
+
+  :root {
+    --header-height: 64px;
+  }
+}
+
+/* =========================================
+   SERVICE CHECKLIST – REN, SKARP DESIGN
+   ========================================= */
+
+.service-offer-checklist {
+  display: grid !important;
+  gap: 0 !important;
+  margin-top: 22px !important;
+
+  list-style: none !important;
+
+  border-top: 1px solid #c7cbd0;
+}
+
+
+/* Varje rad */
+.service-offer-checklist li {
+  position: relative !important;
+
+  padding: 20px 14px 20px 46px !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid #c7cbd0 !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  color: #334155 !important;
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+}
+
+
+/* Fyrkantig checkmark */
+.service-offer-checklist li::before {
+  content: "✓" !important;
+
+  position: absolute !important;
+  left: 10px !important;
+  top: 50% !important;
+
+  width: 24px !important;
+  height: 24px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 0 !important;
+
+  background: var(--primary) !important;
+  color: #fff !important;
+
+  font-size: 14px !important;
+  font-weight: 900 !important;
+
+  transform: translateY(-50%) !important;
+}
+
+
+/* Ingen rörelse på hover */
+.service-offer-checklist li:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Mobil */
+@media (max-width: 700px) {
+
+  .service-offer-checklist li {
+    padding: 17px 8px 17px 42px !important;
+
+    font-size: 15px !important;
+  }
+
+  .service-offer-checklist li::before {
+    left: 8px !important;
+
+    width: 22px !important;
+    height: 22px !important;
+
+    font-size: 13px !important;
+  }
+}
+
+/* =========================================
+   INTEGRITETSCHECKBOX – RENARE
+   ========================================= */
+
+#kontakt .privacy-consent {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+
+  width: 100% !important;
+
+  padding: 8px 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+
+  cursor: pointer;
+}
+
+
+/* Checkbox */
+#kontakt .privacy-consent input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  flex: 0 0 18px !important;
+
+  margin: 2px 0 0 !important;
+  padding: 0 !important;
+
+  border: 2px solid #8f969d !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+
+/* Markerad */
+#kontakt .privacy-consent input[type="checkbox"]:checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+
+/* Text */
+#kontakt .privacy-consent span {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+
+/* Integritetspolicy-länk */
+#kontakt .privacy-consent a {
+  display: inline !important;
+
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+
+#kontakt .privacy-consent input[type="checkbox"] {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+#kontakt .privacy-consent input[type="checkbox"]::after {
+  content: "" !important;
+
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+
+  width: 5px !important;
+  height: 9px !important;
+
+  border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important;
+
+  margin: 0 !important;
+
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(0) !important;
+}
+
+#kontakt .privacy-consent input[type="checkbox"]:checked::after {
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(1) !important;
+}
+
+/* =========================================
+   TJÄNSTVAL – REN HOVER + CENTRERAD CHECK
+   ========================================= */
+
+/* Grundrad */
+#kontakt .service-option {
+  position: relative !important;
+
+  padding: 12px 10px !important;
+
+  background: transparent !important;
+  color: var(--text-dark) !important;
+
+  border: 0 !important;
+  border-left: 3px solid transparent !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease !important;
+}
+
+
+/* Hover – neutral grå ton + diskret röd kant */
+#kontakt .service-option:hover {
+  background: #f3f3f2 !important;
+  border-left-color: var(--primary) !important;
+
+  color: var(--text-dark) !important;
+
+  transform: none !important;
+}
+
+
+/* Vald rad ska INTE få rosa/röd bakgrund */
+#kontakt .service-option:has(input[type="checkbox"]:checked) {
+  background: transparent !important;
+  color: var(--text-dark) !important;
+  border-left-color: transparent !important;
+}
+
+
+/* Om vald rad samtidigt hoveras */
+#kontakt .service-option:has(input[type="checkbox"]:checked):hover {
+  background: #f3f3f2 !important;
+  border-left-color: var(--primary) !important;
+}
+
+
+/* =========================================
+   CHECKBOX – samma centrering som samtycket
+   ========================================= */
+
+#kontakt .service-option input[type="checkbox"] {
+  position: relative !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  max-width: 20px !important;
+
+  flex: 0 0 20px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 2px solid #8f969d !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Bocken */
+#kontakt .service-option input[type="checkbox"]::after {
+  content: "" !important;
+
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+
+  width: 5px !important;
+  height: 9px !important;
+
+  border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important;
+
+  margin: 0 !important;
+
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(0) !important;
+}
+
+
+/* Markerad checkbox */
+#kontakt .service-option input[type="checkbox"]:checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+
+/* Centrerad bock när markerad */
+#kontakt .service-option input[type="checkbox"]:checked::after {
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(1) !important;
+}
+
+
+/* Ingen studs */
+#kontakt .service-option input[type="checkbox"]:active {
+  transform: none !important;
+}
+
+/* =========================================
+   INTEGRITETSPOLICY – SKARPA KANTER
+   ========================================= */
+
+body.privacy-body .privacy-hero,
+body.privacy-body .privacy-card,
+body.privacy-body .privacy-note {
+  border-radius: 0 !important;
+}
+
+
+/* Hero-rutan */
+body.privacy-body .privacy-hero {
+  border: 1px solid #b9bec4 !important;
+  border-top: 4px solid var(--primary) !important;
+
+  box-shadow: 0 8px 20px rgba(15, 23, 42, .07) !important;
+}
+
+
+/* Informationskort längre ner */
+body.privacy-body .privacy-card {
+  border: 1px solid #c7cbd0 !important;
+
+  box-shadow: 0 6px 16px rgba(15, 23, 42, .05) !important;
+}
+
+
+/* Knappar */
+body.privacy-body .btn {
+  border-radius: 0 !important;
+}
+
+/* =========================================
+   FOOTER – SITTER IHOP MED KONTAKT
+   ========================================= */
+
+body:not(.service-body):not(.privacy-body) footer {
+  margin-top: 0 !important;
+
+  background: var(--surface-section-alt) !important;
+  background-image: none !important;
+
+  border-top: 1px solid rgba(31, 41, 55, .20) !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+
+/* Ta bort den gamla dekorativa bakgrunden */
+body:not(.service-body):not(.privacy-body) footer::before {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* Kontaktsektionen ska gå direkt ner till footern */
+body:not(.service-body):not(.privacy-body) > main > #kontakt {
+  margin-bottom: 0 !important;
+}
+
+/* =========================================
+   FOOTER – SAMMA HOVER SOM HEADERN
+   ========================================= */
+
+.site-footer .footer-nav a,
+.site-footer .footer-contact a {
+  position: relative !important;
+
+  display: inline-block !important;
+  width: fit-content !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+
+  color: var(--text-dark) !important;
+
+  text-decoration: none !important;
+
+  transform: none !important;
+  box-shadow: none !important;
+
+  transition: color .2s ease !important;
+}
+
+
+/* Röda linjen – samma princip som headern */
+.site-footer .footer-nav a::after,
+.site-footer .footer-contact a::after {
+  content: "" !important;
+
+  display: block !important;
+
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+
+  border-radius: 0 !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+
+/* Hover */
+.site-footer .footer-nav a:hover,
+.site-footer .footer-contact a:hover {
+  color: var(--primary) !important;
+
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+
+/* Linjen växer ut från vänster */
+.site-footer .footer-nav a:hover::after,
+.site-footer .footer-contact a:hover::after {
+  transform: scaleX(1) !important;
+}
+.site-footer .footer-address {
+  color: var(--text-muted) !important;
+}
+
+.site-footer .footer-address:hover {
+  color: var(--primary) !important;
+}
+
+/* =========================================
+   FOOTER – SLUTGILTIG LAYOUT
+   ========================================= */
+
+.site-footer {
+  margin: 0 !important;
+
+  padding:
+    54px
+    max(24px, calc((100vw - 1240px) / 2))
+    24px !important;
+
+  background: var(--surface-section-alt) !important;
+  background-image: none !important;
+
+  border-top: 1px solid rgba(31, 41, 55, .20) !important;
+
+  box-shadow: none !important;
+
+  text-align: left !important;
+
+  overflow: visible !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-footer::before {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* =========================================
+   TRE KOLUMNER
+   ========================================= */
+
+.site-footer .footer-inner {
+  width: 100%;
+  max-width: 1240px;
+
+  margin: 0 auto;
+
+  display: grid !important;
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(180px, .8fr)
+    minmax(240px, 1fr) !important;
+
+  gap: clamp(40px, 6vw, 90px) !important;
+
+  align-items: start !important;
+}
+
+
+.site-footer .footer-column {
+  display: block !important;
+
+  text-align: left !important;
+}
+
+
+/* =========================================
+   FÖRETAG
+   ========================================= */
+
+.site-footer .footer-brand strong {
+  display: block !important;
+
+  margin-bottom: 12px !important;
+
+  color: var(--text-strong) !important;
+
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+
+.site-footer .footer-brand p {
+  max-width: 430px !important;
+
+  margin: 0 !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+}
+
+
+/* =========================================
+   RUBRIKER
+   ========================================= */
+
+.site-footer .footer-column h3 {
+  margin: 0 0 18px !important;
+
+  color: var(--text-strong) !important;
+
+  font-size: 15px !important;
+  font-weight: 800 !important;
+
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+
+/* =========================================
+   SNABBLÄNKAR
+   ========================================= */
+
+.site-footer .footer-nav {
+  display: grid !important;
+  justify-items: start !important;
+
+  gap: 12px !important;
+}
+
+
+/* =========================================
+   KONTAKT
+   ========================================= */
+
+.site-footer .footer-contact {
+  display: grid !important;
+  justify-items: start !important;
+
+  gap: 12px !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 14px !important;
+}
+
+
+/* =========================================
+   LÄNKAR
+   ========================================= */
+
+.site-footer .footer-nav a,
+.site-footer .footer-contact a {
+  position: relative !important;
+
+  display: inline-block !important;
+
+  width: fit-content !important;
+
+  padding: 0 !important;
+
+  color: var(--text-dark) !important;
+  background: transparent !important;
+
+  border: 0 !important;
+
+  font-size: 14px !important;
+  font-weight: 600 !important;
+
+  text-decoration: none !important;
+
+  transform: none !important;
+
+  transition: color .2s ease !important;
+}
+
+
+/* Röda linjen – samma animation som headern */
+.site-footer .footer-nav a::after,
+.site-footer .footer-contact a::after {
+  content: "" !important;
+
+  display: block !important;
+
+  position: absolute !important;
+
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+
+.site-footer .footer-nav a:hover,
+.site-footer .footer-contact a:hover {
+  color: var(--primary) !important;
+
+  transform: none !important;
+}
+
+
+.site-footer .footer-nav a:hover::after,
+.site-footer .footer-contact a:hover::after {
+  transform: scaleX(1) !important;
+}
+
+
+/* Adress */
+.site-footer .footer-address {
+  color: var(--text-dark) !important;
+}
+
+
+/* =========================================
+   COPYRIGHT
+   ========================================= */
+
+.site-footer .footer-bottom {
+  width: 100%;
+  max-width: 1240px;
+
+  margin: 46px auto 0 !important;
+  padding-top: 20px !important;
+
+  border-top: 1px solid rgba(31, 41, 55, .16);
+
+  text-align: left !important;
+}
+
+
+.site-footer .footer-bottom p {
+  margin: 0 !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+
+/* =========================================
+   MOBIL
+   ========================================= */
+
+@media (max-width: 760px) {
+
+  .site-footer {
+    padding: 42px 20px 22px !important;
+  }
+
+  .site-footer .footer-inner {
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+  }
+
+  .site-footer .footer-bottom {
+    margin-top: 34px !important;
+  }
+}
+
+/* =========================================
+   SOCIALKNAPPAR = BTN SECONDARY
+   ========================================= */
+
+header .header-actions .social-icons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+
+/* Behåll exakt btn-secondary-look,
+   men gör dem kvadratiska ikonknappar */
+header .header-actions .social-icons .social-button.btn.btn-secondary {
+  display: grid !important;
+  place-items: center !important;
+
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+
+  padding: 0 !important;
+
+  border-radius: 0 !important;
+
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  color: #fff !important;
+
+  border: 3px solid transparent !important;
+
+  box-shadow: none !important;
+
+  transform: none !important;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease !important;
+}
+
+
+/* SVG */
+header .header-actions .social-icons .social-button .icon {
+  width: 18px !important;
+  height: 18px !important;
+
+  fill: currentColor !important;
+
+  transform: none !important;
+}
+
+
+/* Hover = samma som Se våra tjänster */
+@media (hover: hover) and (pointer: fine) {
+
+  header .header-actions .social-icons .social-button.btn.btn-secondary:hover {
+    background: #fff !important;
+
+    color: var(--primary) !important;
+
+    border-color: var(--primary) !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+  }
+}
+
+
+/* Ta bort alla gamla social-pseudoeffekter */
+header .header-actions .social-icons .social-button::before,
+header .header-actions .social-icons .social-button::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* =========================================
+   SOCIALKNAPPAR – POLERAD VERSION
+   ========================================= */
+
+header .header-actions .social-icons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+header .header-actions .social-icons .social-button.btn.btn-secondary {
+  position: relative !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+
+  padding: 0 !important;
+
+  border: 3px solid transparent !important;
+  border-radius: 0 !important;
+
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  color: #fff !important;
+
+  box-shadow: none !important;
+  transform: none !important;
+
+  overflow: hidden !important;
+
+  transition:
+    background-color .22s ease,
+    border-color .22s ease,
+    color .22s ease !important;
+}
+
+
+/* Större ikoner */
+header .header-actions .social-icons .social-button .icon {
+  width: 23px !important;
+  height: 23px !important;
+
+  fill: currentColor !important;
+
+  position: relative !important;
+  z-index: 2 !important;
+
+  transform: scale(1) !important;
+
+  transition:
+    transform .28s cubic-bezier(.2,.8,.2,1) !important;
+}
+
+
+/* Hover */
+@media (hover: hover) and (pointer: fine) {
+
+  header .header-actions .social-icons .social-button.btn.btn-secondary:hover {
+    background: #fff !important;
+
+    color: var(--primary) !important;
+
+    border-color: var(--primary) !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ikonen förstoras lite */
+  header .header-actions .social-icons .social-button.btn.btn-secondary:hover .icon {
+    transform: scale(1.18) !important;
+  }
+}
+
+
+/* Klickkänsla */
+header .header-actions .social-icons .social-button.btn.btn-secondary:active .icon {
+  transform: scale(.92) !important;
+}
+
+
+/* Keyboard */
+header .header-actions .social-icons .social-button.btn.btn-secondary:focus-visible {
+  outline: 2px solid rgba(156,35,36,.25) !important;
+  outline-offset: 3px !important;
+}
+
+
+/* Ta bort gamla pseudo-animationer */
+header .header-actions .social-icons .social-button::before,
+header .header-actions .social-icons .social-button::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* =========================================
+   HISTORIA – AKTIVA/PASSERADE CIRKLAR
+   ========================================= */
+
+/* Centrera siffrorna korrekt */
+#historia .cp-history__step::before {
+  display: grid !important;
+  place-items: center !important;
+
+  box-sizing: border-box !important;
+
+  padding: 0 !important;
+  line-height: 1 !important;
+
+  background: #fff !important;
+  color: var(--primary) !important;
+
+  border: 3px solid #cfd3d7 !important;
+
+  font-weight: 900 !important;
+}
+
+
+/* =========================================
+   HISTORIA – STEGSTATUS
+   ========================================= */
+
+/* Grundläge */
+#historia .cp-history__step::before {
+  display: grid !important;
+  place-items: center !important;
+
+  box-sizing: border-box !important;
+
+  padding: 0 !important;
+  line-height: 1 !important;
+
+  background: #fff !important;
+  color: var(--primary) !important;
+
+  border: 3px solid #cfd3d7 !important;
+
+  font-weight: 900 !important;
+
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease !important;
+}
+
+/* Hover */
+#historia .cp-history__step:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+
+  border-color: var(--primary) !important;
+}
+
+/* Bara valt steg ska vara rött */
+#historia .cp-history__inner:has(#cp-step-1:checked)
+.cp-history__step:nth-of-type(1)::before,
+
+#historia .cp-history__inner:has(#cp-step-2:checked)
+.cp-history__step:nth-of-type(2)::before,
+
+#historia .cp-history__inner:has(#cp-step-3:checked)
+.cp-history__step:nth-of-type(3)::before,
+
+#historia .cp-history__inner:has(#cp-step-4:checked)
+.cp-history__step:nth-of-type(4)::before,
+
+#historia .cp-history__inner:has(#cp-step-5:checked)
+.cp-history__step:nth-of-type(5)::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+#historia .cp-train-image {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+#historia .cp-train-image {
+  left: 50% !important;
+  top: -50px !important;
+  transform: translateX(-50%) !important;
+}
+
+
+
+#historia .cp-history__step:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+@media (min-width: 901px) {
+
+  /* Bredare tidslinje + större kort */
+  #historia .cp-history__inner {
+    width: 820px !important;
+    max-width: 100% !important;
+  }
+
+  /* Större stegtexter */
+  #historia .cp-history__step {
+    font-size: 15px !important;
+    font-weight: 800 !important;
+  }
+
+  /* Större cirklar */
+  #historia .cp-history__step::before {
+    width: 36px !important;
+    height: 36px !important;
+    margin-left: -18px !important;
+
+    font-size: 13px !important;
+  }
+
+  /* Flytta rälsen så den fortsatt går genom mitten */
+  #historia .cp-history__bar,
+  #historia .cp-history__bar-set {
+    top: 15px !important;
+    height: 6px !important;
+  }
+
+  #historia .cp-train-image {
+  width: 125px !important;
+  max-width: none !important;
+}
+
+  /* Större informationskort */
+  #historia .cp-history__tab {
+    padding: 36px 42px !important;
+  }
+
+  #historia .cp-history__tab h3 {
+    font-size: 30px !important;
+  }
+
+  #historia .cp-history__tab p {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+  }
+}
+
+#historia .cp-history__step label {
+  top: -10px !important;
+}
+
+#historia .cp-history__step.is-passed::before {
+  background: #fff !important;
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+#historia .cp-history__step.is-passed:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+@media (min-width: 901px) {
+  #historia.codepen-history-section,
+  #historia .cp-history,
+  #historia .cp-history__inner,
+  #historia .cp-history__status {
+    overflow: visible !important;
+  }
+}
+
+/* =========================================
+   RENA TJÄNSTESIDOR
+   ========================================= */
+
+body.service-body {
+  background: #e3e5e7 !important;
+}
+
+.service-page-clean {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* SEKTIONER */
+
+.service-band {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.service-band--hero {
+  background: #e9ebec;
+}
+
+.service-band--info {
+  background: #f0f1f1;
+}
+
+.service-band--cta {
+  background: #e7e9eb;
+}
+
+.service-band + .service-band {
+  border-top: 1px solid #c9cdd1;
+}
+
+
+/* INNEHÅLLET HÅLLS IHOP */
+
+.service-band__inner {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+
+/* HERO */
+
+.service-hero-clean {
+  min-height: 600px;
+  padding: 90px 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(380px, .9fr);
+  gap: 70px;
+
+  align-items: center;
+}
+
+.service-hero-clean__text h1 {
+  max-width: 700px;
+
+  margin: 0 0 24px;
+
+  color: #010101;
+
+  font-size: clamp(48px, 5.5vw, 76px);
+  line-height: .98;
+  letter-spacing: -3px;
+}
+
+.service-hero-clean__text p {
+  max-width: 650px;
+
+  color: #626d7b;
+
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+
+/* LITEN RÖD RUBRIK SOM INDEX */
+
+.service-kicker {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: var(--primary);
+
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+
+/* BILD */
+
+.service-hero-clean__image {
+  width: 100%;
+}
+
+.service-hero-clean__image img {
+  width: 100%;
+  height: 430px;
+
+  object-fit: cover;
+
+  border: 0;
+  border-radius: 0;
+
+  box-shadow: none;
+}
+
+
+/* KNAPPAR */
+
+.service-actions-clean {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+
+/* INFORMATION */
+
+.service-info-clean {
+  padding: 90px 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .8fr);
+  gap: 90px;
+
+  align-items: start;
+}
+
+.service-info-clean__text h2 {
+  max-width: 700px;
+
+  margin-bottom: 24px;
+
+  color: #010101;
+
+  font-size: clamp(38px, 4vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.service-info-clean__text p {
+  max-width: 720px;
+
+  margin-bottom: 18px;
+
+  color: #626d7b;
+
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+
+/* LISTAN – INGA CARDS */
+
+.service-list-clean h3 {
+  margin-bottom: 22px;
+
+  color: #010101;
+
+  font-size: 26px;
+}
+
+.service-list-clean ul {
+  display: grid;
+
+  gap: 0;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.service-list-clean li {
+  position: relative;
+
+  padding: 14px 0 14px 30px;
+
+  color: #384250;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+
+  border-bottom: 1px solid #cfd3d6;
+}
+
+.service-list-clean li:first-child {
+  border-top: 1px solid #cfd3d6;
+}
+
+.service-list-clean li::before {
+  content: "✓";
+
+  position: absolute;
+  left: 0;
+  top: 14px;
+
+  color: var(--primary);
+
+  font-weight: 900;
+}
+
+
+/* CTA */
+
+.service-cta-clean {
+  min-height: 300px;
+
+  padding: 70px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 50px;
+}
+
+.service-cta-clean h2 {
+  max-width: 720px;
+
+  margin-bottom: 12px;
+
+  color: #010101;
+
+  font-size: clamp(34px, 3.5vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
+
+.service-cta-clean p {
+  color: #626d7b;
+
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+
+/* SLIDERS BORT */
+
+body.service-body .slider-showcase,
+body.service-body .before-after-slider {
+  display: none !important;
+}
+
+
+/* MOBIL */
+
+@media (max-width: 800px) {
+
+  .service-band__inner {
+    width: calc(100% - 36px);
+  }
+
+  .service-hero-clean {
+    min-height: 0;
+
+    padding: 58px 0;
+
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .service-hero-clean__text h1 {
+    font-size: clamp(40px, 12vw, 58px);
+    letter-spacing: -2px;
+  }
+
+  .service-hero-clean__image img {
+    height: 300px;
+  }
+
+  .service-info-clean {
+    padding: 58px 0;
+
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .service-cta-clean {
+    padding: 58px 0;
+
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+
+  header > nav {
+    border-radius: 0 !important;
+
+    clip-path: inset(0 0 100% 0) !important;
+
+    border: 1px solid var(--edge) !important;
+
+    box-shadow: 0 18px 40px rgba(15, 23, 42, .14) !important;
+  }
+
+  header > nav.active {
+    clip-path: inset(0 0 0 0) !important;
+  }
+
+  header > nav a,
+  header > nav .nav-dropdown-toggle,
+  header > nav .nav-dropdown-menu {
+    border-radius: 0 !important;
+  }
+
+  header > nav .nav-dropdown-menu {
+    border-left: 2px solid var(--primary) !important;
+    background: #f3f4f4 !important;
+  }
+
+  header > nav a,
+  header > nav .nav-dropdown-toggle {
+    border-bottom: 1px solid rgba(31, 41, 55, .10);
+  }
+
+  header > nav > a:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-dropdown-toggle::after {
+    display: inline-block !important;
+    content: "▾" !important;
+  }
+
+  .nav-dropdown.open .nav-dropdown-toggle::after {
+    transform: rotate(180deg) !important;
+  }
+}
+
+@media (max-width: 700px) {
+
+  /* Loket större och närmare rälsen */
+  #historia .cp-train-image {
+    width: 86px !important;
+    max-width: none !important;
+
+    top: -18px !important;
+    left: 50% !important;
+
+    transform: translateX(-50%) !important;
+  }
+
+  #historia .cp-history__status {
+    top: -12px !important;
+    width: 54px !important;
+    height: 42px !important;
+  }
+
+  /* Lite mer balanserad tidslinje */
+  #historia .cp-history {
+    min-height: 455px !important;
+    padding-top: 48px !important;
+    padding-bottom: 36px !important;
+  }
+
+  #historia .cp-history__inner {
+    height: 255px !important;
+  }
+
+  /* Lite tydligare steg */
+  #historia .cp-history__step::before {
+    width: 30px !important;
+    height: 30px !important;
+    margin-left: -15px !important;
+    font-size: 11px !important;
+  }
+
+  #historia .cp-history__step {
+    font-size: 10.5px !important;
+    font-weight: 800 !important;
+  }
+
+  /* Kortet något närmare tidslinjen */
+  #historia .cp-history__tabs {
+    top: 80px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  #historia .cp-train-image {
+    width: 82px !important;
+    max-width: none !important;
+    top: -40px !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* Historia – mobil även i liggande telefon */
+@media (max-width: 700px),
+       (max-width: 900px) and (max-height: 500px) {
+
+  #historia.codepen-history-section {
+    padding-top: 72px !important;
+    padding-bottom: 52px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  #historia .cp-history {
+    min-height: 430px !important;
+    padding: 52px 14px 34px !important;
+    overflow: hidden !important;
+  }
+
+  #historia .cp-history__inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 250px !important;
+    transform: none !important;
+  }
+
+  #historia .cp-history__step {
+    width: 20% !important;
+    padding: 0 2px !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+  }
+
+  #historia .cp-history__step::before {
+    width: 28px !important;
+    height: 28px !important;
+    margin-left: -14px !important;
+    font-size: 10px !important;
+  }
+
+  #historia .cp-history__step label {
+    top: -12px !important;
+    padding-top: 44px !important;
+  }
+
+  #historia .cp-history__bar,
+  #historia .cp-history__bar-set {
+    top: 11px !important;
+    height: 5px !important;
+  }
+
+  /* Loket */
+  #historia .cp-history__status {
+    top: -26px !important;
+    width: 60px !important;
+    height: 44px !important;
+  }
+
+  #historia .cp-train-image {
+    width: 88px !important;
+    max-width: none !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Informationskort */
+  #historia .cp-history__tabs {
+    top: 80px !important;
+  }
+
+  #historia .cp-history__tab {
+    padding: 22px 18px !important;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 500px) {
+
+  #historia .section-title {
+    padding-top: 58px !important;
+    margin-bottom: 24px !important;
+  }
+
+  #historia.codepen-history-section {
+    padding-top: 20px !important;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 500px) {
+  #historia .cp-history__status {
+    top: -55px !important;
+  }
+
+  #historia .cp-train-image {
+    top: 0 !important;
+  }
+}
+
+/* =========================================
+   GEMENSAM STIL FÖR VANLIGA TEXTLÄNKAR
+   Samma utseende/hover som "Start"
+   ========================================= */
+
+.contact-details a,
+.social-header a,
+#kontakt .privacy-consent a,
+.site-footer .footer-nav a,
+.site-footer .footer-contact a,
+.site-footer .footer-policy {
+  position: relative !important;
+  display: inline-block !important;
+  width: fit-content !important;
+
+  color: var(--text-dark) !important;
+  background: transparent !important;
+
+  border: 0 !important;
+  padding: 0 !important;
+
+  font-weight: 700 !important;
+  text-decoration: none !important;
+
+  transform: none !important;
+
+  transition: color .2s ease !important;
+}
+
+
+/* Röd linje under länken */
+.contact-details a::after,
+.social-header a::after,
+#kontakt .privacy-consent a::after,
+.site-footer .footer-nav a::after,
+.site-footer .footer-contact a::after,
+.site-footer .footer-policy::after {
+  content: "" !important;
+
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+  border-radius: 999px !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+
+/* Hover – samma som Start */
+.contact-details a:hover,
+.social-header a:hover,
+#kontakt .privacy-consent a:hover,
+.site-footer .footer-nav a:hover,
+.site-footer .footer-contact a:hover,
+.site-footer .footer-policy:hover {
+  color: var(--primary) !important;
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+
+/* Linjen visas vid hover */
+.contact-details a:hover::after,
+.social-header a:hover::after,
+#kontakt .privacy-consent a:hover::after,
+.site-footer .footer-nav a:hover::after,
+.site-footer .footer-contact a:hover::after,
+.site-footer .footer-policy:hover::after {
+  transform: scaleX(1) !important;
+}
+
+
+/* Samma tydliga tangentbordsfokus */
+.contact-details a:focus-visible,
+.social-header a:focus-visible,
+#kontakt .privacy-consent a:focus-visible,
+.site-footer .footer-nav a:focus-visible,
+.site-footer .footer-contact a:focus-visible,
+.site-footer .footer-policy:focus-visible {
+  outline: 3px solid rgba(156, 35, 36, .28);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   TJÄNSTESIDA – NEDERSTA CTA
+   ========================================= */
+
+body.service-body .service-band--cta {
+  background: #f4f4f1 !important;
+}
+
+
+/* Själva innehållet */
+body.service-body .service-cta-clean {
+  min-height: 0 !important;
+
+  display: block !important;
+
+  padding-top: 72px !important;
+  padding-bottom: 78px !important;
+
+  text-align: left !important;
+}
+
+
+/* Stor rubrik */
+body.service-body .service-cta-clean h2 {
+  max-width: none !important;
+
+  margin: 0 !important;
+
+  color: #010101 !important;
+
+  font-size: clamp(48px, 6vw, 74px) !important;
+  font-weight: 800 !important;
+
+  line-height: .98 !important;
+  letter-spacing: -3px !important;
+}
+
+
+/* Text under rubriken */
+body.service-body .service-cta-clean p {
+  max-width: 760px !important;
+
+  margin: 24px 0 0 !important;
+
+  color: #707989 !important;
+
+  font-size: clamp(17px, 1.6vw, 21px) !important;
+  font-weight: 400 !important;
+
+  line-height: 1.55 !important;
+}
+
+
+/* Knappen */
+body.service-body .service-cta-clean .service-cta-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: auto !important;
+
+  margin-top: 30px !important;
+  padding: 13px 21px !important;
+
+  color: #fff !important;
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  border: 2px solid var(--primary) !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  font-size: 13px !important;
+  font-weight: 800 !important;
+
+  letter-spacing: .7px !important;
+  line-height: 1.1 !important;
+
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease !important;
+}
+
+
+/* Hover */
+body.service-body .service-cta-clean .service-cta-button:hover {
+  color: var(--primary) !important;
+  background: #fff !important;
+  border-color: var(--primary) !important;
+
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Mobil */
+@media (max-width: 700px) {
+
+  body.service-body .service-cta-clean {
+    padding-top: 52px !important;
+    padding-bottom: 58px !important;
+  }
+
+  body.service-body .service-cta-clean h2 {
+    font-size: clamp(42px, 13vw, 58px) !important;
+    letter-spacing: -2px !important;
+  }
+
+  body.service-body .service-cta-clean p {
+    margin-top: 18px !important;
+    font-size: 17px !important;
+  }
+
+  body.service-body .service-cta-clean .service-cta-button {
+    margin-top: 26px !important;
+  }
+
+}
+
+/* Tjänstekort – mer lättläst informationstext */
+.service-card .service-text p {
+  font-family: "Inter", Arial, sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0 !important;
+}
+
+/* =========================================
+   SOCIALA MEDIER – STABIL FACEBOOK IFRAME
+   ========================================= */
+
+/*
+  Facebook Page Plugin stöder max ca 500px innehållsbredd.
+  Därför får själva iframe:n aldrig sträckas bredare än 500px.
+  Reglerna ligger sist för att vinna över äldre social-frame-regler.
+*/
+
+#sociala-medier .social-grid {
+  align-items: start !important;
+}
+
+#sociala-medier .social-box {
+  min-width: 0 !important;
+}
+
+/* Instagram-kortet är just nu bara en länk/header – låt det inte bli 500–680px högt */
+#sociala-medier .social-box--instagram {
+  min-height: 0 !important;
+}
+
+/* Facebook-kortet ska anpassa sig efter innehållet, inte tvingas till gammal min-height */
+#sociala-medier .social-box--facebook {
+  min-height: 0 !important;
+}
+
+/* Själva Facebook-pluginen */
+#sociala-medier .social-box--facebook .social-frame {
+  display: block !important;
+
+  width: 100% !important;
+  max-width: 500px !important;
+
+  height: 600px !important;
+  min-height: 600px !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  flex: 0 0 auto !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+  overflow: hidden !important;
+}
+
+/* Tablet / mindre laptop: lägg sociala kort under varandra och centrera dem */
+@media (max-width: 1050px) {
+  #sociala-medier .social-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  #sociala-medier .social-box--instagram,
+  #sociala-medier .social-box--facebook {
+    width: min(100%, 560px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Mobil */
+@media (max-width: 560px) {
+  #sociala-medier .social-box {
+    width: 100% !important;
+    padding: 18px !important;
+  }
+
+  #sociala-medier .social-header {
+    flex-wrap: wrap !important;
+  }
+
+  #sociala-medier .social-box--facebook .social-frame {
+    width: 100% !important;
+    max-width: 500px !important;
+
+    height: 520px !important;
+    min-height: 520px !important;
+  }
+}
+
+
+/* =========================================
+   HISTORIA – håll loket synligt på tablet
+   ========================================= */
+@media (min-width: 701px) and (max-width: 900px) {
+  #historia .cp-history__status {
+    top: -28px !important;
+    overflow: visible !important;
+  }
+
+  #historia .cp-train-image {
+    top: -18px !important;
+    left: 50% !important;
+    width: 96px !important;
+    max-width: none !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* Historia – finjustera lokets höjd på mobil */
+@media (max-width: 700px) {
+  #historia .cp-train-image {
+    top: -16px !important;
+  }
+}
+
+/* =========================================
+   HEADER – CENTRERA SOCIALA IKONER EXAKT
+   Mobil, tablet och desktop
+   ========================================= */
+
+header {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+  align-items: center !important;
+}
+
+header .logo {
+  grid-column: 1 !important;
+  justify-self: start !important;
+}
+
+header .header-actions {
+  grid-column: 2 !important;
+  justify-self: center !important;
+  align-self: center !important;
+}
+
+header .header-actions .social-icons {
+  justify-content: center !important;
+}
+
+/* Desktop: navigationen ligger till höger om de centrerade socialknapparna */
+@media (min-width: 1201px) and (hover: hover) and (pointer: fine) {
+  header > nav {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    gap: clamp(12px, 1.25vw, 20px) !important;
+  }
+
+  header > nav a,
+  header > nav .nav-dropdown-toggle {
+    font-size: 14px !important;
+  }
+}
+
+/* Mobil/tablet: hamburgaren ligger till höger, ikonerna förblir exakt centrerade */
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+  header .menu-btn {
+    grid-column: 3 !important;
+    justify-self: end !important;
+  }
+
+  header > nav {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – LANDSCAPE-MOBIL
+   Lös klippningen generellt, inte per enhet.
+   ========================================= */
+@media (orientation: landscape) and (max-width: 950px) and (max-height: 600px) {
+
+  /* Loket får gå ovanför tidslinjens egen box utan att kapas. */
+  #historia.codepen-history-section,
+  #historia .cp-history,
+  #historia .cp-history__inner,
+  #historia .cp-history__status {
+    overflow: visible !important;
+  }
+
+  /* Håll loket ovanför rälsen och återställ tidigare mobil-offset. */
+  #historia .cp-history__status {
+    top: -55px !important;
+    z-index: 10 !important;
+  }
+
+  #historia .cp-train-image {
+    top: 0 !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – PORTRAIT
+   Lyft loket lite extra i stående läge.
+   ========================================= */
+@media (orientation: portrait) and (max-width: 900px) {
+  #historia .cp-train-image {
+    top: -24px !important;
+  }
+}
+
+/* =========================================
+   MOBILMENY – HELSKÄRMSMENY I APPLE-STIL
+   Använder befintlig #navMenu + .active/.open.
+   ========================================= */
+
+.mobile-nav-only {
+  display: none !important;
+}
+
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+
+  /* Menyknappen ska alltid ligga ovanför helskärmsmenyn. */
+  header .menu-btn {
+    position: relative !important;
+    z-index: 100002 !important;
+  }
+
+  /*
+   * Helskärmsyta. Vi skriver över samtliga äldre "dropdown/card"-regler
+   * så att resultatet blir konsekvent på mobil, tablet och landscape.
+   */
+  header > #navMenu {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: none !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding:
+      max(74px, calc(env(safe-area-inset-top) + 58px))
+      max(28px, calc(env(safe-area-inset-right) + 28px))
+      max(42px, calc(env(safe-area-inset-bottom) + 28px))
+      max(36px, calc(env(safe-area-inset-left) + 36px)) !important;
+
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fbfbfd !important;
+    box-shadow: none !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+
+    transform: translateY(-12px) !important;
+    clip-path: none !important;
+
+    z-index: 100001 !important;
+
+    transition:
+      opacity .22s ease,
+      transform .28s cubic-bezier(.22, 1, .36, 1),
+      visibility 0s linear .28s !important;
+  }
+
+  header > #navMenu.active,
+  header > #navMenu.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+    transition:
+      opacity .22s ease,
+      transform .28s cubic-bezier(.22, 1, .36, 1),
+      visibility 0s linear 0s !important;
+  }
+
+  /* Apple-lik vertikal typografi. */
+  header > #navMenu > a,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    width: 100% !important;
+    min-height: 46px !important;
+
+    margin: 0 !important;
+    padding: 4px 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    color: #333336 !important;
+    background: transparent !important;
+
+    font-family: "Inter", sans-serif !important;
+    font-size: clamp(24px, 5.8vw, 30px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.035em !important;
+
+    text-align: left !important;
+    box-shadow: none !important;
+  }
+
+  header > #navMenu > a + a,
+  header > #navMenu > .nav-dropdown + a,
+  header > #navMenu > a + .nav-dropdown {
+    margin-top: 1px !important;
+  }
+
+  header > #navMenu > a:hover,
+  header > #navMenu > a:focus-visible,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle:hover,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle:focus-visible {
+    color: var(--primary) !important;
+    background: transparent !important;
+  }
+
+  header > #navMenu > a::after,
+  header > #navMenu > a::before {
+    display: none !important;
+  }
+
+  .mobile-nav-only {
+    display: flex !important;
+  }
+
+  /* Tjänster fungerar som en expanderbar grupp. */
+  header > #navMenu .nav-dropdown {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header > #navMenu .nav-dropdown-toggle::after {
+    content: "›" !important;
+    display: inline-block !important;
+    margin-left: 12px !important;
+    color: #6e6e73 !important;
+    font-size: .9em !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    transform: rotate(0deg) !important;
+    transition: transform .2s ease !important;
+  }
+
+  header > #navMenu .nav-dropdown.open > .nav-dropdown-toggle::after {
+    transform: rotate(90deg) !important;
+  }
+
+  header > #navMenu .nav-dropdown-menu {
+    position: static !important;
+    inset: auto !important;
+
+    display: none !important;
+    width: 100% !important;
+
+    margin: 3px 0 10px !important;
+    padding: 0 0 0 18px !important;
+
+    border: 0 !important;
+    border-left: 0 !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    box-shadow: none !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  header > #navMenu .nav-dropdown.open > .nav-dropdown-menu {
+    display: block !important;
+  }
+
+  header > #navMenu .nav-dropdown-menu a {
+    display: block !important;
+    width: 100% !important;
+
+    margin: 0 !important;
+    padding: 6px 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    color: #6e6e73 !important;
+    background: transparent !important;
+
+    font-family: "Inter", sans-serif !important;
+    font-size: clamp(17px, 4vw, 20px) !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+
+    text-align: left !important;
+  }
+
+  header > #navMenu .nav-dropdown-menu a:hover,
+  header > #navMenu .nav-dropdown-menu a:focus-visible {
+    color: var(--primary) !important;
+  }
+
+  /*
+   * X-knappen i Apple-exemplet:
+   * den befintliga hamburgaren morphar redan via aria-expanded.
+   */
+  header .menu-btn[aria-expanded="true"] {
+    position: fixed !important;
+    top: max(14px, env(safe-area-inset-top)) !important;
+    right: max(18px, env(safe-area-inset-right)) !important;
+
+    width: 44px !important;
+    height: 44px !important;
+    padding: 8px !important;
+
+    display: grid !important;
+    place-content: center !important;
+
+    background: transparent !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span {
+    width: 22px !important;
+    height: 2px !important;
+    margin: 0 !important;
+    background: #333336 !important;
+    box-shadow: none !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(2px) rotate(45deg) !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(2) {
+    display: none !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(0) rotate(-45deg) !important;
+  }
+}
+
+/* Lite tätare layout på mycket små telefoner. */
+@media (max-width: 430px) {
+  header > #navMenu {
+    padding-left: max(28px, calc(env(safe-area-inset-left) + 28px)) !important;
+    padding-right: max(24px, calc(env(safe-area-inset-right) + 24px)) !important;
+  }
+
+  header > #navMenu > a,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle {
+    min-height: 43px !important;
+    font-size: 25px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header > #navMenu {
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   MOBILMENY v8 – MJUK HAMBURGARE → KRYSS
+   ========================================= */
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+
+  header .menu-btn,
+  header .menu-btn[aria-expanded="true"] {
+    position: relative !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    display: block !important;
+    border: 0 !important;
+    background: transparent !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] {
+    position: fixed !important;
+    top: max(14px, env(safe-area-inset-top)) !important;
+    right: max(18px, env(safe-area-inset-right)) !important;
+    z-index: 100003 !important;
+  }
+
+  header .menu-btn span,
+  header .menu-btn[aria-expanded="true"] span {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+
+    display: block !important;
+    width: 26px !important;
+    height: 2.5px !important;
+    margin: 0 !important;
+    border-radius: 999px !important;
+
+    background: var(--primary) !important;
+    box-shadow: none !important;
+
+    transform-origin: 50% 50% !important;
+
+    transition:
+      transform .38s cubic-bezier(.22, 1, .36, 1),
+      opacity .18s ease,
+      width .28s ease,
+      background-color .22s ease !important;
+  }
+
+  /* Grundläge */
+  header .menu-btn span:nth-child(1) {
+    transform: translate(-50%, -8px) rotate(0deg) !important;
+  }
+
+  header .menu-btn span:nth-child(2) {
+    transform: translate(-50%, -50%) scaleX(1) !important;
+    opacity: 1 !important;
+  }
+
+  header .menu-btn span:nth-child(3) {
+    transform: translate(-50%, 6px) rotate(0deg) !important;
+  }
+
+  /* Öppet läge – alla linjer möts i centrum, sedan roterar ytterlinjerna */
+  header .menu-btn[aria-expanded="true"] span {
+    width: 24px !important;
+    background: #333336 !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg) !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(2) {
+    transform: translate(-50%, -50%) scaleX(.15) !important;
+    opacity: 0 !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(-45deg) !important;
+  }
+
+  /* Liten respons vid tryck utan att störa morphen */
+  header .menu-btn:active {
+    transform: scale(.92) !important;
+  }
+
+  /*
+   * Menyinnehållet får en diskret sekventiell entré.
+   * Det gör att helskärmsmenyn känns mer sammanhållen.
+   */
+  header > #navMenu > a,
+  header > #navMenu > .nav-dropdown {
+    opacity: 0 !important;
+    transform: translateY(-8px) !important;
+    transition:
+      opacity .24s ease,
+      transform .34s cubic-bezier(.22, 1, .36, 1) !important;
+  }
+
+  header > #navMenu.active > a,
+  header > #navMenu.active > .nav-dropdown,
+  header > #navMenu.open > a,
+  header > #navMenu.open > .nav-dropdown {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  header > #navMenu.active > :nth-child(1),
+  header > #navMenu.open > :nth-child(1) { transition-delay: .035s !important; }
+  header > #navMenu.active > :nth-child(2),
+  header > #navMenu.open > :nth-child(2) { transition-delay: .065s !important; }
+  header > #navMenu.active > :nth-child(3),
+  header > #navMenu.open > :nth-child(3) { transition-delay: .095s !important; }
+  header > #navMenu.active > :nth-child(4),
+  header > #navMenu.open > :nth-child(4) { transition-delay: .125s !important; }
+  header > #navMenu.active > :nth-child(5),
+  header > #navMenu.open > :nth-child(5) { transition-delay: .155s !important; }
+  header > #navMenu.active > :nth-child(6),
+  header > #navMenu.open > :nth-child(6) { transition-delay: .185s !important; }
+  header > #navMenu.active > :nth-child(7),
+  header > #navMenu.open > :nth-child(7) { transition-delay: .215s !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header .menu-btn span,
+  header > #navMenu > a,
+  header > #navMenu > .nav-dropdown {
+    transition: none !important;
+  }
+}
+
+
+
+/* =========================================
+   MOBILMENY v9 – FINAL POLISH
+   Ingen positionsförflyttning när hamburgaren blir kryss.
+   ========================================= */
+
+body.mobile-menu-open {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+
+  header .menu-btn,
+  header .menu-btn[aria-expanded="true"] {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    z-index: 100003 !important;
+    transition: transform .16s ease !important;
+  }
+
+  header .menu-btn span,
+  header .menu-btn[aria-expanded="true"] span {
+    transition:
+      transform .34s cubic-bezier(.22, 1, .36, 1),
+      opacity .18s ease,
+      width .26s ease,
+      background-color .22s ease !important;
+  }
+
+  header .menu-btn span:nth-child(1) {
+    transform: translate(-50%, -8px) rotate(0deg) !important;
+  }
+
+  header .menu-btn span:nth-child(2) {
+    transform: translate(-50%, -50%) scaleX(1) !important;
+    opacity: 1 !important;
+  }
+
+  header .menu-btn span:nth-child(3) {
+    transform: translate(-50%, 6px) rotate(0deg) !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg) !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(2) {
+    transform: translate(-50%, -50%) scaleX(0) !important;
+    opacity: 0 !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(-45deg) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header .menu-btn,
+  header .menu-btn span {
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   v10 – RÖTT KRYSS + ENHETLIGA KONTAKTLÄNKAR
+   ========================================= */
+
+/* Hamburgaren och krysset använder alltid företagets röda färg. */
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+  header .menu-btn span,
+  header .menu-btn[aria-expanded="true"] span {
+    background: var(--primary) !important;
+  }
+}
+
+/*
+ * E-postlänken i Integritetspolicyn samt kontaktens e-post/adress
+ * får samma rena textlänksbeteende som webbplatsens övriga
+ * navigations-/textlänkar: mörk text, röd hover och animerad röd linje.
+ */
+.privacy-card a[href^="mailto:"],
+.site-footer .footer-contact a[href^="mailto:"],
+.site-footer .footer-address {
+  position: relative !important;
+  display: inline-block !important;
+  width: fit-content !important;
+
+  color: var(--text-dark) !important;
+  background: transparent !important;
+
+  border: 0 !important;
+  padding: 0 !important;
+
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: 700 !important;
+
+  text-decoration: none !important;
+  transform: none !important;
+
+  transition: color .2s ease !important;
+}
+
+.privacy-card a[href^="mailto:"]::after,
+.site-footer .footer-contact a[href^="mailto:"]::after,
+.site-footer .footer-address::after {
+  content: "" !important;
+  position: absolute !important;
+
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+  border-radius: 999px !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+.privacy-card a[href^="mailto:"]:hover,
+.site-footer .footer-contact a[href^="mailto:"]:hover,
+.site-footer .footer-address:hover {
+  color: var(--primary) !important;
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+.privacy-card a[href^="mailto:"]:hover::after,
+.site-footer .footer-contact a[href^="mailto:"]:hover::after,
+.site-footer .footer-address:hover::after {
+  transform: scaleX(1) !important;
+}
+
+.privacy-card a[href^="mailto:"]:focus-visible,
+.site-footer .footer-contact a[href^="mailto:"]:focus-visible,
+.site-footer .footer-address:focus-visible {
+  outline: 3px solid rgba(156, 35, 36, .28) !important;
+  outline-offset: 4px !important;
+}
+
