@@ -13,8 +13,6 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
   const BACKEND_URL = "https://lokomotiv-backend.onrender.com/send-email";
 
   function onReady(callback) {
@@ -41,28 +39,6 @@
     button.textContent = "Skicka förfrågan";
   }
 
-  function getPreferredTheme() {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme || (systemThemeQuery.matches ? "dark" : "light");
-  }
-
-  function applyTheme(theme, themeToggle) {
-    const isDark = theme === "dark";
-
-    document.documentElement.dataset.theme = theme;
-    document.body.classList.toggle("theme--dark", isDark);
-
-    if (!themeToggle) return;
-
-    themeToggle.setAttribute("aria-pressed", String(isDark));
-    themeToggle.setAttribute("aria-label", isDark ? "Byt till ljust läge" : "Byt till mörkt läge");
-
-    const icon = $(".dark-mode-toggle__icon", themeToggle);
-    if (icon) {
-      icon.classList.toggle("dark-mode-toggle__icon--moon", isDark);
-    }
-  }
-
   onReady(() => {
     const menuBtn = $("#menuBtn");
     const navMenu = $("#navMenu");
@@ -74,7 +50,6 @@
     const scrollTopBtn = $("#scrollTopBtn");
     const header = $("header");
     const floatingCall = $(".floating-call");
-    const themeToggle = $("#themeToggle");
     const navDropdown = $(".nav-dropdown");
     const navDropdownToggle = $(".nav-dropdown-toggle");
     const sections = $$("main section[id]");
@@ -86,27 +61,6 @@
     if (!window.location.hash) {
       window.addEventListener("pageshow", () => window.scrollTo(0, 0), { once: true });
     }
-
-    applyTheme(getPreferredTheme(), themeToggle);
-
-    if (themeToggle) {
-      themeToggle.addEventListener("click", event => {
-        event.stopPropagation();
-
-        const isDark = document.body.classList.contains("theme--dark");
-        const nextTheme = isDark ? "light" : "dark";
-
-        localStorage.setItem("theme", nextTheme);
-        applyTheme(nextTheme, themeToggle);
-      });
-    }
-
-    systemThemeQuery.addEventListener("change", () => {
-      if (!localStorage.getItem("theme")) {
-        applyTheme(getPreferredTheme(), themeToggle);
-      }
-    });
-
     if (phoneInput) {
       phoneInput.addEventListener("input", () => {
         const numbers = phoneInput.value.replace(/\D/g, "").slice(0, 10);
