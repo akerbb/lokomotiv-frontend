@@ -108,6 +108,26 @@ function escapeMessage(value) {
   return div.innerHTML;
 }
 
+function isValidEmail(value) {
+  const email = String(value || "").trim();
+
+  // Praktisk webbvalidering: lokal del + domän + TLD på minst 2 bokstäver.
+  // Exempel: namn@gmail.com = giltig, asd@g.c = ogiltig.
+  return /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,63}$/.test(email);
+}
+
+function clearSingleFieldError(field) {
+  if (!field) return;
+
+  field.classList.remove("field-error");
+  field.removeAttribute("aria-invalid");
+
+  const next = field.nextElementSibling;
+  if (next && next.classList.contains("field-error-message")) {
+    next.remove();
+  }
+}
+
 function hideFormMessage(element) {
   if (!element) return;
 
@@ -163,6 +183,14 @@ function hideFormMessage(element) {
         }
       });
     }
+
+    [nameInput, emailInput, phoneInput].forEach(field => {
+      if (!field) return;
+
+      field.addEventListener("input", () => {
+        clearSingleFieldError(field);
+      });
+    });
 
     function updateServiceSelection() {
       if (!serviceDropdownBtn || !contactForm) return;
@@ -238,7 +266,7 @@ function hideFormMessage(element) {
           return;
         }
 
-        if (!emailValue || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+        if (!isValidEmail(emailValue)) {
           showFieldError(
             emailInput,
             "Fyll i en giltig e-postadress, till exempel namn@gmail.com."
@@ -409,33 +437,31 @@ if (totalFiles > 10) {
               rawText ||
               `Serverfel ${response.status}`;
 
+            if (
+              response.status === 400 &&
+              /e-?post|email|reply[_ -]?to/i.test(String(serverMessage))
+            ) {
+              showFieldError(
+                emailInput,
+                "Fyll i en giltig e-postadress, till exempel namn@gmail.com."
+              );
+              return;
+            }
+
             showFormMessage(
-  messageBox,
-  "error",
-  "Något gick fel när förfrågan skickades. Försök igen om en stund eller kontakta oss via telefon eller e-post.",
-  true
-);
+              messageBox,
+              "error",
+              "Något gick fel när förfrågan skickades. Försök igen om en stund eller kontakta oss via telefon eller e-post.",
+              true
+            );
 
             return;
           }
 
-          showFormMessage(
-  messageBox,
-  "success",
-  "Tack! Din förfrågan är skickad. Vi återkommer så snart vi kan.",
-  true
-);
-
-          contactForm.reset();
-          updateServiceSelection();
-
-          $$(".service-extra", contactForm).forEach(extraBox => {
-            extraBox.classList.remove("active", "open");
-            $$("input, textarea, select", extraBox).forEach(field => {
-              field.disabled = false;
-              if (field.type !== "file") field.value = "";
-            });
-          });
+          // Backend har bekräftat att meddelandet skickades.
+          // Visa en separat tack-sida i stället för ett successmeddelande i formuläret.
+          window.location.assign("/thanks.html");
+          return;
 
         } catch (error) {
           console.error("Fetch failed:", error);

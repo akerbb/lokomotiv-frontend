@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sidan hittades inte | Lokomotiv Städ</title>
+  <title>Tack för din förfrågan | Lokomotiv Städ</title>
+  <meta name="description" content="Tack för din förfrågan till Lokomotiv Städ & Fönsterputs AB.">
   <meta name="robots" content="noindex,follow">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" type="image/x-icon" href="/bilder/favicon.ico">
@@ -21,12 +22,17 @@
       border: 1px solid #d7dadd;
       background: #fff;
     }
-    .error-code {
-      margin: 0 0 10px;
-      color: var(--primary, #9c2324);
-      font-size: clamp(54px, 12vw, 96px);
+    .status-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #15803d;
+      color: #fff;
+      font-size: 30px;
       font-weight: 900;
-      line-height: 1;
     }
     .status-card h1 { margin-bottom: 14px; }
     .status-card p { margin: 0 auto 26px; max-width: 52ch; }
@@ -40,13 +46,13 @@
 </head>
 <body>
   <main class="status-page">
-    <section class="status-card" aria-labelledby="error-title">
-      <p class="error-code" aria-hidden="true">404</p>
-      <h1 id="error-title">Sidan kunde inte hittas</h1>
-      <p>Adressen kan vara felstavad eller sidan kan ha flyttats. Gå tillbaka till startsidan eller kontakta oss om du behöver hjälp.</p>
+    <section class="status-card" aria-labelledby="thanks-title">
+      <div class="status-icon" aria-hidden="true">✓</div>
+      <h1 id="thanks-title">Tack för din förfrågan!</h1>
+      <p>Din förfrågan har skickats till Lokomotiv Städ &amp; Fönsterputs AB. Vi återkommer så snart vi kan.</p>
       <div class="status-actions">
         <a class="btn btn-primary" href="/">Till startsidan</a>
-        <a class="btn btn-secondary" href="/#kontakt">Kontakta oss</a>
+        <a class="btn btn-secondary" href="/#kontakt">Kontaktuppgifter</a>
       </div>
     </section>
   </main>
