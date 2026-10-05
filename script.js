@@ -138,6 +138,16 @@ function hideFormMessage(element) {
   element.setAttribute("aria-live", "polite");
 }
 
+function resetTurnstile() {
+  if (!window.turnstile) return;
+
+  try {
+    window.turnstile.reset();
+  } catch (error) {
+    console.warn("Turnstile kunde inte återställas:", error);
+  }
+}
+
   function resetSubmitButton(button) {
     if (!button) return;
 
@@ -437,6 +447,19 @@ if (totalFiles > 10) {
               rawText ||
               `Serverfel ${response.status}`;
 
+              if (response.status === 403) {
+  resetTurnstile();
+
+  showFormMessage(
+    messageBox,
+    "error",
+    serverMessage || "Säkerhetskontrollen misslyckades. Försök igen.",
+    true
+  );
+
+  return;
+}
+
             if (
               response.status === 400 &&
               /e-?post|email|reply[_ -]?to/i.test(String(serverMessage))
@@ -447,7 +470,7 @@ if (totalFiles > 10) {
               );
               return;
             }
-
+resetTurnstile();
             showFormMessage(
               messageBox,
               "error",
@@ -464,7 +487,9 @@ if (totalFiles > 10) {
           return;
 
         } catch (error) {
-          console.error("Fetch failed:", error);
+  console.error("Fetch failed:", error);
+
+  resetTurnstile();
 
           const message = error.name === "AbortError"
   ? "Det tog för lång tid att skicka förfrågan. Kontrollera din anslutning och försök igen."
