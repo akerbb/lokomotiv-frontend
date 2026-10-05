@@ -539,3 +539,166 @@
   transform: none !important;
 }
 
+/* =========================================
+   FORM STATUS / VALIDATION
+   ========================================= */
+
+#kontakt .form-submit-area {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+
+/* Globalt meddelande */
+
+#kontakt .form-message {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 16px 18px;
+
+  grid-template-columns: 30px 1fr;
+  align-items: start;
+  gap: 12px;
+
+  border: 1px solid;
+  border-radius: 0;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.55;
+
+  opacity: 0;
+  transform: translateY(-5px);
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease;
+}
+
+#kontakt .form-message.show {
+  display: grid;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#kontakt .form-message__icon {
+  display: grid;
+  place-items: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+#kontakt .form-message__text {
+  padding-top: 2px;
+}
+
+
+/* Success */
+
+#kontakt .form-message.success {
+  color: #166534;
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+#kontakt .form-message.success .form-message__icon {
+  color: #fff;
+  background: #15803d;
+}
+
+
+/* Error */
+
+#kontakt .form-message.error {
+  color: #991b1b;
+  background: #fff7f7;
+  border-color: #fecaca;
+}
+
+#kontakt .form-message.error .form-message__icon {
+  color: #fff;
+  background: #b91c1c;
+}
+
+
+/* Felaktigt fält */
+
+#kontakt input.field-error:not([type="checkbox"]),
+#kontakt textarea.field-error,
+#kontakt select.field-error,
+#kontakt .select-button.field-error {
+  border-color: #b91c1c !important;
+  background: #fff8f8 !important;
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, .08) !important;
+}
+
+
+/* Checkbox */
+
+#kontakt input[type="checkbox"].field-error {
+  border-color: #b91c1c !important;
+}
+
+
+/* Fältspecifikt fel */
+
+#kontakt .field-error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  margin: -3px 0 5px;
+  padding: 8px 10px;
+
+  color: #991b1b;
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+
+  background: #fff7f7;
+  border-left: 3px solid #b91c1c;
+}
+
+#kontakt .field-error-message__icon {
+  display: grid;
+  place-items: center;
+
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+
+  margin-top: 1px;
+
+  color: #fff;
+  background: #b91c1c;
+  border-radius: 50%;
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  #kontakt .form-message {
+    padding: 14px;
+    grid-template-columns: 26px 1fr;
+  }
+
+  #kontakt .form-message__icon {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+}

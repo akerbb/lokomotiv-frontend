@@ -23,13 +23,84 @@
     }
   }
 
-  function showFormMessage(element, type, message) {
-    if (!element) return;
+function showFormMessage(element, type, message, shouldScroll = false) {
+  if (!element) return;
 
-    element.style.display = "block";
-    element.className = `form-message ${type} show`;
-    element.textContent = message;
+  element.className = `form-message ${type} show`;
+
+  element.innerHTML = `
+    <span class="form-message__icon" aria-hidden="true">
+      ${type === "success" ? "✓" : "!"}
+    </span>
+
+    <span class="form-message__text">
+      ${escapeMessage(message)}
+    </span>
+  `;
+
+  if (shouldScroll) {
+    element.scrollIntoView({
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+      block: "center"
+    });
   }
+}
+
+function clearFieldErrors(form) {
+  if (!form) return;
+
+  $$(".field-error-message", form).forEach(element => {
+    element.remove();
+  });
+
+  $$(".field-error", form).forEach(element => {
+    element.classList.remove("field-error");
+    element.removeAttribute("aria-invalid");
+  });
+}
+
+function showFieldError(field, message, options = {}) {
+  if (!field) return;
+
+  const {
+    container = null,
+    focus = true
+  } = options;
+
+  const target = container || field;
+
+  field.classList.add("field-error");
+  field.setAttribute("aria-invalid", "true");
+
+  const error = document.createElement("div");
+
+  error.className = "field-error-message";
+  error.setAttribute("role", "alert");
+
+  error.innerHTML = `
+    <span class="field-error-message__icon" aria-hidden="true">!</span>
+    <span>${escapeMessage(message)}</span>
+  `;
+
+  target.insertAdjacentElement("afterend", error);
+
+  target.scrollIntoView({
+    behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+    block: "center"
+  });
+
+  if (focus) {
+    window.setTimeout(() => {
+      field.focus({ preventScroll: true });
+    }, prefersReducedMotion.matches ? 0 : 350);
+  }
+}
+
+function escapeMessage(value) {
+  const div = document.createElement("div");
+  div.textContent = String(value);
+  return div.innerHTML;
+}
 
   function resetSubmitButton(button) {
     if (!button) return;
@@ -119,7 +190,9 @@
 
     if (contactForm) {
       contactForm.addEventListener("submit", async event => {
-        event.preventDefault();
+  event.preventDefault();
+
+  clearFieldErrors(contactForm);
 
         const selectedServices = $$(".service-checkbox:checked", contactForm);
         const selectedServiceNames = selectedServices.map(service => service.value);
@@ -140,14 +213,28 @@
         if (honeypot && honeypot.value.trim() !== "") return;
 
         if (privacyConsent && !privacyConsent.checked) {
-          showFormMessage(messageBox, "error", "Du behöver godkänna integritetspolicyn innan du skickar formuläret.");
-          return;
-        }
+  const privacyBox = privacyConsent.closest(".privacy-consent");
+
+  showFieldError(
+    privacyConsent,
+    "Godkänn integritetspolicyn innan du skickar.",
+    {
+      container: privacyBox,
+      focus: true
+    }
+  );
+
+  return;
+}
 
         if (cleanPhone.length < 7) {
-          showFormMessage(messageBox, "error", "Fyll i ett giltigt telefonnummer.");
-          return;
-        }
+  showFieldError(
+    phoneInput,
+    "Fyll i ett giltigt telefonnummer."
+  );
+
+  return;
+}
 
         hiddenInput.value = selectedServiceNames.join(", ");
 
@@ -215,14 +302,34 @@
         const totalSizeMB = totalSize / (1024 * 1024);
 
         if (totalSizeMB > 10) {
-          showFormMessage(messageBox, "error", `Bilderna är för stora (${totalSizeMB.toFixed(1)} MB). Max 10 MB totalt.`);
-          return;
-        }
+  const uploadArea = $("#serviceExtraFields");
 
-        if (totalFiles > 10) {
-          showFormMessage(messageBox, "error", "Max 10 bilder kan laddas upp samtidigt.");
-          return;
-        }
+  showFieldError(
+    fileInputs.find(input => input.files.length > 0),
+    `Bilderna är totalt ${totalSizeMB.toFixed(1)} MB. Max tillåtet är 10 MB.`,
+    {
+      container: uploadArea,
+      focus: false
+    }
+  );
+
+  return;
+}
+
+if (totalFiles > 10) {
+  const uploadArea = $("#serviceExtraFields");
+
+  showFieldError(
+    fileInputs.find(input => input.files.length > 0),
+    "Du kan ladda upp högst 10 bilder totalt.",
+    {
+      container: uploadArea,
+      focus: false
+    }
+  );
+
+  return;
+}
 
         submitBtn.disabled = true;
         submitBtn.classList.add("loading");
@@ -270,19 +377,21 @@
               `Serverfel ${response.status}`;
 
             showFormMessage(
-              messageBox,
-              "error",
-              `Formuläret kunde inte skickas: ${serverMessage}`
-            );
+  messageBox,
+  "error",
+  "Något gick fel när förfrågan skickades. Försök igen om en stund eller kontakta oss via telefon eller e-post.",
+  true
+);
 
             return;
           }
 
           showFormMessage(
-            messageBox,
-            "success",
-            "✓ Tack! Din förfrågan har skickats. Vi återkommer så fort vi kan med en offert! Ha en trevlig dag :)"
-          );
+  messageBox,
+  "success",
+  "Tack! Din förfrågan är skickad. Vi återkommer så snart vi kan.",
+  true
+);
 
           contactForm.reset();
           updateServiceSelection();
@@ -295,7 +404,6 @@
             });
           });
 
-          contactForm.classList.add("submitted");
           contactForm.scrollIntoView({
             behavior: prefersReducedMotion.matches ? "auto" : "smooth",
             block: "start"
@@ -305,9 +413,15 @@
           console.error("Fetch failed:", error);
 
           const message = error.name === "AbortError"
-            ? "Det tog för lång tid att skicka. Försök igen."
-            : "Anropet blockerades eller nådde inte servern. Kontrollera CORS, CSP eller backend-URL.";
+  ? "Det tog för lång tid att skicka förfrågan. Kontrollera din anslutning och försök igen."
+  : "Vi kunde inte skicka förfrågan just nu. Kontrollera din internetanslutning och försök igen.";
 
+showFormMessage(
+  messageBox,
+  "error",
+  message,
+  true
+);
           showFormMessage(messageBox, "error", message);
 
         } finally {

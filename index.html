@@ -472,7 +472,6 @@
 
         <div class="contact-box">
           <form id="contactForm">
-          <p id="formMessage" class="form-message"></p>
   <h3>Kontaktformulär</h3>
   <input type="text" id="name" name="Namn" placeholder="Ditt namn" required>
   <input type="email" id="email" name="E-post" placeholder="Din e-post" required>
@@ -630,9 +629,20 @@
     <span>Jag godkänner att mina uppgifter används för att besvara min förfrågan enligt <a href="integritet.html" target="_blank" rel="noopener noreferrer">integritetspolicyn</a>.</span>
   </label>
 
+<div class="form-submit-area">
+
   <button id="submitFormBtn" type="submit" class="btn btn-primary">
-  Skicka förfrågan
-</button>
+    Skicka förfrågan
+  </button>
+
+  <div
+    id="formMessage"
+    class="form-message"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+</div>
 </form>
         </div>
       </div>
