@@ -26,7 +26,13 @@
 function showFormMessage(element, type, message, shouldScroll = false) {
   if (!element) return;
 
+  // Viktigt: tidigare submit kan ha lämnat en inline display:none.
+  // Inline-stilen vinner över CSS-klassen .show, så ta bort den här.
+  element.style.removeProperty("display");
+
   element.className = `form-message ${type} show`;
+  element.setAttribute("role", type === "error" ? "alert" : "status");
+  element.setAttribute("aria-live", type === "error" ? "assertive" : "polite");
 
   element.innerHTML = `
     <span class="form-message__icon" aria-hidden="true">
@@ -102,6 +108,16 @@ function escapeMessage(value) {
   return div.innerHTML;
 }
 
+function hideFormMessage(element) {
+  if (!element) return;
+
+  element.className = "form-message";
+  element.innerHTML = "";
+  element.style.removeProperty("display");
+  element.setAttribute("role", "status");
+  element.setAttribute("aria-live", "polite");
+}
+
   function resetSubmitButton(button) {
     if (!button) return;
 
@@ -114,6 +130,8 @@ function escapeMessage(value) {
     const menuBtn = $("#menuBtn");
     const navMenu = $("#navMenu");
     const contactForm = $("#contactForm");
+    const nameInput = $("#name");
+    const emailInput = $("#email");
     const phoneInput = $("#phone");
     const serviceDropdownBtn = $("#serviceDropdownBtn");
     const serviceOptions = $("#serviceOptions");
@@ -202,39 +220,54 @@ function escapeMessage(value) {
         const submitBtn = $("#submitFormBtn");
         const privacyConsent = $("#privacyConsent");
         const honeypot = $("#website");
+        const nameValue = nameInput ? nameInput.value.trim() : "";
+        const emailValue = emailInput ? emailInput.value.trim() : "";
         const cleanPhone = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
 
         if (!messageBox || !hiddenInput || !submitBtn) return;
 
-        messageBox.className = "form-message";
-        messageBox.style.display = "none";
-        messageBox.textContent = "";
+        hideFormMessage(messageBox);
 
         if (honeypot && honeypot.value.trim() !== "") return;
 
-        if (privacyConsent && !privacyConsent.checked) {
-  const privacyBox = privacyConsent.closest(".privacy-consent");
+        if (!nameValue) {
+          showFieldError(
+            nameInput,
+            "Fyll i ditt namn."
+          );
+          return;
+        }
 
-  showFieldError(
-    privacyConsent,
-    "Godkänn integritetspolicyn innan du skickar.",
-    {
-      container: privacyBox,
-      focus: true
-    }
-  );
-
-  return;
-}
+        if (!emailValue || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+          showFieldError(
+            emailInput,
+            "Fyll i en giltig e-postadress, till exempel namn@gmail.com."
+          );
+          return;
+        }
 
         if (cleanPhone.length < 7) {
-  showFieldError(
-    phoneInput,
-    "Fyll i ett giltigt telefonnummer."
-  );
+          showFieldError(
+            phoneInput,
+            "Fyll i ett giltigt telefonnummer."
+          );
+          return;
+        }
 
-  return;
-}
+        if (privacyConsent && !privacyConsent.checked) {
+          const privacyBox = privacyConsent.closest(".privacy-consent");
+
+          showFieldError(
+            privacyConsent,
+            "Godkänn integritetspolicyn innan du skickar.",
+            {
+              container: privacyBox,
+              focus: true
+            }
+          );
+
+          return;
+        }
 
         hiddenInput.value = selectedServiceNames.join(", ");
 
@@ -343,7 +376,7 @@ if (totalFiles > 10) {
         });
 
         const controller = new AbortController();
-        const timeoutId = window.setTimeout(() => controller.abort(), 90000);
+        const timeoutId = window.setTimeout(() => controller.abort(), 30000);
 
         try {
           const response = await fetch(BACKEND_URL, {
@@ -404,11 +437,6 @@ if (totalFiles > 10) {
             });
           });
 
-          contactForm.scrollIntoView({
-            behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-            block: "start"
-          });
-
         } catch (error) {
           console.error("Fetch failed:", error);
 
@@ -422,7 +450,6 @@ showFormMessage(
   message,
   true
 );
-          showFormMessage(messageBox, "error", message);
 
         } finally {
           window.clearTimeout(timeoutId);
