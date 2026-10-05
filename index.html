@@ -126,7 +126,7 @@
 </button>
 
     <nav id="navMenu">
-      <a href="index.html#hem">Start</a>
+      <a href="index.html#hem"></a>Hem</a>
       <div class="nav-dropdown">
   <a href="index.html#tjanster" class="nav-dropdown-toggle">
   Tjänster
@@ -497,16 +497,9 @@
       <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Ultrarent vatten"> <span>Ultrarent vatten</span></label>
       <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Golvvård"> <span>Golvvård</span></label>
       <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Skyltputs"> <span>Skyltputs</span></label>
-      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Fasadtvätt"> <span>Fasadtvätt</span></label>
+      <label class="checkbox-row service-option"><input type="checkbox" class="service-checkbox" value="Höghöjdsdammsugning"> <span>Höghöjdsdammsugning</span></label>
     </div>
   </div>
-
-  <input type="hidden" id="selectedServicesInput" name="Valda Tjänster">
-  <input type="hidden" name="_subject" value="Ny offertförfrågan från hemsidan">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_next" value="http://127.0.0.1:5500/tack.html">
-
   <textarea id="mailSummary" name="Sammanfattning" hidden></textarea>
 
   <div class="honeypot-field" aria-hidden="true">
@@ -602,16 +595,16 @@
       </div>
     </div>
 
-    <div class="service-extra" data-service="Fasadtvätt">
-      <button type="button" class="service-extra-toggle">Fasadtvätt - detaljer</button>
+    <div class="service-extra" data-service="Höghöjdsdammsugning">
+      <button type="button" class="service-extra-toggle">Höghöjdsdammsugning - detaljer</button>
       <div class="service-extra-content">
-        <input type="text" name="_fasadtvatt_yta" data-mail-label="Fasadtvätt - yta" placeholder="Storlek / yta">
-        <textarea name="_fasadtvatt_beskrivning" data-mail-label="Fasadtvätt - beskrivning" placeholder="Beskriv jobbet"></textarea>
+        <input type="text" name="_hoghojdsdammsugning_yta" data-mail-label="Höghöjdsdammsugning - yta" placeholder="Storlek / yta">
+        <textarea name="_hoghojdsdammsugning_beskrivning" data-mail-label="Höghöjdsdammsugning - beskrivning" placeholder="Beskriv jobbet"></textarea>
         <label class="upload-label">
           Lägg till bilder
 <input 
   type="file" 
-  name="fasadtvatt_bilder"
+  name="hoghojdsdammsugning_bilder"
   data-mail-label="Bilder"
   accept="image/png, image/jpeg, image/webp"
   multiple
@@ -629,12 +622,16 @@
     <span>Jag godkänner att mina uppgifter används för att besvara min förfrågan enligt <a href="integritet.html" target="_blank" rel="noopener noreferrer">integritetspolicyn</a>.</span>
   </label>
 
+<div class="turnstile-wrap">
   <div
-  class="cf-turnstile"
-  data-sitekey="0x4AAAAAAFONVT8HoMLba1d6"
-  data-theme="light"
-  data-size="flexible"
-></div>
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAAFONVT8HoMLba1d6"
+    data-theme="light"
+    data-size="normal"
+    data-language="sv"
+    data-appearance="interaction-only"
+  ></div>
+</div>
 
 <div class="form-submit-area">
 
@@ -674,7 +671,7 @@
       <h3>Snabblänkar</h3>
 
       <div class="footer-nav">
-        <a href="index.html#hem">Start</a>
+        <a href="index.html#hem">Hem</a>
         <a href="index.html#tjanster">Tjänster</a>
         <a href="index.html#historia">Historia</a>
         <a href="index.html#kvalitet">Kvalitet & Miljö</a>
