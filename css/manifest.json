@@ -1,0 +1,192 @@
+[
+  {
+    "file": "core/01-tokens-global.css",
+    "lines": "1-34",
+    "description": "Design tokens and global defaults"
+  },
+  {
+    "file": "components/02-header-navigation.css",
+    "lines": "35-122",
+    "description": "Header and navigation"
+  },
+  {
+    "file": "sections/03-hero-buttons.css",
+    "lines": "123-191",
+    "description": "Hero and shared buttons"
+  },
+  {
+    "file": "sections/04-content-cards-services.css",
+    "lines": "192-339",
+    "description": "Content, cards and service overview"
+  },
+  {
+    "file": "components/05-contact-forms.css",
+    "lines": "340-478",
+    "description": "Contact and forms"
+  },
+  {
+    "file": "components/06-floating-controls.css",
+    "lines": "479-501",
+    "description": "Floating controls"
+  },
+  {
+    "file": "pages/07-privacy-service-pages.css",
+    "lines": "502-694",
+    "description": "Privacy and legacy service page styles"
+  },
+  {
+    "file": "core/08-animations.css",
+    "lines": "695-734",
+    "description": "Animations"
+  },
+  {
+    "file": "responsive/09-core-responsive.css",
+    "lines": "735-888",
+    "description": "Core responsive layout"
+  },
+  {
+    "file": "components/10-before-after-sliders.css",
+    "lines": "889-1029",
+    "description": "Before-and-after sliders"
+  },
+  {
+    "file": "overrides/11-navigation-service-refinements.css",
+    "lines": "1030-1322",
+    "description": "Navigation and service refinements"
+  },
+  {
+    "file": "overrides/12-visual-wide-screen.css",
+    "lines": "1323-1551",
+    "description": "Visual effects and wide-screen adjustments"
+  },
+  {
+    "file": "components/13-uploads-motion-assets.css",
+    "lines": "1552-1624",
+    "description": "Uploads and motion assets"
+  },
+  {
+    "file": "responsive/14-adaptive-layout.css",
+    "lines": "1625-2050",
+    "description": "Adaptive layout"
+  },
+  {
+    "file": "overrides/15-header-footer-refinements.css",
+    "lines": "2051-2160",
+    "description": "Header and footer refinements"
+  },
+  {
+    "file": "overrides/16-device-fallbacks.css",
+    "lines": "2161-2326",
+    "description": "Device fallbacks"
+  },
+  {
+    "file": "overrides/17-final-surface-buttons.css",
+    "lines": "2327-2595",
+    "description": "Final surface and button cascade"
+  },
+  {
+    "file": "overrides/18-performance-reduced-motion.css",
+    "lines": "2596-2639",
+    "description": "Performance and reduced-motion safeguards"
+  },
+  {
+    "file": "overrides/19-interaction-content-polish.css",
+    "lines": "2640-2783",
+    "description": "Interaction and content polish"
+  },
+  {
+    "file": "overrides/20-responsive-shadows-density.css",
+    "lines": "2784-2945",
+    "description": "Responsive shadows, hamburger and mobile density"
+  },
+  {
+    "file": "components/21-header-social-buttons.css",
+    "lines": "2946-3037",
+    "description": "Header social button effects"
+  },
+  {
+    "file": "sections/22-service-card-expansion.css",
+    "lines": "3038-3218",
+    "description": "Expanding service cards"
+  },
+  {
+    "file": "sections/23-company-history-slider.css",
+    "lines": "3219-3534",
+    "description": "Company history slider and navigation spacing"
+  },
+  {
+    "file": "sections/24-home-fullwidth-history.css",
+    "lines": "3535-4208",
+    "description": "Home full-width sections and history embed/responsive rules"
+  },
+  {
+    "file": "themes/25-sharp-surfaces.css",
+    "lines": "4209-4445",
+    "description": "Sharp surface/card system and compact history"
+  },
+  {
+    "file": "sections/26-hero-quality-environment.css",
+    "lines": "4446-4765",
+    "description": "Centered hero, large-screen hero, quality/environment cards"
+  },
+  {
+    "file": "components/27-form-polish.css",
+    "lines": "4766-5306",
+    "description": "Form fields, checkboxes, uploads and service selection polish"
+  },
+  {
+    "file": "components/28-privacy-footer.css",
+    "lines": "5307-5702",
+    "description": "Privacy surfaces and footer system"
+  },
+  {
+    "file": "components/29-social-buttons-polish.css",
+    "lines": "5703-5880",
+    "description": "Social buttons polished version"
+  },
+  {
+    "file": "sections/30-history-status.css",
+    "lines": "5881-6053",
+    "description": "History step/status polish"
+  },
+  {
+    "file": "pages/31-clean-service-pages.css",
+    "lines": "6054-6559",
+    "description": "Clean service-page system"
+  },
+  {
+    "file": "components/32-links-service-cta.css",
+    "lines": "6560-6785",
+    "description": "Shared text links and service-page bottom CTA"
+  },
+  {
+    "file": "sections/33-social-history-header.css",
+    "lines": "6786-6982",
+    "description": "Social embeds, history mobile fixes and header centering"
+  },
+  {
+    "file": "components/34-mobile-menu-fullscreen.css",
+    "lines": "6983-7251",
+    "description": "Fullscreen mobile menu"
+  },
+  {
+    "file": "components/35-mobile-menu-morph.css",
+    "lines": "7252-7449",
+    "description": "Mobile menu hamburger-to-close morph and final polish"
+  },
+  {
+    "file": "components/36-mobile-menu-v10.css",
+    "lines": "7450-7531",
+    "description": "Red close icon and unified contact links"
+  },
+  {
+    "file": "components/37-header-final-layout.css",
+    "lines": "7532-7850",
+    "description": "Final desktop/mobile header placement"
+  },
+  {
+    "file": "sections/38-social-media-final-fix.css",
+    "lines": "7851-7915",
+    "description": "Final social media layout fix"
+  }
+]

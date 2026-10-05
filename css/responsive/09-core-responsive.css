@@ -1,0 +1,154 @@
+/* Core responsive layout */
+
+@media (max-width: 1366px) {
+  header{ padding-inline: 4%; gap: 12px; }
+
+  nav{ gap: 18px; flex-wrap: wrap; justify-content: center; }
+
+  .nav-dropdown-toggle, nav a{ font-size: 13px; }
+
+  .hero{ grid-template-columns: 1fr; min-height: auto; padding: 80px 6% 60px; gap: 32px; }
+
+  .hero-logo{ width: min(420px,100%); }
+
+  .hero-text h1{ font-size: clamp(38px,6vw,62px); }
+
+  .hero-text p{ font-size: 16px; }
+
+  .about, .content-section{ padding: 70px 5%; }
+}
+
+@media (max-width: 950px) {
+  .about, .contact-layout, .hero, .historia-grid, .service-detail-card, .service-extra-grid, .service-hero-detail, .service-info-grid, .services-grid, .social-grid, .window-premium-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .hero{ justify-items: center; text-align: center; }
+
+  .hero-card{ width: 100%; max-width: 500px; }
+
+  .hero-logo{ margin: 0 auto 18px; }
+
+  .hero-text{ display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+  .hero-buttons{ justify-content: center; }
+
+  .historia-image img{ height: 380px; }
+
+  .service-hero-image img{ height: 360px; }
+
+  .slider-gallery.two-sliders{ max-width: 100%; }
+
+  .slider-gallery.two-sliders .premium-slider{ height: 220px; }
+}
+
+@media (max-width: 700px) {
+  header{ padding: 14px 6%; }
+
+  .logo img{ height: 40px; }
+
+  .menu-btn{ display: block; }
+
+  .social-icons{ display: none; }
+
+  nav{
+    display: none; position: absolute; top: 100%; left: 0; width: 100%; flex-direction: column; align-items: stretch;
+    gap: 10px; padding: 22px; background: rgba(255,255,255,.97); border-top: 1px solid var(--gray-border);
+    box-shadow: 0 18px 35px rgba(1,1,1,.08); z-index: 999;
+  }
+
+  nav.active{ display: flex; }
+
+  nav a{ display: block; padding: 10px 0; color: var(--text-dark); }
+
+  nav > a.active::after {
+  display: none;
+}
+
+  .nav-dropdown{ width: 100%; padding: 0; }
+
+  .nav-dropdown-toggle{ width: 100%; justify-content: space-between; padding: 10px 0; font-size: 14px; }
+
+  .nav-dropdown-menu{
+    position: static; display: none; min-width: 100%; margin-top: 6px; padding: 10px 14px 10px 18px;
+    border-radius: 16px; background: rgba(156,35,36,.045); border: 1px solid rgba(156,35,36,.1); box-shadow: none;
+    opacity: 1; pointer-events: auto; transform: none;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-menu{ display: none; }
+
+  .nav-dropdown.open .nav-dropdown-menu{ display: block; }
+
+  .nav-dropdown-menu a{ padding: 8px 0; }
+
+  
+
+  .hero{ padding: 55px 5% 45px; gap: 32px; }
+
+  .hero-logo{ width: min(320px,100%); margin-bottom: 18px; }
+
+  .hero-text h1{ font-size: 38px; letter-spacing: -1.4px; }
+
+  .hero-text p{ font-size: 15px; line-height: 1.6; }
+
+  .hero-card{ padding: 22px; }
+
+  .hero-card h2{ font-size: 24px; }
+
+  .about, .content-section{
+    width: calc(100% - 18px); padding: 42px 5%; margin: 18px auto; border-radius: 24px;
+  }
+
+  .section-title{ margin-bottom: 34px; }
+
+  .section-title h2{ font-size: 30px; }
+
+  .service-card{ height: auto; min-height: 300px; }
+
+  .service-text{ left: 14px; right: 14px; bottom: 14px; padding: 15px; }
+
+  .service-text h3{ font-size: 21px; }
+
+  .service-text p{ font-size: 14px; }
+
+  .stats{ grid-template-columns: 1fr; }
+
+  .historia-image img{ height: 300px; }
+
+  .card, .contact-box, .contact-details{ padding: 24px; }
+
+  .social-frame{ height: 420px; }
+
+  .floating-buttons{ right: 14px; bottom: 14px; }
+
+  .floating-call{ left: 14px; bottom: 14px; padding: 12px 15px; font-size: 14px; }
+
+  .scroll-top-btn{ width: 44px; height: 44px; font-size: 22px; }
+
+  .privacy-page{ padding-top: 90px; }
+
+  .service-page{ width: calc(100% - 18px); padding: 34px 0 54px; }
+
+  .service-cta, .service-detail-card, .service-hero-detail, .service-info-section{ border-radius: 24px; }
+
+  .service-hero-image img{ height: 280px; border-radius: 20px; }
+
+  .before-after-card{ padding: 14px; }
+}
+
+@media (max-width: 520px) {
+  .slider-gallery.two-sliders .premium-slider{ height: 180px; }
+
+  .window-offer-list{ padding: 18px; }
+}
+
+@media (max-width: 420px) {
+  .hero-text h1{ font-size: 34px; }
+
+  .btn{ width: 100%; text-align: center; }
+
+  .floating-call{ font-size: 13px; padding: 10px 13px; }
+
+  .scroll-top-btn{ width: 40px; height: 40px; }
+}
+

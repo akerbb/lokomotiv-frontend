@@ -1,0 +1,674 @@
+/* =========================================
+   Tjänster: ta bort transparent ruta bakom text
+   ========================================= */
+#tjanster .service-card .service-text.service-card-content {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* =========================================
+   FULL-WIDTH HUVUDSEKTIONER
+   Tar bort stora yttre "kort" och låter varje
+   huvuddel löpa kant-till-kant över sidan.
+   ========================================= */
+main > .content-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-top: clamp(76px, 7vw, 112px) !important;
+  padding-bottom: clamp(76px, 7vw, 112px) !important;
+  padding-left: max(24px, calc((100% - 1240px) / 2)) !important;
+  padding-right: max(24px, calc((100% - 1240px) / 2)) !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Tydliga, lugna band mellan delarna */
+main > #tjanster,
+main > #kvalitet,
+main > #kontakt {
+  background: #ffffff !important;
+}
+
+main > #historia,
+main > #sociala-medier {
+  background: #f5f5f6 !important;
+}
+
+main > #historia,
+main > #kvalitet,
+main > #sociala-medier,
+main > #kontakt {
+  border-top: 1px solid rgba(15, 23, 42, .06) !important;
+}
+
+/* Innehållet hålls professionellt centrerat */
+main > .content-section > .section-title {
+  width: min(100%, 780px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+main > .content-section > .services-grid,
+main > .content-section > .social-grid,
+main > .content-section > .contact-layout {
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Läs mer: bara vit text, ingen knappbakgrund */
+#tjanster .service-card-button,
+#tjanster .service-link-text {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 700px) {
+  main > .content-section {
+    padding-top: 58px !important;
+    padding-bottom: 58px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+}
+
+/* =========================================
+   TRUE FULL-BLEED HOME SECTIONS
+   Gör själva <main> fullbredd på startsidan så
+   huvudsektionernas bakgrunder når viewportens kanter.
+   ========================================= */
+body:not(.service-body):not(.privacy-body) > main {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > .content-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+  padding-left: max(24px, calc((100vw - 1240px) / 2)) !important;
+  padding-right: max(24px, calc((100vw - 1240px) / 2)) !important;
+}
+
+@media (max-width: 700px) {
+  body:not(.service-body):not(.privacy-body) > main > .content-section {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+}
+
+/* =========================================
+   HOME: HERO FYLLER FÖRSTA SKÄRMEN
+   Våra tjänster börjar först under viewporten.
+   ========================================= */
+body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+  min-height: calc(100svh - var(--header-height)) !important;
+  box-sizing: border-box !important;
+}
+
+/* Fallback för webbläsare utan svh-stöd */
+@supports not (height: 100svh) {
+  body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+    min-height: calc(100vh - var(--header-height)) !important;
+  }
+}
+
+
+/* ========================================
+   EXACT CODEPEN HISTORY EMBED
+   Original pen: jcoulterdesign / zdwajv
+   Kept intentionally unchanged inside iframe.
+   ======================================== */
+#historia.codepen-history-section{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+#historia .codepen-history-frame{
+  display: block;
+  width: 100%;
+  height: 620px;
+  min-height: 620px;
+  border: 0;
+  background: #a6cde2;
+}
+
+@media (max-width: 800px){
+  #historia .codepen-history-frame{
+    height: 620px;
+    min-height: 620px;
+  }
+}
+
+
+/* ========================================
+   CODEPEN HISTORY — LOCAL STATUS REPLACEMENT
+   Keeps the original five-step visual language.
+   Only the gift/package status artwork is replaced.
+   ======================================== */
+
+#historia.codepen-history-section{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+#historia .cp-history{
+  min-height: 620px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #a6cde2;
+  color: #2e6c8e;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+}
+
+#historia .cp-history,
+#historia .cp-history *{
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+#historia .cp-history__inner{
+  position: relative;
+  width: 700px;
+  max-width: calc(100vw - 48px);
+  height: 200px;
+}
+
+#historia .cp-history__step{
+  position: relative;
+  z-index: 4;
+  float: left;
+  width: 20%;
+  padding: 0 10px;
+  color: #000000;
+  font-size: 14px;
+  text-align: center;
+  transition: color .4s ease;
+}
+
+#historia .cp-history__step::before{
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  border: 3px solid #a6cde2;
+  border-radius: 50%;
+  background: #fff;
+  color: #70afd0;
+  line-height: 24px;
+  font-size: 12px;
+  transition: color .4s ease, background .4s ease;
+  pointer-events: none;
+}
+
+#historia .cp-history__step:nth-of-type(1)::before{ content: "1"; }
+#historia .cp-history__step:nth-of-type(2)::before{ content: "2"; }
+#historia .cp-history__step:nth-of-type(3)::before{ content: "3"; }
+#historia .cp-history__step:nth-of-type(4)::before{ content: "4"; }
+#historia .cp-history__step:nth-of-type(5)::before{ content: "5"; }
+
+#historia .cp-history__step label{
+  position: relative;
+  top: -20px;
+  display: block;
+  padding-top: 50px;
+  cursor: pointer;
+}
+
+#historia .cp-history__step:hover{
+  color: #000000;
+}
+
+#historia .cp-history__step:hover::before{
+  color: #fff;
+  background: #9c2324;
+}
+
+#historia .cp-history__inner > input[type="radio"]{
+  display: none;
+}
+
+#historia .cp-history__bar,
+#historia .cp-history__bar-set{
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 10%;
+  height: 6px;
+  border-radius: 6px;
+}
+
+#historia .cp-history__bar{
+  z-index: 2;
+  width: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    #9c2324,
+    #9c2324 4px,
+    #7f1c1d 4px,
+    #7f1c1d 10px
+  );
+  transition: width 800ms cubic-bezier(.915,.015,.3,1.005);
+}
+
+#historia .cp-history__bar-set{
+  width: 80%;
+  background: #7f1c1ead;
+}
+
+#historia .cp-history__tabs{
+  position: absolute;
+  z-index: 3;
+  top: 80px;
+  left: 0;
+  width: 100%;
+}
+
+#historia .cp-history__tab{
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 1px #80b7d5;
+  opacity: 0;
+  text-align: center;
+  transition: opacity .2s ease, top .2s ease;
+  pointer-events: none;
+}
+
+#historia .cp-history__tab h3{
+  margin: 0;
+  color: #000000;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+#historia .cp-history__tab p{
+  margin: 12px 0 0;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+  opacity: .8;
+}
+
+#historia .cp-history__status{
+  position: absolute;
+  z-index: 6;
+  top: -84px;
+  left: 10%;
+  width: 72px;
+  height: 54px;
+  transform: translateX(-50%);
+  transition: left 800ms cubic-bezier(.915,.015,.3,1.005);
+  pointer-events: none;
+}
+
+/* Same five-step mechanics as the CodePen */
+#historia #cp-step-1:checked ~ .cp-history__bar{ width: 0; }
+#historia #cp-step-2:checked ~ .cp-history__bar{ width: 20%; }
+#historia #cp-step-3:checked ~ .cp-history__bar{ width: 40%; }
+#historia #cp-step-4:checked ~ .cp-history__bar{ width: 60%; }
+#historia #cp-step-5:checked ~ .cp-history__bar{ width: 80%; }
+
+#historia #cp-step-1:checked ~ .cp-history__status{ left: 10%; }
+#historia #cp-step-2:checked ~ .cp-history__status{ left: 30%; }
+#historia #cp-step-3:checked ~ .cp-history__status{ left: 50%; }
+#historia #cp-step-4:checked ~ .cp-history__status{ left: 70%; }
+#historia #cp-step-5:checked ~ .cp-history__status{ left: 90%; }
+
+#historia #cp-step-1:checked ~ .cp-history__tabs .cp-history__tab--1,
+#historia #cp-step-2:checked ~ .cp-history__tabs .cp-history__tab--2,
+#historia #cp-step-3:checked ~ .cp-history__tabs .cp-history__tab--3,
+#historia #cp-step-4:checked ~ .cp-history__tabs .cp-history__tab--4,
+#historia #cp-step-5:checked ~ .cp-history__tabs .cp-history__tab--5{
+  top: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep CodePen's fixed desktop composition; scale it instead of redesigning it. */
+@media (max-width: 760px){
+  #historia .cp-history{
+    min-height: 560px;
+  }
+
+  #historia .cp-history__inner{
+    width: 700px;
+    max-width: none;
+    transform: scale(.78);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 560px){
+  #historia .cp-history__inner{
+    transform: scale(.58);
+  }
+}
+
+#historia .cp-history__status {
+  top: -25px !important;
+}
+
+#historia .cp-train-image {
+  width: 110px;
+  height: auto;
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(calc(-50% + 30px));
+}
+
+/* ========================================
+   CODEPEN HISTORY TIMELINE - RESPONSIVE FIX
+   ======================================== */
+
+/* Tablet / smaller laptops */
+@media (max-width: 900px) {
+  #historia .cp-history {
+    min-height: 540px !important;
+    padding: 72px 24px 56px !important;
+  }
+
+  #historia .cp-history__inner {
+    width: min(100%, 700px) !important;
+    max-width: 100% !important;
+    height: 240px !important;
+    transform: none !important;
+    transform-origin: center !important;
+  }
+
+  #historia .cp-history__step {
+    padding-inline: 6px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+
+  #historia .cp-history__tab {
+    padding: 26px 24px !important;
+  }
+
+  #historia .cp-train-image {
+    width: 96px !important;
+    transform: translateX(calc(-50% + 25px)) !important;
+  }
+}
+
+/* Phones */
+@media (max-width: 700px) {
+  #historia .cp-history {
+    min-height: 500px !important;
+    padding: 64px 14px 48px !important;
+    overflow: hidden !important;
+  }
+
+  #historia .cp-history__inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 270px !important;
+    transform: none !important;
+  }
+
+  #historia .cp-history__step {
+    width: 20% !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    line-height: 1.15 !important;
+  }
+
+  #historia .cp-history__step::before {
+    width: 28px !important;
+    height: 28px !important;
+    margin-left: -14px !important;
+    border-width: 3px !important;
+    line-height: 22px !important;
+    font-size: 11px !important;
+  }
+
+  #historia .cp-history__step label {
+    top: -14px !important;
+    padding-top: 46px !important;
+    min-height: 68px !important;
+    overflow-wrap: anywhere;
+  }
+
+  #historia .cp-history__bar,
+  #historia .cp-history__bar-set {
+    top: 11px !important;
+    height: 5px !important;
+  }
+
+  #historia .cp-history__tabs {
+    top: 86px !important;
+  }
+
+  #historia .cp-history__tab {
+    padding: 22px 18px !important;
+    border-radius: 12px !important;
+  }
+
+  #historia .cp-history__tab h3 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+  }
+
+  #historia .cp-history__tab p {
+    margin-top: 10px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  #historia .cp-history__status {
+    top: -18px !important;
+    width: 54px !important;
+    height: 42px !important;
+  }
+
+  #historia .cp-train-image {
+    width: 78px !important;
+    transform: translateX(calc(-50% + 19px)) !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 430px) {
+  #historia .cp-history {
+    min-height: 480px !important;
+    padding-inline: 10px !important;
+  }
+
+  #historia .cp-history__inner {
+    height: 280px !important;
+  }
+
+  #historia .cp-history__step {
+    font-size: 10px !important;
+    padding-inline: 1px !important;
+  }
+
+  #historia .cp-history__step::before {
+    width: 26px !important;
+    height: 26px !important;
+    margin-left: -13px !important;
+    line-height: 20px !important;
+    font-size: 10px !important;
+  }
+
+  #historia .cp-history__step label {
+    padding-top: 43px !important;
+  }
+
+  #historia .cp-history__tabs {
+    top: 82px !important;
+  }
+
+  #historia .cp-history__tab {
+    padding: 20px 15px !important;
+  }
+
+  #historia .cp-history__tab h3 {
+    font-size: 20px !important;
+  }
+
+  #historia .cp-history__tab p {
+    font-size: 13px !important;
+  }
+
+  #historia .cp-history__status {
+    top: -15px !important;
+  }
+
+  #historia .cp-train-image {
+    width: 70px !important;
+    transform: translateX(calc(-50% + 17px)) !important;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  #historia .cp-history__status,
+  #historia .cp-history__bar,
+  #historia .cp-history__tab {
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – samma layout som övriga sektioner
+   ========================================= */
+
+#historia.codepen-history-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+
+  padding-top: clamp(76px, 7vw, 112px) !important;
+  padding-bottom: clamp(76px, 7vw, 112px) !important;
+  padding-left: max(24px, calc((100% - 1240px) / 2)) !important;
+  padding-right: max(24px, calc((100% - 1240px) / 2)) !important;
+
+  background: #f5f5f6 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+
+/* Ingen blå bakgrund bakom tidslinjen */
+#historia .cp-history {
+  background: transparent !important;
+  color: var(--text-dark) !important;
+}
+
+
+/* Stegtexter */
+#historia .cp-history__step {
+  color: var(--text-muted) !important;
+}
+
+#historia .cp-history__step:hover {
+  color: var(--primary) !important;
+}
+
+
+/* Numrerade cirklar */
+#historia .cp-history__step::before {
+  background: #fff !important;
+  color: var(--primary) !important;
+  border-color: #f5f5f6 !important;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, .08);
+}
+
+#historia .cp-history__step:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+
+
+/* Rälsen */
+#historia .cp-history__bar-set {
+  background: #d9dde2 !important;
+}
+
+#historia .cp-history__bar {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--primary),
+    var(--primary) 4px,
+    var(--wine) 4px,
+    var(--wine) 10px
+  ) !important;
+}
+
+
+/* Informationskortet */
+#historia .cp-history__tab {
+  background: #fff !important;
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, .08),
+    0 1px 2px rgba(15, 23, 42, .05) !important;
+}
+
+#historia .cp-history__tab h3 {
+  color: var(--text-strong) !important;
+}
+
+#historia .cp-history__tab p {
+  color: var(--text-muted) !important;
+}
+
+
+/* Mobil – samma padding som övriga sektioner */
+@media (max-width: 700px) {
+  #historia.codepen-history-section {
+    padding-top: 58px !important;
+    padding-bottom: 58px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+}
+

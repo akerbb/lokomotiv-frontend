@@ -1,0 +1,178 @@
+/* =========================================
+   SOCIALKNAPPAR = BTN SECONDARY
+   ========================================= */
+
+header .header-actions .social-icons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+
+/* Behåll exakt btn-secondary-look,
+   men gör dem kvadratiska ikonknappar */
+header .header-actions .social-icons .social-button.btn.btn-secondary {
+  display: grid !important;
+  place-items: center !important;
+
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+
+  padding: 0 !important;
+
+  border-radius: 0 !important;
+
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  color: #fff !important;
+
+  border: 3px solid transparent !important;
+
+  box-shadow: none !important;
+
+  transform: none !important;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease !important;
+}
+
+
+/* SVG */
+header .header-actions .social-icons .social-button .icon {
+  width: 18px !important;
+  height: 18px !important;
+
+  fill: currentColor !important;
+
+  transform: none !important;
+}
+
+
+/* Hover = samma som Se våra tjänster */
+@media (hover: hover) and (pointer: fine) {
+
+  header .header-actions .social-icons .social-button.btn.btn-secondary:hover {
+    background: #fff !important;
+
+    color: var(--primary) !important;
+
+    border-color: var(--primary) !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+  }
+}
+
+
+/* Ta bort alla gamla social-pseudoeffekter */
+header .header-actions .social-icons .social-button::before,
+header .header-actions .social-icons .social-button::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* =========================================
+   SOCIALKNAPPAR – POLERAD VERSION
+   ========================================= */
+
+header .header-actions .social-icons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+header .header-actions .social-icons .social-button.btn.btn-secondary {
+  position: relative !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+
+  padding: 0 !important;
+
+  border: 3px solid transparent !important;
+  border-radius: 0 !important;
+
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  color: #fff !important;
+
+  box-shadow: none !important;
+  transform: none !important;
+
+  overflow: hidden !important;
+
+  transition:
+    background-color .22s ease,
+    border-color .22s ease,
+    color .22s ease !important;
+}
+
+
+/* Större ikoner */
+header .header-actions .social-icons .social-button .icon {
+  width: 23px !important;
+  height: 23px !important;
+
+  fill: currentColor !important;
+
+  position: relative !important;
+  z-index: 2 !important;
+
+  transform: scale(1) !important;
+
+  transition:
+    transform .28s cubic-bezier(.2,.8,.2,1) !important;
+}
+
+
+/* Hover */
+@media (hover: hover) and (pointer: fine) {
+
+  header .header-actions .social-icons .social-button.btn.btn-secondary:hover {
+    background: #fff !important;
+
+    color: var(--primary) !important;
+
+    border-color: var(--primary) !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ikonen förstoras lite */
+  header .header-actions .social-icons .social-button.btn.btn-secondary:hover .icon {
+    transform: scale(1.18) !important;
+  }
+}
+
+
+/* Klickkänsla */
+header .header-actions .social-icons .social-button.btn.btn-secondary:active .icon {
+  transform: scale(.92) !important;
+}
+
+
+/* Keyboard */
+header .header-actions .social-icons .social-button.btn.btn-secondary:focus-visible {
+  outline: 2px solid rgba(156,35,36,.25) !important;
+  outline-offset: 3px !important;
+}
+
+
+/* Ta bort gamla pseudo-animationer */
+header .header-actions .social-icons .social-button::before,
+header .header-actions .social-icons .social-button::after {
+  content: none !important;
+  display: none !important;
+}
+

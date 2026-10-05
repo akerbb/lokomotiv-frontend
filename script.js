@@ -13,7 +13,7 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const BACKEND_URL = "https://lokomotiv-backend.onrender.com/send-email";
+  const BACKEND_URL = "https://lokomotiv-backend.onrender.com/api/contact";
 
   function onReady(callback) {
     if (document.readyState === "loading") {

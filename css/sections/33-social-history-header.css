@@ -1,0 +1,197 @@
+/* =========================================
+   SOCIALA MEDIER – STABIL FACEBOOK IFRAME
+   ========================================= */
+
+/*
+  Facebook Page Plugin stöder max ca 500px innehållsbredd.
+  Därför får själva iframe:n aldrig sträckas bredare än 500px.
+  Reglerna ligger sist för att vinna över äldre social-frame-regler.
+*/
+
+#sociala-medier .social-grid {
+  align-items: start !important;
+}
+
+#sociala-medier .social-box {
+  min-width: 0 !important;
+}
+
+/* Instagram-kortet är just nu bara en länk/header – låt det inte bli 500–680px högt */
+#sociala-medier .social-box--instagram {
+  min-height: 0 !important;
+}
+
+/* Facebook-kortet ska anpassa sig efter innehållet, inte tvingas till gammal min-height */
+#sociala-medier .social-box--facebook {
+  min-height: 0 !important;
+}
+
+/* Själva Facebook-pluginen */
+#sociala-medier .social-box--facebook .social-frame {
+  display: block !important;
+
+  width: 100% !important;
+  max-width: 500px !important;
+
+  height: 600px !important;
+  min-height: 600px !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  flex: 0 0 auto !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+  overflow: hidden !important;
+}
+
+/* Tablet / mindre laptop: lägg sociala kort under varandra och centrera dem */
+@media (max-width: 1050px) {
+  #sociala-medier .social-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  #sociala-medier .social-box--instagram,
+  #sociala-medier .social-box--facebook {
+    width: min(100%, 560px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Mobil */
+@media (max-width: 560px) {
+  #sociala-medier .social-box {
+    width: 100% !important;
+    padding: 18px !important;
+  }
+
+  #sociala-medier .social-header {
+    flex-wrap: wrap !important;
+  }
+
+  #sociala-medier .social-box--facebook .social-frame {
+    width: 100% !important;
+    max-width: 500px !important;
+
+    height: 520px !important;
+    min-height: 520px !important;
+  }
+}
+
+
+/* =========================================
+   HISTORIA – håll loket synligt på tablet
+   ========================================= */
+@media (min-width: 701px) and (max-width: 900px) {
+  #historia .cp-history__status {
+    top: -28px !important;
+    overflow: visible !important;
+  }
+
+  #historia .cp-train-image {
+    top: -18px !important;
+    left: 50% !important;
+    width: 96px !important;
+    max-width: none !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* Historia – finjustera lokets höjd på mobil */
+@media (max-width: 700px) {
+  #historia .cp-train-image {
+    top: -16px !important;
+  }
+}
+
+/* =========================================
+   HEADER – CENTRERA SOCIALA IKONER EXAKT
+   Mobil, tablet och desktop
+   ========================================= */
+
+header {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+  align-items: center !important;
+}
+
+header .logo {
+  grid-column: 1 !important;
+  justify-self: start !important;
+}
+
+header .header-actions {
+  grid-column: 2 !important;
+  justify-self: center !important;
+  align-self: center !important;
+}
+
+header .header-actions .social-icons {
+  justify-content: center !important;
+}
+
+/* Desktop: navigationen ligger till höger om de centrerade socialknapparna */
+@media (min-width: 1201px) and (hover: hover) and (pointer: fine) {
+  header > nav {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    gap: clamp(12px, 1.25vw, 20px) !important;
+  }
+
+  header > nav a,
+  header > nav .nav-dropdown-toggle {
+    font-size: 14px !important;
+  }
+}
+
+/* Mobil/tablet: hamburgaren ligger till höger, ikonerna förblir exakt centrerade */
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+  header .menu-btn {
+    grid-column: 3 !important;
+    justify-self: end !important;
+  }
+
+  header > nav {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – LANDSCAPE-MOBIL
+   Lös klippningen generellt, inte per enhet.
+   ========================================= */
+@media (orientation: landscape) and (max-width: 950px) and (max-height: 600px) {
+
+  /* Loket får gå ovanför tidslinjens egen box utan att kapas. */
+  #historia.codepen-history-section,
+  #historia .cp-history,
+  #historia .cp-history__inner,
+  #historia .cp-history__status {
+    overflow: visible !important;
+  }
+
+  /* Håll loket ovanför rälsen och återställ tidigare mobil-offset. */
+  #historia .cp-history__status {
+    top: -55px !important;
+    z-index: 10 !important;
+  }
+
+  #historia .cp-train-image {
+    top: 0 !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – PORTRAIT
+   Lyft loket lite extra i stående läge.
+   ========================================= */
+@media (orientation: portrait) and (max-width: 900px) {
+  #historia .cp-train-image {
+    top: -24px !important;
+  }
+}
+

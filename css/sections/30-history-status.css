@@ -1,0 +1,173 @@
+/* =========================================
+   HISTORIA – AKTIVA/PASSERADE CIRKLAR
+   ========================================= */
+
+/* Centrera siffrorna korrekt */
+#historia .cp-history__step::before {
+  display: grid !important;
+  place-items: center !important;
+
+  box-sizing: border-box !important;
+
+  padding: 0 !important;
+  line-height: 1 !important;
+
+  background: #fff !important;
+  color: var(--primary) !important;
+
+  border: 3px solid #cfd3d7 !important;
+
+  font-weight: 900 !important;
+}
+
+
+/* =========================================
+   HISTORIA – STEGSTATUS
+   ========================================= */
+
+/* Grundläge */
+#historia .cp-history__step::before {
+  display: grid !important;
+  place-items: center !important;
+
+  box-sizing: border-box !important;
+
+  padding: 0 !important;
+  line-height: 1 !important;
+
+  background: #fff !important;
+  color: var(--primary) !important;
+
+  border: 3px solid #cfd3d7 !important;
+
+  font-weight: 900 !important;
+
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease !important;
+}
+
+/* Hover */
+#historia .cp-history__step:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+
+  border-color: var(--primary) !important;
+}
+
+/* Bara valt steg ska vara rött */
+#historia .cp-history__inner:has(#cp-step-1:checked)
+.cp-history__step:nth-of-type(1)::before,
+
+#historia .cp-history__inner:has(#cp-step-2:checked)
+.cp-history__step:nth-of-type(2)::before,
+
+#historia .cp-history__inner:has(#cp-step-3:checked)
+.cp-history__step:nth-of-type(3)::before,
+
+#historia .cp-history__inner:has(#cp-step-4:checked)
+.cp-history__step:nth-of-type(4)::before,
+
+#historia .cp-history__inner:has(#cp-step-5:checked)
+.cp-history__step:nth-of-type(5)::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+#historia .cp-train-image {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+#historia .cp-train-image {
+  left: 50% !important;
+  top: -50px !important;
+  transform: translateX(-50%) !important;
+}
+
+
+
+#historia .cp-history__step:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+@media (min-width: 901px) {
+
+  /* Bredare tidslinje + större kort */
+  #historia .cp-history__inner {
+    width: 820px !important;
+    max-width: 100% !important;
+  }
+
+  /* Större stegtexter */
+  #historia .cp-history__step {
+    font-size: 15px !important;
+    font-weight: 800 !important;
+  }
+
+  /* Större cirklar */
+  #historia .cp-history__step::before {
+    width: 36px !important;
+    height: 36px !important;
+    margin-left: -18px !important;
+
+    font-size: 13px !important;
+  }
+
+  /* Flytta rälsen så den fortsatt går genom mitten */
+  #historia .cp-history__bar,
+  #historia .cp-history__bar-set {
+    top: 15px !important;
+    height: 6px !important;
+  }
+
+  #historia .cp-train-image {
+  width: 125px !important;
+  max-width: none !important;
+}
+
+  /* Större informationskort */
+  #historia .cp-history__tab {
+    padding: 36px 42px !important;
+  }
+
+  #historia .cp-history__tab h3 {
+    font-size: 30px !important;
+  }
+
+  #historia .cp-history__tab p {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+  }
+}
+
+#historia .cp-history__step label {
+  top: -10px !important;
+}
+
+#historia .cp-history__step.is-passed::before {
+  background: #fff !important;
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+#historia .cp-history__step.is-passed:hover::before {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+@media (min-width: 901px) {
+  #historia.codepen-history-section,
+  #historia .cp-history,
+  #historia .cp-history__inner,
+  #historia .cp-history__status {
+    overflow: visible !important;
+  }
+}
+

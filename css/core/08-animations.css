@@ -1,0 +1,40 @@
+/* Animations */
+
+@keyframes trainIn {
+  0% { transform: translateX(-120%); }
+
+  80% { transform: translateX(10px); }
+
+  100% { transform: translateX(0); }
+}
+
+@keyframes floatShapeOne {
+  0%, 100% { transform: translate(0,0) rotate(0); }
+
+  50% { transform: translate(60px,-40px) rotate(12deg); }
+}
+
+@keyframes floatShapeTwo {
+  0%, 100% { transform: translateY(0) rotate(0); }
+
+  50% { transform: translateY(-22px) rotate(-10deg); }
+}
+
+@keyframes checkboxBounce {
+  0% { transform: scale(.9); }
+
+  60% { transform: scale(1.08); }
+
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+

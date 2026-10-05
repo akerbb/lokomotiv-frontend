@@ -1,0 +1,396 @@
+/* =========================================
+   INTEGRITETSPOLICY – SKARPA KANTER
+   ========================================= */
+
+body.privacy-body .privacy-hero,
+body.privacy-body .privacy-card,
+body.privacy-body .privacy-note {
+  border-radius: 0 !important;
+}
+
+
+/* Hero-rutan */
+body.privacy-body .privacy-hero {
+  border: 1px solid #b9bec4 !important;
+  border-top: 4px solid var(--primary) !important;
+
+  box-shadow: 0 8px 20px rgba(15, 23, 42, .07) !important;
+}
+
+
+/* Informationskort längre ner */
+body.privacy-body .privacy-card {
+  border: 1px solid #c7cbd0 !important;
+
+  box-shadow: 0 6px 16px rgba(15, 23, 42, .05) !important;
+}
+
+
+/* Knappar */
+body.privacy-body .btn {
+  border-radius: 0 !important;
+}
+
+/* =========================================
+   FOOTER – SITTER IHOP MED KONTAKT
+   ========================================= */
+
+body:not(.service-body):not(.privacy-body) footer {
+  margin-top: 0 !important;
+
+  background: var(--surface-section-alt) !important;
+  background-image: none !important;
+
+  border-top: 1px solid rgba(31, 41, 55, .20) !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+
+/* Ta bort den gamla dekorativa bakgrunden */
+body:not(.service-body):not(.privacy-body) footer::before {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* Kontaktsektionen ska gå direkt ner till footern */
+body:not(.service-body):not(.privacy-body) > main > #kontakt {
+  margin-bottom: 0 !important;
+}
+
+/* =========================================
+   FOOTER – SAMMA HOVER SOM HEADERN
+   ========================================= */
+
+.site-footer .footer-nav a,
+.site-footer .footer-contact a {
+  position: relative !important;
+
+  display: inline-block !important;
+  width: fit-content !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+
+  color: var(--text-dark) !important;
+
+  text-decoration: none !important;
+
+  transform: none !important;
+  box-shadow: none !important;
+
+  transition: color .2s ease !important;
+}
+
+
+/* Röda linjen – samma princip som headern */
+.site-footer .footer-nav a::after,
+.site-footer .footer-contact a::after {
+  content: "" !important;
+
+  display: block !important;
+
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+
+  border-radius: 0 !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+
+/* Hover */
+.site-footer .footer-nav a:hover,
+.site-footer .footer-contact a:hover {
+  color: var(--primary) !important;
+
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+
+/* Linjen växer ut från vänster */
+.site-footer .footer-nav a:hover::after,
+.site-footer .footer-contact a:hover::after {
+  transform: scaleX(1) !important;
+}
+.site-footer .footer-address {
+  color: var(--text-muted) !important;
+}
+
+.site-footer .footer-address:hover {
+  color: var(--primary) !important;
+}
+
+/* =========================================
+   FOOTER – SLUTGILTIG LAYOUT
+   ========================================= */
+
+.site-footer {
+  margin: 0 !important;
+
+  padding:
+    54px
+    max(24px, calc((100vw - 1240px) / 2))
+    24px !important;
+
+  background: var(--surface-section-alt) !important;
+  background-image: none !important;
+
+  border-top: 1px solid rgba(31, 41, 55, .20) !important;
+
+  box-shadow: none !important;
+
+  text-align: left !important;
+
+  overflow: visible !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-footer::before {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* =========================================
+   TRE KOLUMNER
+   ========================================= */
+
+.site-footer .footer-inner {
+  width: 100%;
+  max-width: 1240px;
+
+  margin: 0 auto;
+
+  display: grid !important;
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(180px, .8fr)
+    minmax(240px, 1fr) !important;
+
+  gap: clamp(40px, 6vw, 90px) !important;
+
+  align-items: start !important;
+}
+
+
+.site-footer .footer-column {
+  display: block !important;
+
+  text-align: left !important;
+}
+
+
+/* =========================================
+   FÖRETAG
+   ========================================= */
+
+.site-footer .footer-brand strong {
+  display: block !important;
+
+  margin-bottom: 12px !important;
+
+  color: var(--text-strong) !important;
+
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+
+.site-footer .footer-brand p {
+  max-width: 430px !important;
+
+  margin: 0 !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+}
+
+
+/* =========================================
+   RUBRIKER
+   ========================================= */
+
+.site-footer .footer-column h3 {
+  margin: 0 0 18px !important;
+
+  color: var(--text-strong) !important;
+
+  font-size: 15px !important;
+  font-weight: 800 !important;
+
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+
+/* =========================================
+   SNABBLÄNKAR
+   ========================================= */
+
+.site-footer .footer-nav {
+  display: grid !important;
+  justify-items: start !important;
+
+  gap: 12px !important;
+}
+
+
+/* =========================================
+   KONTAKT
+   ========================================= */
+
+.site-footer .footer-contact {
+  display: grid !important;
+  justify-items: start !important;
+
+  gap: 12px !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 14px !important;
+}
+
+
+/* =========================================
+   LÄNKAR
+   ========================================= */
+
+.site-footer .footer-nav a,
+.site-footer .footer-contact a {
+  position: relative !important;
+
+  display: inline-block !important;
+
+  width: fit-content !important;
+
+  padding: 0 !important;
+
+  color: var(--text-dark) !important;
+  background: transparent !important;
+
+  border: 0 !important;
+
+  font-size: 14px !important;
+  font-weight: 600 !important;
+
+  text-decoration: none !important;
+
+  transform: none !important;
+
+  transition: color .2s ease !important;
+}
+
+
+/* Röda linjen – samma animation som headern */
+.site-footer .footer-nav a::after,
+.site-footer .footer-contact a::after {
+  content: "" !important;
+
+  display: block !important;
+
+  position: absolute !important;
+
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+
+.site-footer .footer-nav a:hover,
+.site-footer .footer-contact a:hover {
+  color: var(--primary) !important;
+
+  transform: none !important;
+}
+
+
+.site-footer .footer-nav a:hover::after,
+.site-footer .footer-contact a:hover::after {
+  transform: scaleX(1) !important;
+}
+
+
+/* Adress */
+.site-footer .footer-address {
+  color: var(--text-dark) !important;
+}
+
+
+/* =========================================
+   COPYRIGHT
+   ========================================= */
+
+.site-footer .footer-bottom {
+  width: 100%;
+  max-width: 1240px;
+
+  margin: 46px auto 0 !important;
+  padding-top: 20px !important;
+
+  border-top: 1px solid rgba(31, 41, 55, .16);
+
+  text-align: left !important;
+}
+
+
+.site-footer .footer-bottom p {
+  margin: 0 !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+
+/* =========================================
+   MOBIL
+   ========================================= */
+
+@media (max-width: 760px) {
+
+  .site-footer {
+    padding: 42px 20px 22px !important;
+  }
+
+  .site-footer .footer-inner {
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+  }
+
+  .site-footer .footer-bottom {
+    margin-top: 34px !important;
+  }
+}
+

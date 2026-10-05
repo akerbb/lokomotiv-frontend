@@ -1,0 +1,237 @@
+/* =========================================
+   SHARP SURFACES / 90-DEGREE CARD SYSTEM
+   Mer kontrast, tydligare kanter och raka kort.
+   Pills, knappar, sociala ikoner och tidslinjens
+   nummermarkörer behåller sina avsiktliga runda former.
+   ========================================= */
+
+:root{
+  --surface-page: #e3e5e7;
+  --surface-section: #f0f1f1;
+  --surface-section-alt: #e7e9eb;
+  --surface-card: #f8f8f6;
+  --surface-card-strong: #f2f3f2;
+  --edge: #aeb4ba;
+  --edge-strong: #7f878f;
+}
+
+/* Mindre kritvit startsida och tydligare sektionsband */
+body:not(.service-body):not(.privacy-body){
+  background: var(--surface-page) !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > #hem.hero{
+  background: #e9ebec !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > #tjanster,
+body:not(.service-body):not(.privacy-body) > main > #kvalitet,
+body:not(.service-body):not(.privacy-body) > main > #kontakt{
+  background: var(--surface-section) !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > #historia,
+body:not(.service-body):not(.privacy-body) > main > #sociala-medier{
+  background: var(--surface-section-alt) !important;
+}
+
+body:not(.service-body):not(.privacy-body) > main > .content-section{
+  border-top: 1px solid rgba(31,41,55,.20) !important;
+}
+
+/* Faktiska kort/surfaces får 90-graders hörn */
+.card,
+.hero-card,
+.service-card,
+.social-box,
+.contact-box,
+.contact-details,
+.privacy-card,
+.stat-box,
+.service-hero-detail,
+.service-detail-card,
+.service-info-section,
+.service-cta,
+.window-premium-section,
+.window-offer-list,
+.before-after-card,
+.premium-before-after,
+#historia .cp-history__tab,
+#kvalitet .blog-slider{
+  border-radius: 0 !important;
+  border: 1px solid var(--edge) !important;
+  box-shadow: 0 8px 20px rgba(15,23,42,.10) !important;
+}
+
+/* Ljusa kort får en svagt tonad yta så de inte smälter in i bakgrunden */
+.card,
+.hero-card,
+.social-box,
+.contact-box,
+.contact-details,
+.privacy-card,
+.stat-box,
+.service-hero-detail,
+.service-detail-card,
+.service-info-section,
+.service-cta,
+.window-premium-section,
+.window-offer-list,
+.before-after-card,
+.premium-before-after,
+#historia .cp-history__tab,
+#kvalitet .blog-slider{
+  background: var(--surface-card) !important;
+}
+
+/* En diskret brandkant på informationskort – inte på bildkorten */
+.hero-card,
+.social-box,
+.contact-box,
+.contact-details,
+#historia .cp-history__tab,
+#kvalitet .blog-slider{
+  border-top: 3px solid var(--primary) !important;
+}
+
+/* Bild/media följer kortens raka geometri */
+.service-card,
+.service-card img,
+.social-frame,
+.social-box > iframe,
+.social-box .instagram-media,
+#kvalitet .blog-slider__img,
+#kvalitet .blog-slider__img img,
+.contact-details iframe,
+.before-after-slider,
+.premium-slider,
+.service-hero-image img{
+  border-radius: 0 !important;
+}
+
+/* Historia: kort och räls blir skarpare, nummermarkörerna får vara cirklar */
+#historia .cp-history__tab{
+  background: var(--surface-card) !important;
+  border: 1px solid var(--edge-strong) !important;
+  border-top: 3px solid var(--primary) !important;
+}
+
+#historia .cp-history__bar,
+#historia .cp-history__bar-set{
+  border-radius: 0 !important;
+}
+
+#historia .cp-history__step::before{
+  border-color: var(--surface-section-alt) !important;
+}
+
+/* Formytor är också rektangulära, men vanliga CTA-knappar lämnas runda */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+.select-button,
+.select-options,
+.service-extra,
+.service-extra-toggle,
+.service-extra-content,
+.privacy-consent,
+.nav-dropdown-menu{
+  border-radius: 0 !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+.select-button{
+  border-color: var(--edge) !important;
+  background: #f9f9f7 !important;
+}
+
+input[type="checkbox"]{
+  border-radius: 0 !important;
+}
+
+/* Mobilmenyn är en panel/card och får därför också raka hörn */
+@media (max-width: 1200px), (hover: none), (pointer: coarse){
+  header > nav{
+    border-radius: 0 !important;
+    border-color: var(--edge) !important;
+  }
+
+  header > nav a,
+  header > nav .nav-dropdown-toggle{
+    border-radius: 0 !important;
+  }
+}
+
+/* Lite mörkare sekundärtext för bättre kontrast */
+.section-title p,
+.hero-text p,
+.contact-details p,
+#historia .cp-history__tab p{
+  color: #4b5563 !important;
+}
+
+/* Kortens hover bygger på kant/kontrast snarare än mjuka bubblor */
+@media (hover: hover) and (pointer: fine){
+  .card:hover,
+  .hero-card:hover,
+  .social-box:hover,
+  .contact-box:hover,
+  .contact-details:hover,
+  .privacy-card:hover,
+  .stat-box:hover{
+    transform: translateY(-3px) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 10px 24px rgba(15,23,42,.14) !important;
+  }
+}
+
+/* =========================================
+   HISTORIA – kompaktare och mer sammanhållen
+   ========================================= */
+
+#historia .section-title {
+  margin-bottom: 28px !important;
+}
+
+/* Ta bort den enorma tomma ytan */
+#historia .cp-history {
+  min-height: 360px !important;
+  padding: 58px 0 30px !important;
+
+  display: grid !important;
+  place-items: start center !important;
+
+  background: transparent !important;
+}
+
+/* Håll själva tidslinjen samlad */
+#historia .cp-history__inner {
+  width: min(700px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+/* Gör informationskortet lite mer markerat */
+#historia .cp-history__tab {
+  border: 1px solid #9ca3af !important;
+  border-top: 3px solid var(--primary) !important;
+  border-radius: 0 !important;
+
+  box-shadow: 0 8px 18px rgba(15, 23, 42, .08) !important;
+}
+
+
+/* Mobil */
+@media (max-width: 700px) {
+  #historia .section-title {
+    margin-bottom: 20px !important;
+  }
+
+  #historia .cp-history {
+    min-height: 350px !important;
+    padding-top: 48px !important;
+    padding-bottom: 20px !important;
+  }
+}
+

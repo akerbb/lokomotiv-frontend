@@ -1,0 +1,65 @@
+/* =========================================
+   SOCIALA MEDIER – FIX
+   ========================================= */
+
+   #sociala-medier .social-box {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#sociala-medier .social-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 30px !important;
+  align-items: stretch !important;
+}
+
+/* Tvinga båda till samma rad */
+#sociala-medier .social-box--instagram {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+
+#sociala-medier .social-box--facebook {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+
+/* Ingen gigantisk tom höjd */
+#sociala-medier .social-box {
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 28px !important;
+}
+
+/* Instagram */
+#sociala-medier .instagram-media {
+  width: 100% !important;
+  max-width: 540px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+}
+
+/* Facebook */
+#sociala-medier .social-frame {
+  display: block !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  height: 600px !important;
+  min-height: 600px !important;
+  margin: 0 auto !important;
+}
+
+/* Mobil/tablet */
+@media (max-width: 900px) {
+  #sociala-medier .social-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #sociala-medier .social-box--instagram,
+  #sociala-medier .social-box--facebook {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}

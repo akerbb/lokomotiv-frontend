@@ -1,0 +1,426 @@
+/* Adaptive layout */
+
+:root{
+  color-scheme: light;  
+   
+  --header-height: 78px;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 700px) {
+  header{ display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+
+  .social-icons{ display: none; }
+
+  .logo img{ height: 42px; }
+
+  .mobile-actions{ display: flex; align-items: center; gap: 10px; }
+
+  .menu-btn{
+    display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; font-size: 30px;
+    line-height: 1;
+  }
+
+  header{ gap: 10px; }
+
+  .logo{ margin-right: auto; }
+
+  .menu-btn{ order: 3; width: 40px; height: 40px; font-size: 28px; }
+
+  nav{ order: 4; }
+}
+
+@media (max-width: 1100px),(hover: none),(pointer: coarse) {
+  header{ gap: 12px; padding-inline: 5%; justify-content: flex-start; }
+
+  nav{ gap: 14px; }
+
+  .nav-dropdown-toggle, nav a{ font-size: 14px; }
+
+  .social-icons{ display: none; }
+
+  .logo{ margin-right: auto; }
+
+  .menu-btn{ order: 3; margin-left: 0; }
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 700px) {
+  
+
+  
+
+  .service-card, .service-card img, .service-text{
+    transition: none !important; animation: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .service-text{
+    backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(15,23,42,.78);
+  }
+
+  .service-card{ box-shadow: 0 12px 28px rgba(15,23,42,.14); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.section-title h2, .service-card h3, h1, h2, h3{
+  max-width: 100%; white-space: normal; word-break: normal; overflow-wrap: break-word; hyphens: none;
+}
+
+.service-card h3{ font-size: clamp(1.05rem,4vw,1.35rem); line-height: 1.15; }
+
+@media (max-width: 768px) {
+  header{ position: sticky; top: 0; }
+
+  .service-card h3{ font-size: clamp(1rem,5vw,1.25rem); }
+
+  .service-text{ min-width: 0; }
+}
+
+iframe, img, video{ max-width: 100%; height: auto; }
+
+.about, .card, .contact-details, .contact-layout, .historia-grid, .service-text, .services-grid, .social-grid{
+  min-width: 0;
+}
+
+header{
+  position: fixed !important; top: 0; left: 0; right: 0; width: 100%; max-width: none; z-index: 99999;
+}
+
+.about, .card, .checkbox-row, .contact-box, .contact-details, .content-section, .hero-card, .privacy-card, .privacy-consent, .select-button, .service-card, .service-cta, .service-extra, .service-extra-toggle, .service-hero-detail, .service-hero-text, .service-info-grid, .service-info-section, .service-info-text, .service-text, .social-box, .stat-box, .window-premium-grid, .window-premium-section, form, label, main, section{
+  min-width: 0;
+}
+
+.contact-details p, .privacy-card p, .section-title h2, .service-cta h2, .service-hero-text h1, .service-info-text h2, .service-text h3, a, body.service-body .service-hero-text h1, button, h1, h2, h3, h4, input, label, li, p, select, span, strong, textarea{
+  max-width: 100%; white-space: normal; overflow-wrap: normal; word-wrap: normal; word-break: normal; hyphens: none;
+  -webkit-hyphens: none; -ms-hyphens: none;
+}
+
+.nav-dropdown-menu a, .service-hero-text h1, .service-text h3, body.service-body .service-hero-text h1{
+  white-space: normal !important;
+}
+
+.nav-dropdown-menu{ max-width: min(92vw,330px); }
+
+.nav-dropdown-menu a{ line-height: 1.35; }
+
+@media (min-width: 1101px) {
+  nav{ min-width: 0; }
+
+  .nav-dropdown-toggle, nav a{ white-space: nowrap; }
+
+  .nav-dropdown-menu a{ white-space: normal !important; }
+}
+
+@media (max-width: 1100px),(hover: none),(pointer: coarse) {
+  
+
+  
+
+  :root{ --header-height: 66px; }
+
+  body{ padding-top: var(--header-height); }
+
+  nav{
+    position: fixed !important; top: calc(var(--header-height) + 8px) !important; left: 12px !important;
+    right: 12px !important; inset: calc(var(--header-height) + 8px) 12px auto 12px !important;
+    max-height: calc(100dvh - var(--header-height) - 24px); overflow-y: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  :root{ --header-height: 64px; }
+
+  .service-hero-text h1, body.service-body .service-hero-text h1{
+    font-size: clamp(1.8rem,7.5vw,2.4rem); line-height: 1.08; letter-spacing: -0.04em; white-space: normal;
+    word-break: normal; overflow-wrap: normal; hyphens: none;
+  }
+
+  .section-title h2, .service-cta h2, .service-info-text h2{
+    font-size: clamp(1.6rem,7vw,2rem); line-height: 1.12;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero{
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    padding: 90px 24px 70px;
+  }
+
+  .hero-text{
+    width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+
+  .hero-logo{ display: block; width: min(420px,90%); margin: 0 auto 24px; }
+
+  .hero-text h1, .hero-text p{ text-align: center; }
+
+  .hero-buttons{ width: 100%; justify-content: center; }
+
+  .hero-card{ width: 100%; max-width: 700px; }
+}
+
+@media (min-width: 701px) and (max-width: 1366px) {
+  .hero{
+    grid-template-columns: 1fr !important; justify-items: center !important; text-align: center !important;
+  }
+
+  .hero-text{
+    width: 100% !important; max-width: 760px !important; margin: 0 auto !important; display: flex !important;
+    flex-direction: column !important; align-items: center !important;
+  }
+
+  .hero-logo{
+    display: block !important; width: min(520px,92vw) !important; margin: 0 auto 24px !important;
+  }
+
+  .hero-buttons{ justify-content: center !important; }
+}
+
+.checkbox-row, .privacy-consent, .select-options label, .service-option{
+  -webkit-tap-highlight-color: transparent;
+}
+
+.select-options label, .service-option{
+  display: flex !important; align-items: center !important; gap: 12px !important; white-space: normal !important;
+  word-break: normal !important; overflow-wrap: anywhere !important;
+}
+
+input[type=checkbox]{
+  appearance: none !important; -webkit-appearance: none !important; box-sizing: border-box !important;
+  width: 18px !important; height: 18px !important; min-width: 18px !important; max-width: 18px !important;
+  flex: 0 0 18px !important; padding: 0 !important; margin: 0 !important; border-radius: 6px !important;
+  border: 2px solid rgba(156,35,36,.65) !important; background: #fff !important; display: inline-grid !important;
+  place-items: center !important; position: relative !important; cursor: pointer !important;
+  box-shadow: inset 0 1px 2px rgba(15,23,42,.08) !important;
+  transition: background .16s,border-color .16s,box-shadow .16s,transform .16s !important;
+}
+
+input[type=checkbox]::after{
+  content: "" !important; width: 5px !important; height: 9px !important; border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important; transform: rotate(45deg) scale(0) !important;
+  transform-origin: center !important; margin-top: -2px !important; transition: transform .14s !important;
+}
+
+input[type=checkbox]:checked{
+  background: linear-gradient(135deg,var(--primary),var(--wine)) !important; border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(156,35,36,.14),inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+
+input[type=checkbox]:checked::after{ transform: rotate(45deg) scale(1) !important; }
+
+input[type=checkbox]:focus-visible{
+  outline: rgba(156,35,36,.24) solid 3px !important; outline-offset: 3px !important;
+}
+
+input[type=checkbox]:active{ transform: scale(.94) !important; }
+
+.service-option:has(input[type=checkbox]:checked){
+  background: linear-gradient(135deg,rgba(156,35,36,.12),rgba(149,64,84,.08)) !important;
+  color: var(--primary) !important;
+}
+
+.privacy-consent{
+  grid-template-columns: 18px 1fr !important; align-items: start !important; gap: 12px !important;
+}
+
+.privacy-consent input[type=checkbox]{ margin-top: 2px !important; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1600px) {
+  .about, .content-section, .service-page{ width: min(1500px,calc(100% - 80px)); }
+
+  .hero{ padding: 150px 10% 130px; gap: 90px; }
+
+  .hero-text h1{ font-size: clamp(72px,6vw,110px); line-height: .92; }
+
+  .hero-text p{ font-size: 22px; max-width: 850px; }
+
+  .hero-logo{ width: min(680px,100%); }
+
+  .card, .contact-box, .contact-details, .hero-card, .privacy-card, .social-box, .stat-box{
+    padding: 44px; border-radius: 30px;
+  }
+
+  .about h2, .section-title h2, .service-cta h2, .service-detail-card h2, .service-info-text h2{
+    font-size: clamp(52px,4vw,72px);
+  }
+
+  .about p, .section-title p, .service-cta p, .service-detail-card p, .service-info-text p{
+    font-size: 20px; line-height: 1.9;
+  }
+
+  header{ padding: 18px 9%; }
+
+  .nav-dropdown-toggle, nav a{ font-size: 17px; }
+
+  
+
+  .services-grid{ gap: 34px; }
+
+  .service-card{ height: 460px; }
+
+  .service-text{ padding: 28px; }
+
+  .service-text h3{ font-size: 30px; }
+
+  .service-text p{ font-size: 17px; }
+
+  .historia-grid{ gap: 80px; }
+
+  .historia-text h3{ font-size: 38px; }
+
+  .text-block p{ font-size: 18px; line-height: 1.9; }
+
+  .historia-image img{ height: 520px; }
+
+  .btn{ padding: 18px 30px; font-size: 17px; }
+
+  .select-button, input, select, textarea{ padding: 18px 20px; font-size: 17px; }
+
+  footer{ padding: 40px 10%; font-size: 16px; }
+}
+

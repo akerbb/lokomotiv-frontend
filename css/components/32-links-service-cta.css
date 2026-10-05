@@ -1,0 +1,226 @@
+/* =========================================
+   GEMENSAM STIL FÖR VANLIGA TEXTLÄNKAR
+   Samma utseende/hover som "Start"
+   ========================================= */
+
+.contact-details a,
+.social-header a,
+#kontakt .privacy-consent a,
+.site-footer .footer-nav a,
+.site-footer .footer-contact a,
+.site-footer .footer-policy {
+  position: relative !important;
+  display: inline-block !important;
+  width: fit-content !important;
+
+  color: var(--text-dark) !important;
+  background: transparent !important;
+
+  border: 0 !important;
+  padding: 0 !important;
+
+  font-weight: 700 !important;
+  text-decoration: none !important;
+
+  transform: none !important;
+
+  transition: color .2s ease !important;
+}
+
+
+/* Röd linje under länken */
+.contact-details a::after,
+.social-header a::after,
+#kontakt .privacy-consent a::after,
+.site-footer .footer-nav a::after,
+.site-footer .footer-contact a::after,
+.site-footer .footer-policy::after {
+  content: "" !important;
+
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+  border-radius: 999px !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+
+/* Hover – samma som Start */
+.contact-details a:hover,
+.social-header a:hover,
+#kontakt .privacy-consent a:hover,
+.site-footer .footer-nav a:hover,
+.site-footer .footer-contact a:hover,
+.site-footer .footer-policy:hover {
+  color: var(--primary) !important;
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+
+/* Linjen visas vid hover */
+.contact-details a:hover::after,
+.social-header a:hover::after,
+#kontakt .privacy-consent a:hover::after,
+.site-footer .footer-nav a:hover::after,
+.site-footer .footer-contact a:hover::after,
+.site-footer .footer-policy:hover::after {
+  transform: scaleX(1) !important;
+}
+
+
+/* Samma tydliga tangentbordsfokus */
+.contact-details a:focus-visible,
+.social-header a:focus-visible,
+#kontakt .privacy-consent a:focus-visible,
+.site-footer .footer-nav a:focus-visible,
+.site-footer .footer-contact a:focus-visible,
+.site-footer .footer-policy:focus-visible {
+  outline: 3px solid rgba(156, 35, 36, .28);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   TJÄNSTESIDA – NEDERSTA CTA
+   ========================================= */
+
+body.service-body .service-band--cta {
+  background: #f4f4f1 !important;
+}
+
+
+/* Själva innehållet */
+body.service-body .service-cta-clean {
+  min-height: 0 !important;
+
+  display: block !important;
+
+  padding-top: 72px !important;
+  padding-bottom: 78px !important;
+
+  text-align: left !important;
+}
+
+
+/* Stor rubrik */
+body.service-body .service-cta-clean h2 {
+  max-width: none !important;
+
+  margin: 0 !important;
+
+  color: #010101 !important;
+
+  font-size: clamp(48px, 6vw, 74px) !important;
+  font-weight: 800 !important;
+
+  line-height: .98 !important;
+  letter-spacing: -3px !important;
+}
+
+
+/* Text under rubriken */
+body.service-body .service-cta-clean p {
+  max-width: 760px !important;
+
+  margin: 24px 0 0 !important;
+
+  color: #707989 !important;
+
+  font-size: clamp(17px, 1.6vw, 21px) !important;
+  font-weight: 400 !important;
+
+  line-height: 1.55 !important;
+}
+
+
+/* Knappen */
+body.service-body .service-cta-clean .service-cta-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: auto !important;
+
+  margin-top: 30px !important;
+  padding: 13px 21px !important;
+
+  color: #fff !important;
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  border: 2px solid var(--primary) !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  font-size: 13px !important;
+  font-weight: 800 !important;
+
+  letter-spacing: .7px !important;
+  line-height: 1.1 !important;
+
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease !important;
+}
+
+
+/* Hover */
+body.service-body .service-cta-clean .service-cta-button:hover {
+  color: var(--primary) !important;
+  background: #fff !important;
+  border-color: var(--primary) !important;
+
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Mobil */
+@media (max-width: 700px) {
+
+  body.service-body .service-cta-clean {
+    padding-top: 52px !important;
+    padding-bottom: 58px !important;
+  }
+
+  body.service-body .service-cta-clean h2 {
+    font-size: clamp(42px, 13vw, 58px) !important;
+    letter-spacing: -2px !important;
+  }
+
+  body.service-body .service-cta-clean p {
+    margin-top: 18px !important;
+    font-size: 17px !important;
+  }
+
+  body.service-body .service-cta-clean .service-cta-button {
+    margin-top: 26px !important;
+  }
+
+}
+
+/* Tjänstekort – mer lättläst informationstext */
+.service-card .service-text p {
+  font-family: "Inter", Arial, sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0 !important;
+}
+

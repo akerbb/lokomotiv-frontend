@@ -1,0 +1,320 @@
+/* =========================================
+   HERO – centrerad, ren och utan stor ruta
+   ========================================= */
+
+body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+  width: 100% !important;
+  max-width: none !important;
+
+  grid-template-columns: 1fr !important;
+  justify-items: center !important;
+  align-items: center !important;
+
+  margin: 0 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  box-shadow: none !important;
+
+  text-align: center !important;
+}
+
+
+/* Centrera allt hero-innehåll */
+#hem .hero-text {
+  width: min(100%, 950px) !important;
+  max-width: 950px !important;
+
+  margin: 0 auto !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  text-align: center !important;
+}
+
+
+/* Större logga */
+#hem .hero-logo {
+  width: min(650px, 90vw) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+/* Rubrik */
+#hem .hero-text h1 {
+  text-align: center !important;
+}
+
+
+/* Text */
+#hem .hero-text p {
+  max-width: 760px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  text-align: center !important;
+}
+
+
+/* Centrera knappar */
+#hem .hero-buttons {
+  width: 100% !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  gap: 18px !important;
+}
+
+
+/* Större knappar */
+#hem .hero-buttons .btn {
+  min-width: 230px !important;
+
+  padding: 17px 30px !important;
+
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}
+
+
+/* Mobil */
+@media (max-width: 600px) {
+
+  #hem .hero-logo {
+    width: min(480px, 94vw) !important;
+  }
+
+  #hem .hero-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  #hem .hero-buttons .btn {
+    width: min(100%, 340px) !important;
+    min-width: 0 !important;
+
+    padding: 16px 24px !important;
+  }
+}
+
+/* =========================================
+   HERO – större på stora skärmar
+   ========================================= */
+
+@media (min-width: 1500px) {
+
+  #hem .hero-text {
+    width: min(1100px, 90vw) !important;
+    max-width: 1100px !important;
+  }
+
+  #hem .hero-logo {
+    width: min(780px, 52vw) !important;
+    margin-bottom: 28px !important;
+  }
+
+  #hem .hero-text h1 {
+    font-size: clamp(58px, 4vw, 76px) !important;
+    margin-bottom: 24px !important;
+  }
+
+  #hem .hero-text p {
+    max-width: 850px !important;
+    font-size: 20px !important;
+    line-height: 1.75 !important;
+    margin-bottom: 34px !important;
+  }
+
+  #hem .hero-buttons {
+    gap: 20px !important;
+  }
+
+  #hem .hero-buttons .btn {
+    min-width: 250px !important;
+    padding: 19px 34px !important;
+    font-size: 17px !important;
+  }
+}
+
+/* =========================================
+   KVALITET & MILJÖ
+   ========================================= */
+
+#kvalitet {
+  background: #eceeef !important;
+}
+
+#kvalitet .section-title {
+  margin-bottom: 48px !important;
+}
+
+.quality-grid {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.quality-card {
+  position: relative;
+
+  min-height: 260px;
+  padding: 34px;
+
+  background: #f8f8f7;
+  border: 1px solid #aeb4ba;
+  border-top: 4px solid var(--primary);
+  border-radius: 0;
+
+  box-shadow: 0 8px 20px rgba(15, 23, 42, .07);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.quality-card__number {
+  margin-bottom: 34px;
+
+  color: var(--primary);
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.quality-card h3 {
+  margin: 0 0 14px;
+
+  color: var(--text-strong);
+
+  font-size: clamp(24px, 2vw, 30px);
+  line-height: 1.1;
+}
+
+.quality-card p {
+  max-width: 520px;
+
+  color: var(--text-muted);
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+/* Accentkort */
+.quality-card--accent {
+  background: #26292d;
+  border-color: #26292d;
+  border-top-color: var(--primary);
+}
+
+.quality-card--accent h3 {
+  color: #fff;
+}
+
+.quality-card--accent p {
+  color: #cdd1d5;
+}
+
+.quality-card--accent .quality-card__number {
+  color: #d85152;
+}
+
+.quality-card__link {
+  margin-top: auto;
+  padding-top: 28px;
+
+  color: #fff;
+
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.quality-card__link:hover {
+  color: #e36a6b;
+}
+
+
+/* Desktop hover */
+@media (hover: hover) and (pointer: fine) {
+  .quality-card {
+    transition:
+      transform .2s ease,
+      box-shadow .2s ease,
+      border-color .2s ease;
+  }
+
+  .quality-card:hover {
+    transform: translateY(-4px);
+    border-color: #8f969d;
+
+    box-shadow: 0 14px 30px rgba(15, 23, 42, .11);
+  }
+}
+
+
+/* Mobil */
+@media (max-width: 760px) {
+
+  .quality-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .quality-card {
+    min-height: 0;
+    padding: 26px 22px;
+  }
+
+  .quality-card__number {
+    margin-bottom: 22px;
+  }
+
+  .quality-card h3 {
+    font-size: 24px;
+  }
+
+  .quality-card p {
+    font-size: 15px;
+  }
+}
+
+/* Skarpa 90° hörn på knappar */
+.btn,
+.btn-primary,
+.btn-secondary,
+.floating-call,
+.floating-cta,
+.scroll-top-btn,
+button[type="submit"],
+.blog-slider__button,
+.quality-card__link,
+.service-back-button {
+  border-radius: 0 !important;
+}
+
+/* Cards ska inte "sväva" på hover */
+.card:hover,
+.contact-box:hover,
+.contact-details:hover,
+.hero-card:hover,
+.privacy-card:hover,
+.social-box:hover,
+.stat-box:hover,
+.service-card:hover,
+.quality-card:hover,
+.blog-slider:hover {
+  transform: none !important;
+}
+

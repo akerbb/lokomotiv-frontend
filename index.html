@@ -1,41 +1,115 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Lokomotiv Städ & Fönsterputs AB</title>
-  <meta name="description" content="Städfirma i Värmland. Vi erbjuder fönsterputs, städning och golvvård i Hagfors med omnejd.">
-  <meta name="keywords" content="städning Hagfors, fönsterputs Värmland, städfirma">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://lokomotiv-backend.onrender.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com https://*.fbcdn.net https://*.googleusercontent.com; frame-src https://www.facebook.com https://www.google.com https://codepen.io https://cdpn.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
-<link rel="stylesheet" href="style.css" />
+
+  <meta
+    name="description"
+    content="Städfirma i Värmland. Vi erbjuder fönsterputs, städning och golvvård i Hagfors med omnejd."
+  >
+
+  <meta
+    name="keywords"
+    content="städning Hagfors, fönsterputs Värmland, städfirma"
+  >
+
+  <meta
+    name="referrer"
+    content="strict-origin-when-cross-origin"
+  >
+
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://plausible.io https://www.instagram.com;
+      connect-src 'self' https://lokomotiv-backend.onrender.com https://plausible.io;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https://www.facebook.com https://*.fbcdn.net https://*.googleusercontent.com;
+      frame-src https://www.facebook.com https://www.instagram.com https://www.google.com https://codepen.io https://cdpn.io;
+      base-uri 'self';
+      object-src 'none';
+    "
+  >
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&family=Fira+Sans:wght@400;500;600;700;800&family=Inter:wght@400;600;800&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;900&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="bilder/favicon.ico">
-  <script defer data-domain="lokomotivstad.se" src="https://plausible.io/js/script.js"></script>
-  <meta property="og:title" content="Städfirma i Hagfors | Lokomotiv Städ">
-<meta property="og:description" content="Fönsterputs, städning och golvvård i Värmland">
-<meta property="og:image" content="https://lokomotivstad.se/bilder/logo.png">
-<meta property="og:type" content="website">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CleaningService",
-  "name": "Lokomotiv Städ & Fönsterputs AB",
-  "image": "https://lokomotivstad.se/bilder/logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Björnängsvägen 16",
-    "addressLocality": "Hagfors",
-    "postalCode": "68333",
-    "addressCountry": "SE"
-  },
-  "telephone": "+4656330990",
-  "areaServed": "Värmland"
-}
-</script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&family=Fira+Sans:wght@400;500;600;700;800&family=Inter:wght@400;600;800&family=Rubik:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="bilder/favicon.ico"
+  >
+
+  <!-- Plausible Analytics -->
+  <script
+    defer
+    data-domain="lokomotivstad.se"
+    src="https://plausible.io/js/script.js"
+  ></script>
+
+  <!-- Open Graph -->
+  <meta
+    property="og:title"
+    content="Städfirma i Hagfors | Lokomotiv Städ"
+  >
+
+  <meta
+    property="og:description"
+    content="Fönsterputs, städning och golvvård i Värmland"
+  >
+
+  <meta
+    property="og:image"
+    content="https://lokomotivstad.se/bilder/logo.png"
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CleaningService",
+    "name": "Lokomotiv Städ & Fönsterputs AB",
+    "image": "https://lokomotivstad.se/bilder/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Björnängsvägen 16",
+      "addressLocality": "Hagfors",
+      "postalCode": "68333",
+      "addressCountry": "SE"
+    },
+    "telephone": "+4656330990",
+    "areaServed": "Värmland"
+  }
+  </script>
 </head>
 
 <body>
@@ -296,10 +370,6 @@
         Vi ska vara tillgängliga, hålla det vi lovar och leverera ett resultat
         som våra kunder kan känna sig trygga med.
       </p>
-
-      <a href="index.html#kontakt" class="quality-card__link">
-        Kontakta oss →
-      </a>
     </article>
 
   </div>
@@ -317,13 +387,25 @@
   </div>
 
   <div class="social-grid">
-    <div class="social-box social-box--instagram">
-      <div class="social-header">
-        <h3>Instagram</h3>
-        <a href="https://www.instagram.com/lokomotivstad" target="_blank" rel="noopener noreferrer">Öppna Instagram</a>
-      </div>
+ <div class="social-box social-box--instagram">
 
-    </div>
+  <div class="social-header">
+    <h3>Instagram</h3>
+
+    <a href="https://www.instagram.com/lokomotivstad"
+       target="_blank"
+       rel="noopener noreferrer">
+      Öppna Instagram
+    </a>
+  </div>
+
+  <blockquote
+    class="instagram-media"
+    data-instgrm-permalink="https://www.instagram.com/p/DY9Nyf_tqiE/"
+    data-instgrm-version="14">
+  </blockquote>
+
+</div>
 
     <div class="social-box social-box--facebook">
       <div class="social-header">
@@ -372,10 +454,8 @@
           target="_blank"
           rel="noopener noreferrer"
           class="footer-address"
-        >
-          Björnängsvägen 16, Hagfors, 68333
-        </a>
-</p>
+        >Björnängsvägen 16, Hagfors, 68333</a>
+    </p>
 
           <p>
             <strong>E-post:</strong><br />
@@ -620,6 +700,8 @@
       <div class="floating-buttons">
   <a href="index.html#hem" class="scroll-top-btn" id="scrollTopBtn" aria-label="Till toppen">↑</a>
 </div>
+<script async src="https://www.instagram.com/embed.js"></script>
+
   <script src="script.js"></script>
 
 </body>

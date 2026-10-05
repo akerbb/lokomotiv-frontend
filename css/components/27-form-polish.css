@@ -1,0 +1,541 @@
+/* =========================================
+   KONTAKTFORMULÄR – SKARPA FÄLT
+   ========================================= */
+
+/* Alla vanliga formulärfält */
+#kontakt input,
+#kontakt textarea,
+#kontakt select,
+#kontakt .select-button,
+#kontakt .select-options,
+#kontakt .service-extra,
+#kontakt .service-extra-toggle,
+#kontakt .upload-label {
+  border-radius: 0 !important;
+}
+
+
+/* =========================
+   CHECKBOXAR
+   ========================= */
+
+#kontakt input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  max-width: 20px !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: 2px solid #8f969d !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+
+  display: inline-grid !important;
+  place-items: center !important;
+
+  box-shadow: none !important;
+
+  cursor: pointer !important;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease !important;
+}
+
+
+/* Bock */
+#kontakt input[type="checkbox"]::after {
+  content: "" !important;
+
+  width: 5px !important;
+  height: 9px !important;
+
+  border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important;
+
+  transform: rotate(45deg) scale(0) !important;
+  margin-top: -2px !important;
+
+  transition: transform .12s ease !important;
+}
+
+
+#kontakt input[type="checkbox"]:checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+
+  box-shadow: none !important;
+}
+
+
+#kontakt input[type="checkbox"]:checked::after {
+  transform: rotate(45deg) scale(1) !important;
+}
+
+
+/* Ingen "studs" på checkbox */
+#kontakt input[type="checkbox"]:active {
+  transform: none !important;
+}
+
+
+/* Vald tjänst */
+#kontakt .service-option:has(input[type="checkbox"]:checked) {
+  background: rgba(156, 35, 36, .08) !important;
+  color: var(--primary) !important;
+}
+
+
+/* =========================
+   FILUPPLADDNING
+   ========================= */
+
+#kontakt .upload-label {
+  padding: 16px !important;
+
+  border: 1px solid #b8bdc2 !important;
+  border-left: 3px solid var(--primary) !important;
+
+  background: #f7f7f7 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Själva filfältet */
+#kontakt .upload-label input[type="file"] {
+  width: 100% !important;
+
+  padding: 8px 0 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
+/* Browse / Välj filer */
+#kontakt input[type="file"]::file-selector-button {
+  margin-right: 12px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #8f969d;
+  border-radius: 0;
+
+  background: #fff;
+  color: var(--text-dark);
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease;
+}
+
+
+#kontakt input[type="file"]::file-selector-button:hover {
+  background: #eeeeef;
+  border-color: var(--primary);
+}
+
+
+/* Safari/WebKit fallback */
+#kontakt input[type="file"]::-webkit-file-upload-button {
+  margin-right: 12px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #8f969d;
+  border-radius: 0;
+
+  background: #fff;
+  color: var(--text-dark);
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   TEXTAREAS
+   ========================= */
+
+#kontakt textarea {
+  min-height: 120px !important;
+
+  resize: none !important;
+  overflow-y: hidden !important;
+
+  line-height: 1.55 !important;
+}
+
+/* =========================================
+   MOBILE HERO – FYLL FÖRSTA SKÄRMEN
+   ========================================= */
+
+@media (max-width: 700px) {
+
+  :root {
+    --header-height: 66px;
+  }
+
+  body:not(.service-body):not(.privacy-body) {
+    padding-top: var(--header-height) !important;
+  }
+
+  body:not(.service-body):not(.privacy-body) > main {
+    zoom: 1 !important;
+  }
+
+  body:not(.service-body):not(.privacy-body) > main > #hem.hero {
+    min-height: calc(100svh - var(--header-height)) !important;
+
+    display: grid !important;
+    align-items: center !important;
+
+    box-sizing: border-box !important;
+  }
+}
+
+
+/* Mindre mobiler */
+@media (max-width: 520px) {
+
+  :root {
+    --header-height: 64px;
+  }
+}
+
+/* =========================================
+   SERVICE CHECKLIST – REN, SKARP DESIGN
+   ========================================= */
+
+.service-offer-checklist {
+  display: grid !important;
+  gap: 0 !important;
+  margin-top: 22px !important;
+
+  list-style: none !important;
+
+  border-top: 1px solid #c7cbd0;
+}
+
+
+/* Varje rad */
+.service-offer-checklist li {
+  position: relative !important;
+
+  padding: 20px 14px 20px 46px !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid #c7cbd0 !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  color: #334155 !important;
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+}
+
+
+/* Fyrkantig checkmark */
+.service-offer-checklist li::before {
+  content: "✓" !important;
+
+  position: absolute !important;
+  left: 10px !important;
+  top: 50% !important;
+
+  width: 24px !important;
+  height: 24px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 0 !important;
+
+  background: var(--primary) !important;
+  color: #fff !important;
+
+  font-size: 14px !important;
+  font-weight: 900 !important;
+
+  transform: translateY(-50%) !important;
+}
+
+
+/* Ingen rörelse på hover */
+.service-offer-checklist li:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Mobil */
+@media (max-width: 700px) {
+
+  .service-offer-checklist li {
+    padding: 17px 8px 17px 42px !important;
+
+    font-size: 15px !important;
+  }
+
+  .service-offer-checklist li::before {
+    left: 8px !important;
+
+    width: 22px !important;
+    height: 22px !important;
+
+    font-size: 13px !important;
+  }
+}
+
+/* =========================================
+   INTEGRITETSCHECKBOX – RENARE
+   ========================================= */
+
+#kontakt .privacy-consent {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+
+  width: 100% !important;
+
+  padding: 8px 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  color: var(--text-muted) !important;
+
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+
+  cursor: pointer;
+}
+
+
+/* Checkbox */
+#kontakt .privacy-consent input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  flex: 0 0 18px !important;
+
+  margin: 2px 0 0 !important;
+  padding: 0 !important;
+
+  border: 2px solid #8f969d !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+
+/* Markerad */
+#kontakt .privacy-consent input[type="checkbox"]:checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+
+/* Text */
+#kontakt .privacy-consent span {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+
+/* Integritetspolicy-länk */
+#kontakt .privacy-consent a {
+  display: inline !important;
+
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+
+#kontakt .privacy-consent input[type="checkbox"] {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+#kontakt .privacy-consent input[type="checkbox"]::after {
+  content: "" !important;
+
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+
+  width: 5px !important;
+  height: 9px !important;
+
+  border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important;
+
+  margin: 0 !important;
+
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(0) !important;
+}
+
+#kontakt .privacy-consent input[type="checkbox"]:checked::after {
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(1) !important;
+}
+
+/* =========================================
+   TJÄNSTVAL – REN HOVER + CENTRERAD CHECK
+   ========================================= */
+
+/* Grundrad */
+#kontakt .service-option {
+  position: relative !important;
+
+  padding: 12px 10px !important;
+
+  background: transparent !important;
+  color: var(--text-dark) !important;
+
+  border: 0 !important;
+  border-left: 3px solid transparent !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease !important;
+}
+
+
+/* Hover – neutral grå ton + diskret röd kant */
+#kontakt .service-option:hover {
+  background: #f3f3f2 !important;
+  border-left-color: var(--primary) !important;
+
+  color: var(--text-dark) !important;
+
+  transform: none !important;
+}
+
+
+/* Vald rad ska INTE få rosa/röd bakgrund */
+#kontakt .service-option:has(input[type="checkbox"]:checked) {
+  background: transparent !important;
+  color: var(--text-dark) !important;
+  border-left-color: transparent !important;
+}
+
+
+/* Om vald rad samtidigt hoveras */
+#kontakt .service-option:has(input[type="checkbox"]:checked):hover {
+  background: #f3f3f2 !important;
+  border-left-color: var(--primary) !important;
+}
+
+
+/* =========================================
+   CHECKBOX – samma centrering som samtycket
+   ========================================= */
+
+#kontakt .service-option input[type="checkbox"] {
+  position: relative !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  max-width: 20px !important;
+
+  flex: 0 0 20px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 2px solid #8f969d !important;
+  border-radius: 0 !important;
+
+  background: #fff !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Bocken */
+#kontakt .service-option input[type="checkbox"]::after {
+  content: "" !important;
+
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+
+  width: 5px !important;
+  height: 9px !important;
+
+  border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important;
+
+  margin: 0 !important;
+
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(0) !important;
+}
+
+
+/* Markerad checkbox */
+#kontakt .service-option input[type="checkbox"]:checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+
+/* Centrerad bock när markerad */
+#kontakt .service-option input[type="checkbox"]:checked::after {
+  transform:
+    translate(-50%, -58%)
+    rotate(45deg)
+    scale(1) !important;
+}
+
+
+/* Ingen studs */
+#kontakt .service-option input[type="checkbox"]:active {
+  transform: none !important;
+}
+

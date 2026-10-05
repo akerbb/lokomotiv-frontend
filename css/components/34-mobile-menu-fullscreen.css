@@ -1,0 +1,269 @@
+/* =========================================
+   MOBILMENY – HELSKÄRMSMENY I APPLE-STIL
+   Använder befintlig #navMenu + .active/.open.
+   ========================================= */
+
+.mobile-nav-only {
+  display: none !important;
+}
+
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+
+  /* Menyknappen ska alltid ligga ovanför helskärmsmenyn. */
+  header .menu-btn {
+    position: relative !important;
+    z-index: 100002 !important;
+  }
+
+  /*
+   * Helskärmsyta. Vi skriver över samtliga äldre "dropdown/card"-regler
+   * så att resultatet blir konsekvent på mobil, tablet och landscape.
+   */
+  header > #navMenu {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: none !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding:
+      max(74px, calc(env(safe-area-inset-top) + 58px))
+      max(28px, calc(env(safe-area-inset-right) + 28px))
+      max(42px, calc(env(safe-area-inset-bottom) + 28px))
+      max(36px, calc(env(safe-area-inset-left) + 36px)) !important;
+
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fbfbfd !important;
+    box-shadow: none !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+
+    transform: translateY(-12px) !important;
+    clip-path: none !important;
+
+    z-index: 100001 !important;
+
+    transition:
+      opacity .22s ease,
+      transform .28s cubic-bezier(.22, 1, .36, 1),
+      visibility 0s linear .28s !important;
+  }
+
+  header > #navMenu.active,
+  header > #navMenu.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+    transition:
+      opacity .22s ease,
+      transform .28s cubic-bezier(.22, 1, .36, 1),
+      visibility 0s linear 0s !important;
+  }
+
+  /* Apple-lik vertikal typografi. */
+  header > #navMenu > a,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    width: 100% !important;
+    min-height: 46px !important;
+
+    margin: 0 !important;
+    padding: 4px 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    color: #333336 !important;
+    background: transparent !important;
+
+    font-family: "Inter", sans-serif !important;
+    font-size: clamp(24px, 5.8vw, 30px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.035em !important;
+
+    text-align: left !important;
+    box-shadow: none !important;
+  }
+
+  header > #navMenu > a + a,
+  header > #navMenu > .nav-dropdown + a,
+  header > #navMenu > a + .nav-dropdown {
+    margin-top: 1px !important;
+  }
+
+  header > #navMenu > a:hover,
+  header > #navMenu > a:focus-visible,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle:hover,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle:focus-visible {
+    color: var(--primary) !important;
+    background: transparent !important;
+  }
+
+  header > #navMenu > a::after,
+  header > #navMenu > a::before {
+    display: none !important;
+  }
+
+  .mobile-nav-only {
+    display: flex !important;
+  }
+
+  /* Tjänster fungerar som en expanderbar grupp. */
+  header > #navMenu .nav-dropdown {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header > #navMenu .nav-dropdown-toggle::after {
+    content: "›" !important;
+    display: inline-block !important;
+    margin-left: 12px !important;
+    color: #6e6e73 !important;
+    font-size: .9em !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    transform: rotate(0deg) !important;
+    transition: transform .2s ease !important;
+  }
+
+  header > #navMenu .nav-dropdown.open > .nav-dropdown-toggle::after {
+    transform: rotate(90deg) !important;
+  }
+
+  header > #navMenu .nav-dropdown-menu {
+    position: static !important;
+    inset: auto !important;
+
+    display: none !important;
+    width: 100% !important;
+
+    margin: 3px 0 10px !important;
+    padding: 0 0 0 18px !important;
+
+    border: 0 !important;
+    border-left: 0 !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    box-shadow: none !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  header > #navMenu .nav-dropdown.open > .nav-dropdown-menu {
+    display: block !important;
+  }
+
+  header > #navMenu .nav-dropdown-menu a {
+    display: block !important;
+    width: 100% !important;
+
+    margin: 0 !important;
+    padding: 6px 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    color: #6e6e73 !important;
+    background: transparent !important;
+
+    font-family: "Inter", sans-serif !important;
+    font-size: clamp(17px, 4vw, 20px) !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+
+    text-align: left !important;
+  }
+
+  header > #navMenu .nav-dropdown-menu a:hover,
+  header > #navMenu .nav-dropdown-menu a:focus-visible {
+    color: var(--primary) !important;
+  }
+
+  /*
+   * X-knappen i Apple-exemplet:
+   * den befintliga hamburgaren morphar redan via aria-expanded.
+   */
+  header .menu-btn[aria-expanded="true"] {
+    position: fixed !important;
+    top: max(14px, env(safe-area-inset-top)) !important;
+    right: max(18px, env(safe-area-inset-right)) !important;
+
+    width: 44px !important;
+    height: 44px !important;
+    padding: 8px !important;
+
+    display: grid !important;
+    place-content: center !important;
+
+    background: transparent !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span {
+    width: 22px !important;
+    height: 2px !important;
+    margin: 0 !important;
+    background: #333336 !important;
+    box-shadow: none !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(2px) rotate(45deg) !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(2) {
+    display: none !important;
+  }
+
+  header .menu-btn[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(0) rotate(-45deg) !important;
+  }
+}
+
+/* Lite tätare layout på mycket små telefoner. */
+@media (max-width: 430px) {
+  header > #navMenu {
+    padding-left: max(28px, calc(env(safe-area-inset-left) + 28px)) !important;
+    padding-right: max(24px, calc(env(safe-area-inset-right) + 24px)) !important;
+  }
+
+  header > #navMenu > a,
+  header > #navMenu > .nav-dropdown > .nav-dropdown-toggle {
+    min-height: 43px !important;
+    font-size: 25px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header > #navMenu {
+    transition: none !important;
+  }
+}
+
