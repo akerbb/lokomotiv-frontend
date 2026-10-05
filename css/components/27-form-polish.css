@@ -717,15 +717,9 @@
   max-width: 100%;
 }
 
-/* Desktop header – exakt vertikal linjering */
+/* Desktop – linjera Tjänster med övriga menyval */
 @media (min-width: 1201px) {
-  header > #navMenu {
-    align-items: center !important;
-  }
-
-  header > #navMenu > a,
   header > #navMenu > .nav-dropdown {
-    height: 40px !important;
     margin: 0 !important;
     padding: 0 !important;
 
@@ -734,13 +728,19 @@
   }
 
   header > #navMenu > .nav-dropdown > .nav-dropdown-toggle {
-    height: 40px !important;
     margin: 0 !important;
     padding: 0 !important;
 
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
 
     line-height: 1.2 !important;
+  }
+}
+
+@media (min-width: 1201px) {
+  header > #navMenu > a:first-child {
+    position: relative !important;
+    top: 1px !important;
   }
 }
