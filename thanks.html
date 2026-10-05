@@ -2,6 +2,20 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
+  <script>
+  const submittedAt = Number(
+    sessionStorage.getItem("lokomotivContactSubmittedAt") || 0
+  );
+
+  const tenMinutes = 10 * 60 * 1000;
+  const validSubmission =
+    submittedAt > 0 &&
+    Date.now() - submittedAt < tenMinutes;
+
+  if (!validSubmission) {
+    window.location.replace("/");
+  }
+</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Tack för din förfrågan | Lokomotiv Städ</title>

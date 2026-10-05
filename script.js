@@ -483,8 +483,12 @@ resetTurnstile();
 
           // Backend har bekräftat att meddelandet skickades.
           // Visa en separat tack-sida i stället för ett successmeddelande i formuläret.
-          window.location.assign("/thanks.html");
-          return;
+sessionStorage.setItem(
+  "lokomotivContactSubmittedAt",
+  String(Date.now())
+);
+
+window.location.assign("/thanks.html");          return;
 
         } catch (error) {
   console.error("Fetch failed:", error);
