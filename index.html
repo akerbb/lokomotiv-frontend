@@ -29,12 +29,12 @@
     http-equiv="Content-Security-Policy"
     content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://plausible.io https://www.instagram.com;
+      script-src 'self' 'unsafe-inline' https://plausible.io https://www.instagram.com https://challenges.cloudflare.com;
       connect-src 'self' https://lokomotiv-backend.onrender.com https://plausible.io;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       font-src 'self' https://fonts.gstatic.com;
       img-src 'self' data: https://www.facebook.com https://*.fbcdn.net https://*.googleusercontent.com;
-      frame-src https://www.facebook.com https://www.instagram.com https://www.google.com https://codepen.io https://cdpn.io;
+      frame-src https://www.facebook.com https://www.instagram.com https://www.google.com https://codepen.io https://cdpn.io https://challenges.cloudflare.com;
       base-uri 'self';
       object-src 'none';
     "
@@ -629,6 +629,13 @@
     <span>Jag godkänner att mina uppgifter används för att besvara min förfrågan enligt <a href="integritet.html" target="_blank" rel="noopener noreferrer">integritetspolicyn</a>.</span>
   </label>
 
+  <div
+  class="cf-turnstile"
+  data-sitekey="0x4AAAAAAFONVT8HoMLba1d6"
+  data-theme="light"
+  data-size="flexible"
+></div>
+
 <div class="form-submit-area">
 
   <button id="submitFormBtn" type="submit" class="btn btn-primary">
@@ -711,6 +718,12 @@
   <a href="index.html#hem" class="scroll-top-btn" id="scrollTopBtn" aria-label="Till toppen">↑</a>
 </div>
 <script async src="https://www.instagram.com/embed.js"></script>
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
 
   <script src="script.js"></script>
 

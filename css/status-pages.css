@@ -1,0 +1,220 @@
+
+/* =========================================
+   STATUS PAGES â€” THANKS / 404
+   ========================================= */
+
+.status-body {
+  min-height: 100vh;
+  background: #fbfbfa;
+}
+
+.status-body main {
+  min-height: calc(100svh - 170px);
+  padding: 150px 24px 80px;
+  display: grid;
+  place-items: center;
+}
+
+.status-panel {
+  width: min(760px, 100%);
+  text-align: center;
+  margin: 0 auto;
+}
+
+.status-visual {
+  width: 142px;
+  height: 142px;
+  margin: 0 auto 30px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.status-visual::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  background: rgba(156, 35, 36, .07);
+  border-radius: 34% 66% 60% 40% / 48% 34% 66% 52%;
+  transform: rotate(-8deg);
+}
+
+.status-visual svg {
+  position: relative;
+  z-index: 1;
+  width: 92px;
+  height: 92px;
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.status-eyebrow {
+  margin: 0 0 12px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.status-title {
+  margin: 0 auto;
+  max-width: 700px;
+  color: var(--text-dark);
+  font-size: clamp(38px, 7vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.status-text {
+  max-width: 590px;
+  margin: 20px auto 0;
+  color: var(--text-muted);
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.status-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.status-actions .btn {
+  min-width: 170px;
+  justify-content: center;
+}
+
+.status-help {
+  max-width: 620px;
+  margin: 42px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid #e2e2df;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.status-help a {
+  position: relative !important;
+  display: inline-block !important;
+  width: fit-content !important;
+
+  color: var(--text-dark) !important;
+  background: transparent !important;
+
+  border: 0 !important;
+  padding: 0 !important;
+
+  font-weight: 700 !important;
+  text-decoration: none !important;
+
+  transform: none !important;
+
+  transition: color .2s ease !important;
+}
+
+/* Samma rÃ¶da hoverlinje som kontaktlÃ¤nkarna pÃ¥ index.html */
+.status-help a::after {
+  content: "" !important;
+
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -5px !important;
+
+  width: 100% !important;
+  height: 2px !important;
+
+  background: var(--primary) !important;
+  border-radius: 0 !important;
+
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+
+  transition: transform .28s ease !important;
+}
+
+.status-help a:hover {
+  color: var(--primary) !important;
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+.status-help a:hover::after {
+  transform: scaleX(1) !important;
+}
+
+.status-help a:focus-visible {
+  outline: 3px solid rgba(156, 35, 36, .28) !important;
+  outline-offset: 4px !important;
+}
+
+/* 404 */
+
+.status-404 .status-visual {
+  width: 160px;
+  height: 120px;
+  margin-bottom: 28px;
+}
+
+.status-404 .status-visual::before {
+  inset: 6px 16px 12px;
+  border-radius: 48% 52% 36% 64% / 54% 42% 58% 46%;
+}
+
+.status-code {
+  margin: 0 0 10px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* Footer on short status pages */
+
+.status-body .site-footer {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .status-body main {
+    min-height: auto;
+    padding: 120px 20px 58px;
+  }
+
+  .status-visual {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+  }
+
+  .status-visual svg {
+    width: 78px;
+    height: 78px;
+  }
+
+  .status-title {
+    font-size: clamp(36px, 11vw, 54px);
+  }
+
+  .status-actions {
+    display: grid;
+  }
+
+  .status-actions .btn {
+    width: 100%;
+  }
+
+  .status-help {
+    margin-top: 34px;
+  }
+}
